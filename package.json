@@ -1,0 +1,49 @@
+{
+  "name": "bb-react-components",
+  "version": "0.0.1",
+  "description": "BoaterBase React Components",
+  "source": "src/index.js",
+  "main": "dist/bb-react-components.js",
+  "umd:main": "dist/bb-react-components.umd.js",
+  "module": "dist/bb-react-components.m.js",
+  "esmodule": "dist/bb-react-components.modern.js",
+  "unpkg": "dist/bb-react-components.js",
+  "jsdelivr": "dist/bb-react-components.js",
+  "files": [
+    "dist/"
+  ],
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "watch": "microbundle watch -o dist/ --jsx React.createElement",
+    "build": "npm run build-bundle && npm run build-css && build-storybook",
+    "build-bundle": "microbundle -o dist/ --jsx React.createElement",
+    "build-css": "npx tailwindcss build src/styles.css -o dist/styles.css && csso dist/styles.css --output dist/styles.min.css",
+    "build-storybook": "build-storybook",
+    "storybook": "start-storybook -p 6006"
+  },
+  "keywords": [
+    "boaterbase",
+    "react",
+    "components"
+  ],
+  "author": "Anthony Corcutt",
+  "license": "MIT",
+  "devDependencies": {
+    "@babel/core": "^7.11.4",
+    "@storybook/addon-actions": "^6.0.17",
+    "@storybook/addon-essentials": "^6.0.17",
+    "@storybook/addon-links": "^6.0.17",
+    "@storybook/react": "^6.0.17",
+    "@tailwindcss/ui": "^0.5.0",
+    "babel-loader": "^8.1.0",
+    "csso-cli": "^3.0.0",
+    "microbundle": "^0.12.3",
+    "react": "^16.13.1",
+    "react-is": "^16.13.1",
+    "tailwindcss": "^1.7.3"
+  },
+  "peerDependencies": {
+    "react": "^16.8.0"
+  },
+  "dependencies": {}
+}
