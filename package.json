@@ -18,7 +18,7 @@
     "build": "npm run build-bundle && npm run build-css && build-storybook",
     "build-bundle": "microbundle -o dist/ --jsx React.createElement",
     "build-css": "npx tailwindcss build src/styles.css -o dist/styles.css && csso dist/styles.css --output dist/styles.min.css",
-    "build-storybook": "build-storybook",
+    "build-storybook": "build-storybook -o docs/",
     "storybook": "start-storybook -p 6006"
   },
   "keywords": [
