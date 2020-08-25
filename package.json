@@ -45,5 +45,9 @@
   "peerDependencies": {
     "react": "^16.8.0"
   },
-  "dependencies": {}
+  "dependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/BoaterBase/bb-react-components.git"
+  }
 }
