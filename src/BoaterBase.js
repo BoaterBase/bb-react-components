@@ -1,6 +1,6 @@
 import React, { createContext, useState, useContext } from 'react';
 import PropTypes from 'prop-types';
-
+import { CloudinaryContext } from 'cloudinary-react';
 import qs from 'qs';
 import p from '../package.json';
 
@@ -58,7 +58,9 @@ function BoaterBase({ linker, theme, children }) {
         theme: { ...defaultTheme, ...theme },
       }}
     >
-      <Currency>{children}</Currency>
+      <CloudinaryContext cloudName="boaterbase" secure>
+        <Currency>{children}</Currency>
+      </CloudinaryContext>
     </Context.Provider>
   );
 }
