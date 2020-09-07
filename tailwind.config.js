@@ -1,4 +1,4 @@
-console.log('Tailwinds', process.env.NODE_ENV);
+console.log('\nTailwinds', process.env.NODE_ENV);
 
 module.exports = {
   prefix: 'bb-',

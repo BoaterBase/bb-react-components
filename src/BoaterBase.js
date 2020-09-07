@@ -3,8 +3,8 @@ import PropTypes from 'prop-types';
 import { CloudinaryContext } from 'cloudinary-react';
 import qs from 'qs';
 import p from '../package.json';
-
 import Currency from './Currency';
+import Alerts from './Alerts';
 
 const Context = createContext();
 
@@ -12,33 +12,25 @@ const Context = createContext();
  * Hook for providing BoaterBase context to wrapped components.
  */
 export function useBoaterBase() {
-  return useContext(Context);
+  const context = useContext(Context);
+  return context;
 }
 
 const defaultTheme = {
   hitTitle: (hit) => hit.title,
 };
 
-/** Convert a url string to a url object */
-function normalizeUrl(url) {
-  return typeof url === 'string' ? { pathname: url } : url;
-}
-
 const defaultLinker = {
-  changeUrl: (url) => {
-    const { pathname, query } = normalizeUrl(url);
+  changeUrl: ({ pathname, query }) => {
     window.location.assign(pathname + (query ? '?' + qs.stringify(query) : ''));
   },
-  updateUrl: (url) => {
-    const { pathname, query } = normalizeUrl(url);
+  updateUrl: ({ pathname, query }) => {
     window.history.pushState({}, '', pathname + (query ? '?' + qs.stringify(query) : ''));
   },
-  createUrl: (url) => {
-    const { pathname, query } = normalizeUrl(url);
+  createUrl: ({ pathname, query }) => {
     return pathname + (query ? '?' + qs.stringify(query) : '');
   },
-  createPermalink: (url) => {
-    const { pathname, query } = normalizeUrl(url);
+  createPermalink: ({ pathname, query }) => {
     return 'https://www.boaterbase.com' + pathname + (query ? '?' + qs.stringify(query) : '');
   },
 };
@@ -59,19 +51,21 @@ function BoaterBase({ linker, theme, children }) {
       }}
     >
       <CloudinaryContext cloudName="boaterbase" secure>
-        <Currency>{children}</Currency>
+        <Currency>
+          <Alerts>{children}</Alerts>
+        </Currency>
       </CloudinaryContext>
     </Context.Provider>
   );
 }
 
 BoaterBase.propTypes = {
-  linker: {
+  linker: PropTypes.shape({
     changeUrl: PropTypes.func,
     updateUrl: PropTypes.func,
     createUrl: PropTypes.func,
     createPermalink: PropTypes.func,
-  },
+  }),
   theme: PropTypes.object,
 };
 export default BoaterBase;

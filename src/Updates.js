@@ -1,6 +1,7 @@
 import React from 'react';
 import { useAsyncData } from '../src/utils';
 import Markdown from 'markdown-to-jsx';
+import Link from './Link';
 
 /** Create a snippet from a content block */
 function Snippet({ content }) {
@@ -36,12 +37,12 @@ export default function Updates({ data }) {
             </p>
           </a>
           <div className="bb-mt-3">
-            <a
-              href="#"
+            <Link
+              to={`/listings/${updates.listing.slug}/updates/${item.slug}`}
               className="bb-text-base bb-leading-6 bb-font-semibold bb-text-indigo-600 hover:bb-text-indigo-500 bb-transition bb-ease-in-out bb-duration-150"
             >
               Read full update
-            </a>
+            </Link>
           </div>
         </div>
       ))}

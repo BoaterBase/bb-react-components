@@ -4,23 +4,28 @@
   "description": "BoaterBase React Components",
   "source": "src/index.js",
   "main": "dist/bb-react-components.js",
-  "umd:main": "dist/bb-react-components.umd.js",
-  "module": "dist/bb-react-components.m.js",
+  "module": "dist/bb-react-components.esm.js",
   "esmodule": "dist/bb-react-components.modern.js",
-  "unpkg": "dist/bb-react-components.js",
-  "jsdelivr": "dist/bb-react-components.js",
+  "umd:main": "dist/bb-react-components.umd.js",
+  "unpkg": "standalone/bb-react-components.js",
+  "jsdelivr": "standalone/bb-react-components.js",
   "files": [
-    "dist/"
+    "dist/",
+    "standalone/"
   ],
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "npm run storybook",
     "watch": "microbundle watch -o dist/ --jsx React.createElement",
-    "build": "npm run build-bundle && npm run build-css && build-storybook",
-    "build-bundle": "microbundle -o dist/ --jsx React.createElement",
-    "build-css": "npx tailwindcss build src/styles.css -o dist/styles.css && csso dist/styles.css --output dist/styles.min.css",
+    "build": "NODE_ENV=production npm run build-module && npm run build-standalone && npm run build-css && build-storybook",
+    "build-module": "NODE_ENV=production microbundle -o dist/ --jsx React.createElement --no-compress",
+    "build-standalone": "NODE_ENV=production microbundle -o standalone/ --external react --jsx React.createElement",
+    "build-css": "NODE_ENV=production npx tailwindcss build src/styles.css -o dist/styles.css && csso dist/styles.css --output dist/styles.min.css",
     "build-storybook": "build-storybook -o docs/",
-    "storybook": "start-storybook -p 6006"
+    "explorer": "source-map-explorer standalone/bb-react-components.js",
+    "storybook": "start-storybook -p 6006",
+    "deploy": "npm publish --access public",
+    "link-dev-react-hooks": "npm link ../bb-next/node_modules/react"
   },
   "keywords": [
     "boaterbase",
@@ -30,22 +35,26 @@
   "author": "Anthony Corcutt",
   "license": "MIT",
   "devDependencies": {
-    "@babel/core": "^7.11.4",
+    "@babel/core": "^7.11.6",
+    "@babel/preset-env": "^7.11.5",
+    "@babel/preset-react": "^7.10.4",
     "@storybook/addon-actions": "^6.0.21",
     "@storybook/addon-essentials": "^6.0.21",
     "@storybook/addon-links": "^6.0.21",
+    "@storybook/addon-queryparams": "^6.0.21",
     "@storybook/react": "^6.0.21",
     "@tailwindcss/ui": "^0.5.0",
     "babel-loader": "^8.1.0",
     "csso-cli": "^3.0.0",
     "microbundle": "^0.12.3",
     "postcss-import": "^12.0.1",
-    "react": "^16.13.1",
     "react-is": "^16.13.1",
-    "tailwindcss": "^1.7.4"
+    "source-map-explorer": "^2.5.0",
+    "tailwindcss": "^1.7.6"
   },
   "peerDependencies": {
-    "react": "^16.8.0"
+    "react": "^16.8.0",
+    "react-dom": "^16.8.0"
   },
   "dependencies": {
     "algoliasearch": "^4.4.0",
@@ -56,9 +65,10 @@
     "markdown-to-jsx": "^6.11.4",
     "prop-types": "^15.7.2",
     "react-instantsearch-dom": "^6.7.0",
-    "react-map-gl": "^5.2.7",
+    "react-map-gl": "^5.2.8",
     "react-outside-click-handler": "^1.3.0",
-    "react-spring": "^8.0.27"
+    "react-spring": "^8.0.27",
+    "slugify": "^1.4.5"
   },
   "repository": {
     "type": "git",

@@ -16,6 +16,7 @@ import Paging from './Search/Paging';
 function Listings({ filters, layout }) {
   return (
     <div>
+      Hello
       <Search filters={filters} layout={layout} hitsPerPage={24}>
         <div className="md:bb-flex">
           <div className="bb-flex-auto bb-flex md:bb-mr-1 bb-mb-1 md:bb-mb-0">

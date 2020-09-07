@@ -1,7 +1,7 @@
 import React from 'react';
 import BoaterBase from '../src/BoaterBase';
 import Listings from '../src/Listings';
-
+import storybookLinker from './storybookLinker';
 export default {
   title: 'Blocks/Listings',
   component: Listings,
@@ -9,7 +9,7 @@ export default {
 };
 
 const Template = (args) => (
-  <BoaterBase>
+  <BoaterBase linker={storybookLinker}>
     <Listings {...args} />
   </BoaterBase>
 );

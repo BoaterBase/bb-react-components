@@ -74,12 +74,12 @@ function Item({ layout, data }) {
         <div className="bb-relative bb-rounded-md">
           <svg viewBox="0 0 6 4" className="bb-block bb-w-full bb-rounded-md"></svg>
           {data.images?.length && (
-            <a href="#img">
+            <Link title={displayTitle} to={`/listings/${data.slug}`}>
               <img
                 src={imagePath(data.images[mod(currentImage, data.images.length)])}
                 className="bb-absolute bb-w-full bb-rounded-md bb-h-full bb-bg-gray-400 bb-inset-0 bb-object-cover"
               />
-            </a>
+            </Link>
           )}
           {data.message && (
             <div className="bb-absolute bb-top-2 bb-left-2 bb-max-w-xs bb-bg-blue-600 bb-text-blue-50 bb-py-1 bb-px-2 bb-truncate bb-shadow-sm bb-rounded-md bb-text-xs bb-font-medium bb-bg-opacity-75">
@@ -174,12 +174,12 @@ function Item({ layout, data }) {
           <div className="bb-relative bb-rounded-t-md">
             <svg viewBox="0 0 16 9" className="bb-block bb-w-full bb-rounded-t-md"></svg>
             {data.images?.length && (
-              <a href="#img">
+              <Link title={displayTitle} to={`/listings/${data.slug}`}>
                 <img
                   src={imagePath(data.images[mod(currentImage, data.images.length)])}
                   className="bb-absolute bb-w-full bb-rounded-t-md bb-h-full bb-bg-gray-400 bb-inset-0 bb-object-cover"
                 />
-              </a>
+              </Link>
             )}
             {data.message && (
               <div className="bb-absolute bb-top-2 bb-left-2 bb-max-w-xs bb-bg-blue-600 bb-text-blue-50 bb-py-1 bb-px-2 bb-truncate bb-shadow-sm bb-rounded-md bb-text-xs bb-font-medium bb-bg-opacity-75">
@@ -269,12 +269,12 @@ function Item({ layout, data }) {
           <div className="bb-flex-none bb-relative bb-rounded-l-md">
             <svg viewBox="0 0 6 4" className="bb-block bb-w-full bb-rounded-t-md sm:bb-rounded-t-none sm:bb-rounded-l-md"></svg>
             {data.images?.length && (
-              <a href="#img">
+              <Link title={displayTitle} to={`/listings/${data.slug}`}>
                 <img
                   src={imagePath(data.images[mod(currentImage, data.images.length)])}
                   className="bb-absolute bb-w-full bb-rounded-t-md sm:bb-rounded-t-none sm:bb-rounded-l-md bb-h-full bb-bg-gray-400 bb-inset-0 bb-object-cover"
                 />
-              </a>
+              </Link>
             )}
             {data.message && (
               <div className="bb-absolute bb-top-2 bb-left-2 bb-max-w-xs bb-bg-blue-600 bb-text-blue-50 bb-py-1 bb-px-2 bb-truncate bb-shadow-sm bb-rounded-md bb-text-xs bb-font-medium bb-bg-opacity-75">

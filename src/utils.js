@@ -42,9 +42,11 @@ export const useAsyncData = (data) => {
   const [state, setState] = useState([data?.then ? null : data]);
 
   useEffect(() => {
+    let isMounted = true;
     if (data?.then) {
-      data.then((result) => setState([result])).catch((e) => setState([false, e]));
+      data.then((result) => isMounted && setState([result])).catch((e) => isMounted && setState([false, e]));
     }
+    return () => (isMounted = false);
   }, [data]);
 
   return state;

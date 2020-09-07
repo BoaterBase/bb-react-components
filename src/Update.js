@@ -5,7 +5,6 @@ import Content from './Content';
 function Update({ data }) {
   const [update, updateError] = useAsyncData(data);
 
-  console.log(update, updateError);
   if (!update) return <div>Loading</div>;
 
   return (

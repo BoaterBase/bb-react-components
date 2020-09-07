@@ -21,9 +21,12 @@ const Template = (args) => (
 );
 
 export const Preview = PreviewTemplate.bind({});
+const urlParams = new URLSearchParams(document.location.search);
+const listingId = urlParams.get('listingId');
+const updateId = urlParams.get('updateId');
 Preview.args = {
-  listingId: 'g5nm2l6X',
-  updateId: 'w1R0mZGm',
+  listingId: listingId || 'g5nm2l6X',
+  updateId: updateId || 'w1R0mZGm',
 };
 
 export const Loading = Template.bind({});

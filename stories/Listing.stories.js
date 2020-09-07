@@ -2,6 +2,8 @@ import React from 'react';
 import BoaterBase from '../src/BoaterBase';
 import Listing from '../src/Listing';
 import { getListing } from '../src/api';
+import storybookLinker from './storybookLinker';
+
 export default {
   title: 'Blocks/Listing',
   component: Listing,
@@ -9,22 +11,23 @@ export default {
 };
 
 const PreviewTemplate = ({ listingId, ...args }) => (
-  <BoaterBase>
+  <BoaterBase linker={storybookLinker}>
     <Listing {...args} data={getListing(listingId)} />
   </BoaterBase>
 );
 
+export const Preview = PreviewTemplate.bind({});
+const urlParams = new URLSearchParams(document.location.search);
+const listingId = urlParams.get('listingId');
+Preview.args = {
+  listingId: listingId || 'g5nm2l6X',
+};
+
 const Template = (args) => (
-  <BoaterBase>
+  <BoaterBase linker={storybookLinker}>
     <Listing {...args} />
   </BoaterBase>
 );
-
-export const Preview = PreviewTemplate.bind({});
-Preview.args = {
-  listingId: 'g5nm2l6X',
-};
-
 export const Loading = Template.bind({});
 Loading.args = {
   data: null,
