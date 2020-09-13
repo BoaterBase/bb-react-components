@@ -1,7 +1,7 @@
 import React from 'react';
 import BoaterBase from '../src/BoaterBase';
 import Listing from '../src/Listing';
-import { getListing } from '../src/api';
+import { allListings } from '../src/api';
 import storybookLinker from './storybookLinker';
 
 export default {
@@ -12,7 +12,7 @@ export default {
 
 const PreviewTemplate = ({ listingId, ...args }) => (
   <BoaterBase linker={storybookLinker}>
-    <Listing {...args} data={getListing(listingId)} />
+    <Listing {...args} data={allListings().doc(listingId).get()} />
   </BoaterBase>
 );
 

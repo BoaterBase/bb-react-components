@@ -19,5 +19,6 @@ module.exports = {
   purge: ['./src/**/*.css', './src/**/*.js', './src/**/*.jsx'],
   future: {
     removeDeprecatedGapUtilities: true,
+    purgeLayersByDefault: true,
   },
 };

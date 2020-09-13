@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
+import classNames from 'classnames';
 import Search from './Search';
 import Hits from './Search/Hits';
 import LayoutSelector from './Search/LayoutSelector';
@@ -14,9 +15,10 @@ import Paging from './Search/Paging';
 
 /** Listings component to display a list of BoaterBase listings with search interface and paging */
 function Listings({ filters, layout }) {
+  const [filtersToggle, setFiltersToggle] = useState(false);
+
   return (
     <div>
-      Hello
       <Search filters={filters} layout={layout} hitsPerPage={24}>
         <div className="md:bb-flex">
           <div className="bb-flex-auto bb-flex md:bb-mr-1 bb-mb-1 md:bb-mb-0">
@@ -27,7 +29,7 @@ function Listings({ filters, layout }) {
             <LayoutSelector />
             <CurrencySelector />
             <SortSelector />
-            <FilterButton />
+            <FilterButton onClick={() => setFiltersToggle((state) => !state)} />
           </div>
         </div>
 
@@ -37,7 +39,7 @@ function Listings({ filters, layout }) {
             <Hits />
             <Paging />
           </div>
-          <div className="bb-w-30">
+          <div className={classNames('bb-w-30', filtersToggle ? 'bb-block md:bb-hidden' : 'bb-hidden md:bb-block')}>
             <Filters />
           </div>
         </div>

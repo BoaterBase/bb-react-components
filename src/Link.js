@@ -8,14 +8,18 @@ function normalizeUrl(url) {
 }
 
 /** Create a Link for routing BoaterBase paths */
-function Link({ to, children, ...props }) {
+function Link({ to, children, permalink, ...props }) {
   const { linker } = useBoaterBase();
   const onClick = (event) => {
     event.preventDefault();
     linker.changeUrl(normalizeUrl(to));
   };
 
-  return (
+  return permalink ? (
+    <a {...props} href={linker.createPermalink(normalizeUrl(to))}>
+      {children}
+    </a>
+  ) : (
     <a {...props} href={linker.createUrl(normalizeUrl(to))} onClick={onClick}>
       {children}
     </a>

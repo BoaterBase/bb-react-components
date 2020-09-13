@@ -15,3 +15,7 @@ export { default as Updates } from './Updates';
 
 export { default as Search, useSearch } from './Search';
 export { default as Hits } from './Search/Hits';
+
+//** API */
+export { allListings } from './api';
+export { listingUpdates } from './api';

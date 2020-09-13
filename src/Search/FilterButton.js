@@ -1,7 +1,8 @@
 import React from 'react';
-export default function FilterButton() {
+export default function FilterButton(props) {
   return (
     <button
+      {...props}
       type="button"
       className="bb-inline-flex bb-items-center bb-px-2 bb-py-2 bb-rounded-md bb-border bb-border-gray-300 bb-bg-white bb-text-gray-500 hover:bb-text-gray-400 focus:bb-z-10 focus:bb-outline-none focus:bb-border-blue-300 focus:bb-shadow-outline-blue active:bb-bg-gray-100 active:bb-text-gray-500 bb-transition bb-ease-in-out bb-duration-150"
       aria-label="Search Filters"

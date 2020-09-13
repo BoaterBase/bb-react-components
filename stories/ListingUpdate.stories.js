@@ -1,7 +1,7 @@
 import React from 'react';
 import BoaterBase from '../src/BoaterBase';
 import Update from '../src/Update';
-import { getListingUpdate } from '../src/api';
+import { listingUpdates } from '../src/api';
 export default {
   title: 'Blocks/ListingUpdate',
   component: Update,
@@ -10,7 +10,7 @@ export default {
 
 const PreviewTemplate = ({ listingId, updateId, ...args }) => (
   <BoaterBase>
-    <Update {...args} data={getListingUpdate(listingId, updateId)} />
+    <Update {...args} data={listingUpdates(listingId).doc(updateId).get()} />
   </BoaterBase>
 );
 

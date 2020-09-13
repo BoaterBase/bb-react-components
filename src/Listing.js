@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { useAsyncData, formatCoords, formatNumber, formatCurrency } from '../src/utils';
-import { getListingUpdates } from '../src/api';
+import { listingUpdates } from '../src/api';
 import MapImage from './MapImage';
 import Updates from './Updates';
 import LocationIcon from './Icons/Location';
 import Content from './Content';
 import Gallery from './Gallery';
+import Share from './Share';
+
 import ProfileBox from './ProfileBox';
 const specifications = [
   {
@@ -171,7 +173,7 @@ function Listing({ data }) {
 
   useEffect(() => {
     if (listing?.id) {
-      setUpdates(getListingUpdates(listing.id));
+      setUpdates(listingUpdates(listing.id).get()); //.where('listed', '==', true)
     }
   }, [listing]);
 
@@ -213,30 +215,34 @@ function Listing({ data }) {
               <Specifications data={listing.specifications} />
               <Content items={listing.content} className="bb-border-t bb-border-gray-100 bb-mt-2" />
               <h2 className="bb-mt-4 bb-mb-4 bb-text-3xl bb-font-semibold bb-text-gray-800">Updates</h2>
-              <Updates data={updates} />
+              <Updates pathname={`/listings/${listing.slug}`} data={updates} />
             </div>
             <div className="bb-col-span-1 bb-space-y-4">
-              <ProfileBox profile={listing.profile} contact={listing.contact} />
+              <ProfileBox profile={listing.profile} contact={listing.contact} listingId={listing.id} />
+              <Share pathname={`/listings/${listing.slug}`} title={listing.title} summary={listing.summary} />
+
+              {listing.geo && (
+                <div>
+                  <h3 className="bb-mb-1 bb-uppercase bb-text-center bb-font-medium bb-text-gray-500 bb-text-sm">Map</h3>
+
+                  <MapImage
+                    className="bb-shadow bb-rounded-md bb-w-full"
+                    width={400}
+                    height={300}
+                    latitude={listing.geo.latitude}
+                    longitude={listing.geo.longitude}
+                  />
+                </div>
+              )}
 
               <div>
-                <div>
-                  {listing.geo && (
-                    <MapImage
-                      className="bb-shadow bb-rounded-md bb-w-full"
-                      width={400}
-                      height={300}
-                      latitude={listing.geo.latitude}
-                      longitude={listing.geo.longitude}
-                    />
-                  )}
+                <h3 className="bb-uppercase bb-text-center bb-mb-1 bb-font-medium bb-text-gray-500 bb-text-sm">Data</h3>
+                <div className="bb-max-h-20 bb-overflow-y-auto bb-break-all bb-font-mono bb-text-xs bb-bg-gray-800 bb-text-gray-400 bb-rounded bb-shadow bb-p-2">
+                  <code>{JSON.stringify(listing)}</code>
                 </div>
               </div>
 
-              <div className="bb-max-h-20 bb-overflow-y-auto bb-break-all bb-font-mono bb-text-xs bb-bg-gray-800 bb-text-gray-400 bb-rounded bb-shadow bb-p-2">
-                <code>{JSON.stringify(listing)}</code>
-              </div>
-
-              <div className="bb-flex bb-rounded-md bb-shadow">
+              <div className="bb-hidden xbb-flex bb-rounded-md bb-shadow">
                 <button
                   onClick={() => setOverlay('message')}
                   type="button"

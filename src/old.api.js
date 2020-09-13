@@ -30,7 +30,7 @@ function normalizeContent(content) {
   });
 }
 
-const wait = (time) => new Promise((resolve) => setTimeout(resolve, time));
+const wait = (time, ...args) => new Promise((resolve) => setTimeout(resolve, time, ...args));
 export async function getCurrencyRates() {
   console.info('getCurrencyRates()');
   //await wait(5000);
@@ -48,7 +48,6 @@ export async function getGroup(id) {
     random: Math.random(),
   };
 }
-
 export async function getListing(slug) {
   console.info('getListing()', slug);
   if (!slug) return false;
@@ -211,4 +210,27 @@ Find a profile by its username
 */
 export async function findProfile(username) {
   return;
+}
+
+export async function createListingMessage(listingId, message) {
+  return await fetch(`https://api.boaterbase.com/api/listings/${listingId}/messages`, {
+    headers: {
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
+    },
+    method: 'POST',
+    body: JSON.stringify(message),
+  }).then((r) => r.json());
+}
+
+const listingConverter = {
+  fromFirestore(snapshot) {
+    const data = snapshot.data();
+    return {
+      slug: 'SLUGGY',
+    };
+  },
+};
+export function listings() {
+  return firestore.collection('listings').withConverter(listingConverter);
 }

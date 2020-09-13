@@ -1,36 +1,25 @@
 import React, { useState } from 'react';
 import { Image, Transformation } from 'cloudinary-react';
 import { useAlerts } from './Alerts';
+import { allListings } from './api';
+import { useForm } from 'react-hook-form';
+import { useUID } from 'react-uid';
+import Input from './Form/Input';
+import Textarea from './Form/Textarea';
 
-function Input({ id, className, compact, label, ...props }) {
-  return (
-    <div className={className}>
-      <label htmlFor={id} className={compact && 'bb-sr-only'}>
-        {label}
-      </label>
-      <div className="bb-relative bb-rounded-md bb-shadow-sm">
-        <input id={id} className="bb-form-input bb-block bb-w-full sm:bb-text-sm sm:bb-leading-5" {...props} />
-      </div>
-    </div>
-  );
-}
-
-function Textarea({ id, className, compact, label, ...props }) {
-  return (
-    <div className={className}>
-      <div className="bb-max-w-lg bb-flex bb-rounded-md bb-shadow-sm">
-        <textarea
-          id={id}
-          className="bb-form-textarea bb-block bb-w-full bb-transition bb-duration-150 bb-ease-in-out sm:bb-text-sm sm:bb-leading-5"
-          {...props}
-        />
-      </div>
-    </div>
-  );
-}
-
-function SendMessage({ name, setOverlay }) {
+function SendMessage({ name, setOverlay, listingId }) {
   const { createAlert } = useAlerts();
+  const { register, handleSubmit, watch, errors } = useForm();
+  const onSubmit = async (data) => {
+    try {
+      await allListings().doc(listingId).messages().create(data);
+      setOverlay(null);
+      createAlert('Message sent!', 'success');
+    } catch (err) {
+      createAlert('There was an error!', 'error');
+      console.error(err);
+    }
+  };
 
   return (
     <div className="bb-fixed bb-z-10 bb-inset-0 bb-overflow-y-auto">
@@ -64,7 +53,8 @@ Leaving: "ease-in duration-200"
   From: "opacity-100 translate-y-0 sm:scale-100"
   To: "opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
     */}
-        <div
+        <form
+          onSubmit={handleSubmit(onSubmit)}
           className="bb-inline-block bb-align-bottom bb-bg-white bb-rounded-lg bb-px-4 bb-pt-5 bb-pb-4 bb-text-left bb-overflow-hidden bb-shadow-xl bb-transform bb-transition-all sm:bb-my-8 sm:bb-align-middle sm:bb-max-w-sm sm:bb-w-full sm:bb-p-6"
           role="dialog"
           aria-modal="true"
@@ -76,36 +66,69 @@ Leaving: "ease-in duration-200"
               to <b>{name}</b>
             </p>
           )}
-          <Input id="name" compact label="Name" placeholder="Your Name" type="text" className="bb-mt-2" />
+          <Input
+            inputRef={register({ required: 'Please enter your name.' })}
+            error={errors.name}
+            name="name"
+            compact
+            label="Name"
+            placeholder="Your Name"
+            type="text"
+            className="bb-mt-2"
+          />
 
-          <Input id="telephone" compact label="Telephone" placeholder="Telephone Number" type="telephone" className="bb-mt-2" />
-          <Input id="email" compact label="Email" placeholder="Email Address" type="email" className="bb-mt-2" />
-          <Textarea placeholder="Enter a message..." rows={3} className="bb-mt-2" />
+          <Input
+            inputRef={register}
+            error={errors.telephone}
+            name="telephone"
+            compact
+            label="Telephone"
+            placeholder="Telephone Number"
+            type="telephone"
+            className="bb-mt-2"
+          />
+          <Input
+            inputRef={register({ required: 'Enter your email address.' })}
+            error={errors.email}
+            name="email"
+            compact
+            label="Email"
+            placeholder="Email Address"
+            type="email"
+            className="bb-mt-2"
+          />
+          <Textarea
+            inputRef={register({ required: 'A message is required.' })}
+            error={errors.message}
+            name="content"
+            placeholder="Enter a message..."
+            rows={3}
+            className="bb-mt-2"
+          />
           <div className="bb-mt-5 sm:bb-mt-6">
             <span className="bb-flex bb-w-full bb-rounded-md bb-shadow-sm">
               <button
-                onClick={() => createAlert('Not done yet!')}
-                type="button"
+                type="submit"
                 className="bb-inline-flex bb-justify-center bb-w-full bb-rounded-md bb-border bb-border-transparent bb-px-4 bb-py-2 bb-bg-indigo-600 bb-text-base bb-leading-6 bb-font-medium bb-text-white bb-shadow-sm hover:bb-bg-indigo-500 focus:bb-outline-none focus:bb-border-indigo-700 focus:bb-shadow-outline-indigo bb-transition bb-ease-in-out bb-duration-150 sm:bb-text-sm sm:bb-leading-5"
               >
                 Send Message
               </button>
             </span>
           </div>
-        </div>
+        </form>
       </div>
     </div>
   );
 }
 
-function ProfileBox({ profile, contact }) {
+function ProfileBox({ profile, contact, listingId }) {
   const [overlay, setOverlay] = useState();
 
   return (
     <div className="bb-flex bb-flex-col bb-text-center bb-bg-white bb-rounded-lg bb-shadow">
       {contact?.avatar && profile?.avatar && (
-        <div className="bb-p-4 bb-border-b bb-border-gray-100 bb-rounded-t-lg bb-bg-white">
-          <Image className="bb-w-full" publicId={profile.avatar.id}>
+        <div className="bb-p-4 bb-border-b bb-border-gray-100 bb-rounded-t-lg bb-bg-white bb-flex bb-justify-center">
+          <Image className="bb-max-w-full bb-max-h-12" publicId={profile.avatar.id}>
             <Transformation width="600" />
           </Image>
         </div>
@@ -151,7 +174,7 @@ function ProfileBox({ profile, contact }) {
           </div>
         </div>
       </div>
-      {overlay === 'message' && <SendMessage name={contact?.name || profile?.name} setOverlay={setOverlay} />}
+      {overlay === 'message' && <SendMessage name={contact?.name || profile?.name} setOverlay={setOverlay} listingId={listingId} />}
     </div>
   );
 }

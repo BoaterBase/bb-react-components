@@ -9,17 +9,19 @@ function Gallery({ media = [], layout, limit = 9, lightbox = false, selected = 0
       return (
         <div className="bb-relative bb-rounded-md bb-shadow">
           <svg viewBox="0 0 16 9" className="bb-block bb-w-full bb-invisible"></svg>
-          <Image
-            className="bb-rounded-md bb-absolute bb-w-full bb-h-full bb-bg-gray-400 bb-inset-0 bb-object-cover"
-            publicId={media[current].id}
-            dpr="auto"
-            responsive
-            width="auto"
-            responsiveUseBreakpoints="true"
-          >
-            <Placeholder type="blur" />
-            <Transformation quality="auto" fetchFormat="auto" />
-          </Image>
+          <a href={media[current].original} target="_preview">
+            <Image
+              className="bb-rounded-md bb-absolute bb-w-full bb-h-full bb-bg-gray-400 bb-inset-0 bb-object-cover"
+              publicId={media[current].id}
+              dpr="auto"
+              responsive
+              width="auto"
+              responsiveUseBreakpoints="true"
+            >
+              <Placeholder type="blur" />
+              <Transformation quality="auto" fetchFormat="auto" />
+            </Image>
+          </a>
         </div>
       );
     case 'gallery':
@@ -28,18 +30,19 @@ function Gallery({ media = [], layout, limit = 9, lightbox = false, selected = 0
           {media.map((item, index) => (
             <li key={index} className="bb-relative bb-rounded-md bb-shadow">
               <svg viewBox="0 0 16 9" className="bb-block bb-w-full bb-invisible"></svg>
-
-              <Image
-                className="bb-rounded-md bb-absolute bb-w-full bb-h-full bb-bg-gray-400 bb-inset-0 bb-object-cover"
-                publicId={item.id}
-                dpr="auto"
-                responsive
-                width="auto"
-                responsiveUseBreakpoints="true"
-              >
-                <Placeholder type="blur" />
-                <Transformation quality="auto" fetchFormat="auto" />
-              </Image>
+              <a href={item.original} target="_preview">
+                <Image
+                  className="bb-rounded-md bb-absolute bb-w-full bb-h-full bb-bg-gray-400 bb-inset-0 bb-object-cover"
+                  publicId={item.id}
+                  dpr="auto"
+                  responsive
+                  width="auto"
+                  responsiveUseBreakpoints="true"
+                >
+                  <Placeholder type="blur" />
+                  <Transformation quality="auto" fetchFormat="auto" />
+                </Image>
+              </a>
             </li>
           ))}
         </ul>
