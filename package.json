@@ -26,8 +26,9 @@
     "build-storybook": "build-storybook -o docs/",
     "explorer": "source-map-explorer standalone/bb-react-components.js",
     "storybook": "start-storybook -p 6006",
-    "deploy": "npm publish --access public",
-    "link-dev-react-hooks": "npm link ../bb-next/node_modules/react"
+    "link-dev-react-hooks": "npm link ../bb-next/node_modules/react",
+    "patch": "npm version patch",
+    "deploy": "npm publish --access public"
   },
   "keywords": [
     "boaterbase",
