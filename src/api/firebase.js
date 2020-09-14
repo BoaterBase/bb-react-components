@@ -22,4 +22,4 @@ export { firebase };
 import { getFirestore } from '@firebase/firestore';
 export const firestore = getFirestore(firebase);
 
-export { collection, doc, getDoc, addDoc } from '@firebase/firestore';
+export { collection, doc, getDoc, addDoc, collectionGroup } from '@firebase/firestore';
