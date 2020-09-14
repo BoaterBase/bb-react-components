@@ -1,11 +1,8 @@
-import { getFirestore, collection, collectionGroup, doc, getDoc } from '@firebase/firestore';
-import QueryBuilder from './QueryBuilder';
+import { firestore, collection, collectionGroup, doc, getDoc } from './firebase';
 
-import firebase from './firebase';
+import QueryBuilder from './QueryBuilder';
 import slugify from 'slugify';
 import normalizeContent from './normalizeContent';
-
-const fs = getFirestore(firebase);
 
 const updateConverter = {
   async fromFirestore(snapshot, options) {
@@ -27,7 +24,7 @@ class UpdateReference {
   constructor(slug, collection) {
     this.id = slug.split('-').pop();
     if (!this.id) throw new Error('You must provide a valid slug id.');
-    this.collection = (collection || collectionGroup(fs, 'updates')).withConverter(updateConverter);
+    this.collection = (collection || collectionGroup(firestore, 'updates')).withConverter(updateConverter);
   }
   async get(options) {
     const docSnapshot = await getDoc(doc(this.collection, this.id));
@@ -41,7 +38,7 @@ class UpdatesCollection extends QueryBuilder {
     if (query) {
       super(query.withConverter(updateConverter));
     } else {
-      super(collectionGroup(fs, 'updates').withConverter(updateConverter));
+      super(collectionGroup(firestore, 'updates').withConverter(updateConverter));
     }
   }
   doc(slug) {
@@ -58,5 +55,5 @@ export function listingUpdates(slug) {
   const id = slug.split('-').pop();
   if (!id) throw new Error('You must provide a valid slug id.');
 
-  return new UpdatesCollection(doc(collection(fs, 'listings'), id).collection('updates'));
+  return new UpdatesCollection(doc(collection(firestore, 'listings'), id).collection('updates'));
 }

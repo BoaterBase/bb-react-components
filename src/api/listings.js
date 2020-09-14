@@ -1,12 +1,8 @@
-import { getFirestore, collection, doc, getDoc, addDoc } from '@firebase/firestore';
+import { firestore, collection, doc, getDoc, addDoc } from './firebase';
 import QueryBuilder from './QueryBuilder';
-
-import firebase from './firebase';
 import slugify from 'slugify';
 import normalizeMedia from './normalizeMedia';
 import normalizeContent from './normalizeContent';
-
-const fs = getFirestore(firebase);
 
 const listingConverter = {
   async fromFirestore(snapshot, options) {
@@ -39,7 +35,7 @@ const listingConverter = {
     };
 
     if (data.profile?.id) {
-      const profileDoc = await getDoc(doc(collection(fs, 'profiles'), data.profile.id));
+      const profileDoc = await getDoc(doc(collection(firestore, 'profiles'), data.profile.id));
 
       if (profileDoc.exists()) {
         const profileData = profileDoc.data();
@@ -57,7 +53,7 @@ const listingConverter = {
       }
     }
     if (data.contact?.id) {
-      const contactDoc = await getDoc(doc(collection(fs, 'profiles'), data.contact.id));
+      const contactDoc = await getDoc(doc(collection(firestore, 'profiles'), data.contact.id));
       if (contactDoc.exists()) {
         const contactData = contactDoc.data();
 
@@ -84,7 +80,7 @@ class ListingReference {
     if (!this.id) throw new Error('You must provide a valid slug id.');
   }
   async get(options) {
-    const _collection = collection(fs, 'listings').withConverter(listingConverter);
+    const _collection = collection(firestore, 'listings').withConverter(listingConverter);
     const _docSnapshot = await getDoc(doc(_collection, this.id));
     return await _docSnapshot.data(options);
   }
@@ -97,7 +93,7 @@ class ListingReference {
     return {
       create: async (data) => {
         // TODO - use converter and validation
-        const col = collection(fs, 'listings').doc(this.id).collection('messages');
+        const col = collection(firestore, 'listings').doc(this.id).collection('messages');
         // TODO - return our message reference
         return await addDoc(col, { ...data, created: new Date() });
       },
@@ -109,7 +105,7 @@ class ListingsCollection extends QueryBuilder {
     if (query) {
       super(query.withConverter(listingConverter));
     } else {
-      super(collection(fs, 'listings').withConverter(listingConverter));
+      super(collection(firestore, 'listings').withConverter(listingConverter));
     }
   }
 

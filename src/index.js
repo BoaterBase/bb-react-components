@@ -1,5 +1,3 @@
-import BoaterBase from './BoaterBase';
-
 /** BoaterBase external interfaces */
 export { default as BoaterBase, useBoaterBase } from './BoaterBase';
 
@@ -16,6 +14,12 @@ export { default as Updates } from './Updates';
 export { default as Search, useSearch } from './Search';
 export { default as Hits } from './Search/Hits';
 
-//** API */
+/** API */
 export { allListings } from './api';
 export { listingUpdates } from './api';
+export { getCurrencyRates } from './api';
+
+import { version } from '../package.json';
+export function getPackageVersion() {
+  return version;
+}

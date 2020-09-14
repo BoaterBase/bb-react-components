@@ -17,4 +17,9 @@ try {
 } catch (e) {
   firebase = initializeApp(firebaseConfig, 'BoaterBaseComponents');
 }
-export default firebase;
+export { firebase };
+
+import { getFirestore } from '@firebase/firestore';
+export const firestore = getFirestore(firebase);
+
+export { collection, doc, getDoc, addDoc } from '@firebase/firestore';
