@@ -62,13 +62,7 @@ See the Apache Version 2.0 License for specific language governing permissions
 and limitations under the License.
 ***************************************************************************** */
 
-/*! Hammer.JS - v2.0.7 - 2016-04-22
- * http://hammerjs.github.io/
- *
- * Copyright (c) 2016 Jorik Tangelder;
- * Licensed under the MIT license */
-
-/*! algoliasearch-lite.umd.js | 4.4.0 | © Algolia, inc. | https://github.com/algolia/algoliasearch-client-javascript */
+/*! algoliasearch-lite.umd.js | 4.5.1 | © Algolia, inc. | https://github.com/algolia/algoliasearch-client-javascript */
 
 /**
  * @license
