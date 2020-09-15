@@ -1,6 +1,6 @@
 {
   "name": "@boaterbase/bb-react-components",
-  "version": "0.0.7",
+  "version": "0.0.8",
   "description": "BoaterBase React Components",
   "source": "src/index.js",
   "main": "dist/index.js",
