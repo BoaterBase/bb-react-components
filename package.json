@@ -6,7 +6,6 @@
   "main": "dist/index.js",
   "module": "dist/index.module.js",
   "modern": "dist/index.modern.js",
-  "browser": "dist/index.umd.js",
   "unpkg": "dist/index.umd.js",
   "jsdelivr": "dist/browser.umd.js",
   "files": [
@@ -21,7 +20,7 @@
     "build": "npm run build-main && npm run build-module && npm run build-browser && npm run build-css",
     "build-main": "NODE_ENV=production microbundle --jsx React.createElement --compress --format cjs --target node",
     "build-module": "NODE_ENV=production microbundle --jsx React.createElement --compress --format modern,es --target node",
-    "build-browser": "NODE_ENV=production microbundle --external react --jsx React.createElement --compress --format umd",
+    "build-browser": "NODE_ENV=production microbundle --external react --jsx React.createElement --compress --format umd --target browser",
     "build-css": "NODE_ENV=production npx tailwindcss build src/styles.css -o dist/styles.css && csso dist/styles.css --output dist/styles.min.css",
     "build-storybook": "NODE_ENV=production build-storybook -o docs/",
     "explorer": "source-map-explorer dist/index.umd.js",
