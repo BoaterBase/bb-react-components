@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import formatcoords from 'formatcoords';
 
 export function imagePath(path, transform = 't_large_image', format = 'jpg') {
   return `https://res.cloudinary.com/boaterbase/image/upload/${transform}/${path}.${format}`;
@@ -7,26 +6,6 @@ export function imagePath(path, transform = 't_large_image', format = 'jpg') {
 
 export function mod(x, m) {
   return ((x % m) + m) % m;
-}
-
-export function formatCoords(lat, lon) {
-  return formatcoords(lat, lon).format();
-}
-export function formatCurrency(amount, currency = 'USD') {
-  return new Intl.NumberFormat('en-US', {
-    style: 'currency',
-    currency: currency,
-    useGrouping: true,
-    minimumFractionDigits: 0,
-  }).format(amount);
-}
-
-export function formatNumber(amount) {
-  return new Intl.NumberFormat('en-US', {
-    useGrouping: true,
-    minimumFractionDigits: 0,
-    maximumSignificantDigits: 2,
-  }).format(amount);
 }
 
 /* Remove junk from user entered text */

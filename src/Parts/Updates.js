@@ -1,7 +1,6 @@
 import React from 'react';
-import { useAsyncData } from '../src/utils';
 import Markdown from 'markdown-to-jsx';
-import Link from './Link';
+import Link from '../Link';
 
 /** Create a snippet from a content block */
 function Snippet({ content }) {
@@ -20,9 +19,7 @@ function Snippet({ content }) {
         ))
     : null;
 }
-export default function Updates({ data, pathname }) {
-  const [updates, updatesError] = useAsyncData(data);
-
+export default function Updates({ updates, pathname }) {
   if (!updates) return <div>Loading</div>;
   return (
     <div className="bb-grid bb-gap-16 lg:bb-grid-cols-2 lg:bb-col-gap-5 lg:bb-row-gap-12">

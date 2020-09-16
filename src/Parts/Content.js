@@ -1,6 +1,5 @@
 import React from 'react';
 import Markdown from 'markdown-to-jsx';
-
 import Gallery from './Gallery';
 
 const H2 = (props) => <h2 {...props} />;

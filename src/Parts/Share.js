@@ -1,14 +1,14 @@
 import React from 'react';
 import classNames from 'classnames';
-import Facebook from './Icons/Facebook';
-import Twitter from './Icons/Twitter';
-import Pinterest from './Icons/Pinterest';
-import Linkedin from './Icons/Linkedin';
-import Email from './Icons/Email';
-import Copy from './Icons/Copy';
-import { useAlerts } from './Alerts';
+import Facebook from '../Icons/Facebook';
+import Twitter from '../Icons/Twitter';
+import Pinterest from '../Icons/Pinterest';
+import Linkedin from '../Icons/Linkedin';
+import Email from '../Icons/Email';
+import Copy from '../Icons/Copy';
+import { useAlerts } from '../Alerts';
 import qs from 'qs';
-import { useBoaterBase } from './BoaterBase';
+import { useBoaterBase } from '../BoaterBase';
 
 function Share({ pathname, query, title, summary }) {
   const { createAlert } = useAlerts();

@@ -1,5 +1,5 @@
-export { allListings } from './listings';
-export { listingUpdates } from './updates';
+export { getListing } from './listings';
+export { getListingUpdates } from './listings';
 
 /** Wait for some time to happen - for delaying and testing async code */
 const wait = (time, ...args) => new Promise((resolve) => setTimeout(resolve, time, args));

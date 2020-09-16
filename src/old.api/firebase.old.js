@@ -1,4 +1,10 @@
+// TODO - rename to db and abstract firebase away
+import '@firebase/app';
+import '@firebase/firestore';
+import '@firebase/util';
+
 import { initializeApp, getApp } from '@firebase/app';
+import { getFirestore } from '@firebase/firestore';
 
 var firebaseConfig = {
   apiKey: 'AIzaSyDkBS1qwcm0DT0vyMDea8DkLB-adsA8xzk',
@@ -18,8 +24,8 @@ try {
   firebase = initializeApp(firebaseConfig, 'BoaterBaseComponents');
 }
 export { firebase };
-
-import { getFirestore } from '@firebase/firestore';
 export const firestore = getFirestore(firebase);
 
 export { collection, doc, getDoc, addDoc, collectionGroup } from '@firebase/firestore';
+
+// Normalize firebase access for future updates

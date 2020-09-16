@@ -1,14 +1,9 @@
 import React, { createContext, useState, useContext, useEffect, memo } from 'react';
-import { getCurrencyRates } from './api';
 
-// TODO - use rate and add conversion to provider for easy access!
-function formatCurrency(amount, currency = 'USD') {
-  return new Intl.NumberFormat('en-US', {
-    style: 'currency',
-    currency: currency,
-    useGrouping: true,
-    minimumFractionDigits: 0,
-  }).format(amount);
+/** Get currency rates */
+async function getCurrencyRates() {
+  console.info('getCurrencyRates()');
+  return await fetch('https://api.exchangeratesapi.io/latest?base=USD&symbols=USD,GBP,EUR,CAD,AUD,SGD').then((r) => r.json());
 }
 
 const currencySymbols = {

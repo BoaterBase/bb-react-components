@@ -1,9 +1,7 @@
-import 'cross-fetch/polyfill';
-
 // Import packaged source from dist
-import * as boaterbase from '../dist';
+import * as cjs from './dist/index';
 
 //** Test that the module build worked ok */
 test('moduleTest', async () => {
-  expect(boaterbase).toBeDefined();
+  expect(cjs).toBeDefined();
 });

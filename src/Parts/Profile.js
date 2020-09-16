@@ -1,11 +1,9 @@
 import React, { useState } from 'react';
 import { Image, Transformation } from 'cloudinary-react';
-import { useAlerts } from './Alerts';
-import { allListings } from './api';
+import { useAlerts } from '../Alerts';
 import { useForm } from 'react-hook-form';
-import { useUID } from 'react-uid';
-import Input from './Form/Input';
-import Textarea from './Form/Textarea';
+import Input from '../Form/Input';
+import Textarea from '../Form/Textarea';
 
 function SendMessage({ name, setOverlay, listingId }) {
   const { createAlert } = useAlerts();
@@ -121,7 +119,7 @@ Leaving: "ease-in duration-200"
   );
 }
 
-function ProfileBox({ profile, contact, listingId }) {
+function Profile({ profile, contact, listingId }) {
   const [overlay, setOverlay] = useState();
 
   return (
@@ -179,4 +177,4 @@ function ProfileBox({ profile, contact, listingId }) {
   );
 }
 
-export default ProfileBox;
+export default Profile;
