@@ -1,11 +1,11 @@
 import React from 'react';
 import classNames from 'classnames';
-import Facebook from '../Icons/Facebook';
-import Twitter from '../Icons/Twitter';
-import Pinterest from '../Icons/Pinterest';
-import Linkedin from '../Icons/Linkedin';
-import Email from '../Icons/Email';
-import Copy from '../Icons/Copy';
+import Facebook from '../icons/Facebook';
+import Twitter from '../icons/Twitter';
+import Pinterest from '../icons/Pinterest';
+import Linkedin from '../icons/Linkedin';
+import Email from '../icons/Email';
+import Copy from '../icons/Copy';
 import { useAlerts } from '../Alerts';
 import qs from 'qs';
 import { useBoaterBase } from '../BoaterBase';

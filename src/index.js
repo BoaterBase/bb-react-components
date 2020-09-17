@@ -3,7 +3,11 @@ export { default as BoaterBase, useBoaterBase } from './BoaterBase';
 
 export { useCurrency } from './Currency';
 
-export * as ListingBlock from './Blocks/ListingBlock';
+export { default as ListingBlock } from './Blocks/ListingBlock';
+
+export { default as getListing } from './data/getListing';
+
+export * as store from './data/store';
 
 // export { default as Version } from './Version';
 // export { default as Logo } from './Logo';
@@ -22,7 +26,6 @@ export * as ListingBlock from './Blocks/ListingBlock';
 // export { getCurrencyRates } from './api';
 
 import { version } from '../package.json';
-import ListingBlock from './Blocks/ListingBlock';
 export function getPackageVersion() {
   return version;
 }

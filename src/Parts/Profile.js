@@ -2,8 +2,8 @@ import React, { useState } from 'react';
 import { Image, Transformation } from 'cloudinary-react';
 import { useAlerts } from '../Alerts';
 import { useForm } from 'react-hook-form';
-import Input from '../Form/Input';
-import Textarea from '../Form/Textarea';
+import Input from '../form/Input';
+import Textarea from '../form/Textarea';
 
 function SendMessage({ name, setOverlay, listingId }) {
   const { createAlert } = useAlerts();
