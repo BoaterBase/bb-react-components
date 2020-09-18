@@ -1,6 +1,7 @@
 import React from 'react';
 import { memo, useState } from 'react';
-import { mod, imagePath, formatCurrency } from '../utils';
+import { mod, imagePath } from '../utils';
+import formatCurrency from '../utils/formatCurrency';
 import { useBoaterBase } from '../BoaterBase';
 import { useSearch } from '../Search';
 import { useCurrency } from '../Currency';

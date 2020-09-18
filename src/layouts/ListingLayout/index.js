@@ -278,7 +278,10 @@ function ListingBlock({ listingResource, Head = () => null }) {
   );
 }
 
-export default function ListingLayout({ id, Head }) {
+export default function ListingLayout({ id, loading, Head }) {
+  // If the server is rendering a loading page it can tell us to show a loading state and we exit early without triggering resource request
+  if (loading) return <ListingLoading />;
+
   // Start data request early so Suspend can use it for ssr fallback
   const listingResource = getListing(id);
 

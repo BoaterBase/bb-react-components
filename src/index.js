@@ -5,8 +5,10 @@ export { useCurrency } from './Currency';
 export { useAlerts } from './Alerts';
 
 export { default as ListingLayout } from './layouts/ListingLayout';
+export { default as ListingsLayout } from './layouts/ListingsLayout';
 
 export { default as getListing } from './data/getListing';
+export { default as getProfile } from './data/getProfile';
 
 export * as store from './data/store';
 
