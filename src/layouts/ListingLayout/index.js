@@ -1,5 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, Suspense } from 'react';
 import getListing from '../../data/getListing';
+import Suspend from '../../data/Suspend';
+
+import ListingLoading from './ListingLoading';
 
 import formatCoords from '../../utils/formatCoords';
 import formatNumber from '../../utils/formatNumber';
@@ -13,6 +16,8 @@ import Gallery from '../../parts/Gallery';
 import Share from '../../parts/Share';
 
 import Profile from '../../parts/Profile';
+
+import ContactSection from '../../sections/ContactSection';
 
 const specifications = [
   {
@@ -171,14 +176,18 @@ function Specifications({ data }) {
   ) : null;
 }
 
-function ListingBlock({ id }) {
+function ListingBlock({ listingResource, Head = () => null }) {
   const [overlay, setOverlay] = useState({});
 
-  const listing = getListing(id).read();
+  const listing = listingResource.read();
   const updates = undefined;
 
   return (
     <div>
+      <Head>
+        <title>{listing.title}</title>
+        <meta name="description" content={listing.summary} />
+      </Head>
       {listing.media && listing.media[0]?.width >= 900 && (
         <div className="bb-mb-3">
           <Gallery media={listing.media} layout="primary" />
@@ -210,6 +219,7 @@ function ListingBlock({ id }) {
         </div>
         <div className="bb-col-span-1 bb-space-y-4">
           <Profile profile={listing.profile} contact={listing.contact} listingId={listing.id} />
+          <ContactSection profileId={listing.profileId} contactId={listing.contactId} Head={Head} />
           <Share pathname={`/listings/${listing.slug}`} title={listing.title} summary={listing.summary} />
 
           {listing.geo && (
@@ -267,4 +277,14 @@ function ListingBlock({ id }) {
     </div>
   );
 }
-export default ListingBlock;
+
+export default function ListingLayout({ id, Head }) {
+  // Start data request early so Suspend can use it for ssr fallback
+  const listingResource = getListing(id);
+
+  return (
+    <Suspend resources={listingResource} fallback={<ListingLoading />}>
+      <ListingBlock Head={Head} listingResource={listingResource} />
+    </Suspend>
+  );
+}

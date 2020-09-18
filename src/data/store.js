@@ -11,7 +11,11 @@ export function dump() {
 }
 
 export function parse(data) {
-  load(JSON.parse(data));
+  if (data) {
+    load(JSON.parse(data));
+  } else {
+    load([]);
+  }
 }
 export function stringify() {
   return JSON.stringify([...cache]);

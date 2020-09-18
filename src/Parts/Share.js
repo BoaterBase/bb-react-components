@@ -18,6 +18,7 @@ function Share({ pathname, query, title, summary }) {
 
   const shares = [
     {
+      id: 'facebook',
       Icon: Facebook,
       title: 'Facebook',
       link: `https://www.facebook.com/sharer/sharer.php?${qs.stringify({
@@ -26,6 +27,7 @@ function Share({ pathname, query, title, summary }) {
       color: 'bb-bg-blue-500',
     },
     {
+      id: 'twitter',
       Icon: Twitter,
       title: 'Twitter',
       link: `https://twitter.com/intent/tweet?${qs.stringify({
@@ -34,6 +36,7 @@ function Share({ pathname, query, title, summary }) {
       color: 'bb-bg-blue-400',
     },
     {
+      id: 'pinterest',
       Icon: Pinterest,
       title: 'Pinterest',
       link: `http://pinterest.com/pin/create/link/?${qs.stringify({
@@ -43,6 +46,7 @@ function Share({ pathname, query, title, summary }) {
       color: 'bb-bg-red-600',
     },
     {
+      id: 'linkedin',
       Icon: Linkedin,
       title: 'LinkedIn',
       link: `https://www.linkedin.com/shareArticle?${qs.stringify({
@@ -54,6 +58,7 @@ function Share({ pathname, query, title, summary }) {
       color: 'bb-bg-blue-600',
     },
     {
+      id: 'email',
       Icon: Email,
       title: 'Email',
       link: `mailto:?${qs.stringify({
@@ -77,8 +82,9 @@ function Share({ pathname, query, title, summary }) {
     <div>
       <h3 className="bb-uppercase bb-text-center bb-font-medium bb-text-gray-500 bb-text-sm">Share</h3>
       <div className="bb-flex bb-space-x-1 bb-justify-center bb-my-2">
-        {shares.map(({ Icon, title, link, color }) => (
+        {shares.map(({ Icon, title, link, color, id }) => (
           <a
+            key={id}
             target="_share"
             href={link}
             title={title}
@@ -94,6 +100,7 @@ function Share({ pathname, query, title, summary }) {
       <div className="bb-mt-1 bb-relative bb-rounded-md bb-shadow-sm">
         <input
           value={permalink}
+          readOnly
           className="bb-form-input bb-block bb-w-full bb-pr-10 bb-bg-gray-200 bb-text-gray-500 bb-font-mono bb-text-xs bb-leading-5"
           placeholder="000-00-0000"
         />

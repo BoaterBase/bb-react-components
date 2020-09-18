@@ -1,7 +1,7 @@
-import { BoaterBase, useBoaterBase, ListingBlock } from '../src';
+import { BoaterBase, useBoaterBase, ListingLayout } from '../src';
 
 test('imports', async () => {
   expect(BoaterBase).toBeDefined();
   expect(useBoaterBase).toBeDefined();
-  expect(ListingBlock).toBeDefined();
+  expect(ListingLayout).toBeDefined();
 });

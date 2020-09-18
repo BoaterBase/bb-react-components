@@ -1,11 +1,18 @@
 import { firestore } from '../firebase';
-import listingConverter from '../firebase/listingConverter';
-import getId from '../utils/getId';
-import {createResource} from './store';
+import convertListing from './convertListing';
+import { createResource } from './store';
 
 async function getListingsSnapshot(limit = 6, after) {
-  const id = getId(slug);
-  const snapshot = await firestore.collection('listings').withConverter(listingConverter).where('listed','==',true).orderBy('created','desc').limit(limit).get();
-  return await Promise.all(snapshot.docs().map(doc=>await Promise.resolve(doc.data())))
+  const snapshot = await firestore
+    .collection('listings')
+    .withConverter(convertListing())
+    .where('listed', '==', true)
+    .orderBy('created', 'desc')
+    .limit(limit)
+    .get();
+
+  return Promise.all(snapshot.docs.map((doc) => Promise.resolve(doc.data())));
 }
-export default (limit, after)=>createResource([limit,after],()=>getListingsSnapshot(limit,after));
+export default function getListings(limit, after) {
+  return createResource([limit, after], getListingsSnapshot(limit, after));
+}

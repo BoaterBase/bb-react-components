@@ -2,7 +2,7 @@ import React, { createContext, useState, useContext } from 'react';
 import PropTypes from 'prop-types';
 import { CloudinaryContext } from 'cloudinary-react';
 import qs from 'qs';
-import p from '../package.json';
+import { version } from '../package.json';
 import Currency from './Currency';
 import Alerts from './Alerts';
 
@@ -45,7 +45,7 @@ function BoaterBase({ linker, theme, children }) {
   return (
     <Context.Provider
       value={{
-        version: p.version,
+        version: version,
         linker: { ...defaultLinker, ...linker },
         theme: { ...defaultTheme, ...theme },
       }}
