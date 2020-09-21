@@ -1,4 +1,4 @@
-import React, { useState, Suspense } from 'react';
+import React, { useState } from 'react';
 import getListing from '../../data/getListing';
 import Suspend from '../../data/Suspend';
 
@@ -9,15 +9,13 @@ import formatNumber from '../../utils/formatNumber';
 import formatCurrency from '../../utils/formatCurrency';
 
 import MapImage from '../../parts/MapImage';
-import Updates from '../../parts/Updates';
 import LocationIcon from '../../icons/Location';
 import Content from '../../parts/Content';
 import Gallery from '../../parts/Gallery';
 import Share from '../../parts/Share';
 
-import Profile from '../../parts/Profile';
-
 import ContactSection from '../../sections/ContactSection';
+import ListingUpdatesSection from '../../sections/ListingUpdatesSection';
 
 const specifications = [
   {
@@ -215,10 +213,9 @@ function ListingBlock({ listingResource, Head = () => null }) {
           <Specifications data={listing.specifications} />
           <Content items={listing.content} className="bb-border-t bb-border-gray-100 bb-mt-2" />
           <h2 className="bb-mt-4 bb-mb-4 bb-text-3xl bb-font-semibold bb-text-gray-800">Updates</h2>
-          {updates && <Updates pathname={`/listings/${listing.slug}`} />}
+          <ListingUpdatesSection id={listing.id} slug={listing.slug} limit={6} />
         </div>
         <div className="bb-col-span-1 bb-space-y-4">
-          <Profile profile={listing.profile} contact={listing.contact} listingId={listing.id} />
           <ContactSection profileId={listing.profileId} contactId={listing.contactId} Head={Head} />
           <Share pathname={`/listings/${listing.slug}`} title={listing.title} summary={listing.summary} />
 

@@ -1,4 +1,5 @@
 import { Meta, Story } from '@storybook/addon-docs/blocks';
+import BoaterBase from '../../BoaterBase';
 import ContactSection from './index';
 
 <Meta title="Sections/ContactSection" component={ContactSection} />
@@ -6,9 +7,42 @@ import ContactSection from './index';
 # ContactSection
 
 <Story
-  name="Preview"
+  name="Business"
   args={{
-    profileId: 'a4yk46tp',
+    profileId: 'rYzLF3xs',
+  }}
+  decorators={[
+    (Story) => (
+      <BoaterBase>
+        <Story />
+      </BoaterBase>
+    ),
+  ]}
+>
+  {ContactSection.bind({})}
+</Story>
+
+<Story
+  name="Contact"
+  args={{
+    profileId: 'rYzLF3xs',
+    contactId: 'c0qbzzgr',
+  }}
+  decorators={[
+    (Story) => (
+      <BoaterBase>
+        <Story />
+      </BoaterBase>
+    ),
+  ]}
+>
+  {ContactSection.bind({})}
+</Story>
+
+<Story
+  name="Loading"
+  args={{
+    loading: true,
   }}
 >
   {ContactSection.bind({})}

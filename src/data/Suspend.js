@@ -8,7 +8,10 @@ export default function Suspend({ fallback, resources, children }) {
     try {
       // If the children try and read a promise it will throw error we cant catch
       // So try to read the resources we need first and catch the promise if its not ready
-      [].concat(resources).map((resource) => resource.read());
+      []
+        .concat(resources)
+        .filter(Boolean)
+        .map((resource) => resource.read());
       return children;
     } catch (err) {
       // If error is a promise then switch to loading state where server is responsible for loading data

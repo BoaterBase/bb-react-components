@@ -20,12 +20,10 @@ function Snippet({ content }) {
     : null;
 }
 export default function Updates({ updates, pathname }) {
-  if (!updates) return <div>Loading</div>;
   return (
     <div className="bb-grid bb-gap-16 lg:bb-grid-cols-2 lg:bb-col-gap-5 lg:bb-row-gap-12">
-      {updates.docs
-        .filter((d) => d.content && d.title && d.created)
-        .map((item, index) => (
+      {updates &&
+        updates.map((item, index) => (
           <div key={index}>
             <p className="bb-text-sm bb-leading-5 bb-text-gray-500">
               <time dateTime="2020-03-16">{new Date(item.created).toLocaleDateString('en-US', { day: 'numeric', month: 'short', year: 'numeric' })}</time>
