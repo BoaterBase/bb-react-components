@@ -6,10 +6,12 @@ export { useAlerts } from './Alerts';
 
 export { default as ListingLayout } from './layouts/ListingLayout';
 export { default as ListingsLayout } from './layouts/ListingsLayout';
-export { default as ListingUpdateLayout } from './layouts/ListingsLayout';
+export { default as ListingUpdateLayout } from './layouts/ListingUpdateLayout';
+export { default as ProfileLayout } from './layouts/ProfileLayout';
 
 export { default as getListing } from './data/getListing';
 export { default as getProfile } from './data/getProfile';
+export { default as getProfileByHandle } from './data/getProfileByHandle';
 export { default as getListingUpdates } from './data/getListingUpdates';
 export { default as getListingUpdate } from './data/getListingUpdate';
 

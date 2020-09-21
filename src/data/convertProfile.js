@@ -1,4 +1,3 @@
-import slugify from 'slugify';
 import normalizeMedia from './normalizeMedia';
 
 export default function convertProfile() {
@@ -15,6 +14,7 @@ export default function convertProfile() {
         telephone: data.telephone,
         website: data.website,
         avatar: data?.avatar?.info?.resource_type === 'image' && normalizeMedia(data.avatar),
+        header: data?.header?.info?.resource_type === 'image' && normalizeMedia(data.header),
       };
 
       return response;
