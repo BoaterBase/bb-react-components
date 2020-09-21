@@ -211,7 +211,7 @@ function ListingBlock({ listingResource, Head = () => null }) {
             <span className="bb-font-medium bb-text-gray-400">{listing.label}</span>
           </div>
           <Specifications data={listing.specifications} />
-          <Content items={listing.content} className="bb-border-t bb-border-gray-100 bb-mt-2" />
+          <Content snippet={true} items={listing.content} className="bb-border-t bb-border-gray-100 bb-mt-2" />
           <h2 className="bb-mt-4 bb-mb-4 bb-text-3xl bb-font-semibold bb-text-gray-800">Updates</h2>
           <ListingUpdatesSection id={listing.id} slug={listing.slug} limit={6} />
         </div>

@@ -8,6 +8,9 @@ import { Image, Transformation, Placeholder } from 'cloudinary-react';
 function Profile({ Head = () => null, profileResource }) {
   const profile = profileResource.read();
 
+  const profileId = profile.teamProfileId || profile.id;
+  const contactId = profile.teamProfileId && profile.id;
+
   return (
     <div className="bb-grid bb-grid-cols-4 bb-gap-3">
       <Head>
@@ -39,7 +42,7 @@ function Profile({ Head = () => null, profileResource }) {
       </div>
 
       <div className="bb-col-span-1 bb-space-y-2">
-        <ContactSection profileId={profile.id} />
+        <ContactSection profileId={profileId} contactId={contactId} />
         <Share pathname={`/profiles/${profile.handle}`} title={profile.name} summary={profile.summary} />
       </div>
     </div>

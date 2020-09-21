@@ -1,6 +1,7 @@
 import { firestore } from '../firebase';
 import convertUpdate from './convertUpdate';
 import { createResource } from './store';
+import getId from '../utils/getId';
 
 async function getListingUpdatesSnapshot(id, limit = 6, after) {
   const snapshot = await firestore
@@ -18,6 +19,8 @@ async function getListingUpdatesSnapshot(id, limit = 6, after) {
   // Cleanup draft listings
   return docs.filter((data) => data.content && data.title && data.created);
 }
-export default function getListingUpdates(id, limit, after) {
-  return createResource([id, limit, after], getListingUpdatesSnapshot(id, limit, after));
+export default function getListingUpdates(slug, limit, after) {
+  const id = getId(slug);
+
+  return createResource(['listing', 'updates', id, limit, after], getListingUpdatesSnapshot(id, limit, after));
 }

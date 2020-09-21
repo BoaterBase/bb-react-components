@@ -22,6 +22,9 @@ function ListingUpdate({ Head = () => null, listingResource, updateResource }) {
       </Head>
       <div className="bb-col-span-3">
         <h1 className="bb-text-3xl bb-font-semibold bb-text-gray-800 bb-leading-9">{update.title}</h1>
+        <p className="bb-text-sm bb-leading-5 bb-text-gray-500">
+          <time dateTime="2020-03-16">{new Date(update.created).toLocaleDateString('en-US', { day: 'numeric', month: 'short', year: 'numeric' })}</time>
+        </p>
         <p className="bb-mt-2 bb-font-serif bb-text-xl bb-font-medium bb-text-gray-500 bb-italic">
           on{' '}
           <Link className="bb-underline" to={`/listings/${listing.slug}`}>

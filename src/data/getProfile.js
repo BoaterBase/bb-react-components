@@ -8,5 +8,5 @@ async function getProfileSnapshot(id) {
 }
 
 export default function getProfile(id) {
-  return createResource(id, getProfileSnapshot(id));
+  return createResource(['profile', id], getProfileSnapshot(id));
 }

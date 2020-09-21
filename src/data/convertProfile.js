@@ -17,6 +17,10 @@ export default function convertProfile() {
         header: data?.header?.info?.resource_type === 'image' && normalizeMedia(data.header),
       };
 
+      if (data.teamProfile?.id) {
+        response.teamProfileId = data.teamProfile?.id;
+      }
+
       return response;
     },
   };

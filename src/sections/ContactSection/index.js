@@ -3,8 +3,9 @@ import Suspend from '../../data/Suspend';
 import getProfile from '../../data/getProfile';
 import { Image, Transformation } from 'cloudinary-react';
 import classNames from 'classnames';
+import Link from '../../Link';
 
-function Section({ profileResource, contactResource, Head, sendMessage }) {
+function Section({ profileResource, contactResource, Head = () => null, sendMessage }) {
   const profile = profileResource && profileResource.read();
   const contact = contactResource && contactResource.read();
 
@@ -25,10 +26,17 @@ function Section({ profileResource, contactResource, Head, sendMessage }) {
         )}
 
         <h3 className="bb-mt-6 bb-text-gray-900 bb-text-base bb-leading-5 bb-font-medium">
-          {profile && contact && contact.name}
-          {profile && !contact && profile.name}
+          <Link className="hover:bb-underline" to={`/profiles/${contact ? contact.handle : profile.handle}`}>
+            {contact ? contact.name : profile.name}
+          </Link>
         </h3>
-        {profile && contact && <h4 className="bb-text-gray-400 bb-mt-1 bb-text-xl bb-leading-5 bb-font-light">{profile.name || profile.handle}</h4>}
+        {profile && contact && (
+          <h4 className="bb-text-gray-400 bb-mt-1 bb-text-xl bb-leading-5 bb-font-light">
+            <Link className="hover:bb-underline" to={`/profiles/${profile.handle}`}>
+              {profile.name || profile.handle}
+            </Link>
+          </h4>
+        )}
       </div>
       <div className="bb-border-t bb-border-gray-100 bb-bg-gradient-to-b bb-from-white bb-via-white bb-to-blue-50 bb-rounded-b">
         <div className="bb--mt-px bb-flex">

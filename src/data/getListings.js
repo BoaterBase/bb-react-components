@@ -14,5 +14,5 @@ async function getListingsSnapshot(limit = 6, after) {
   return Promise.all(snapshot.docs.map((doc) => Promise.resolve(doc.data())));
 }
 export default function getListings(limit, after) {
-  return createResource([limit, after], getListingsSnapshot(limit, after));
+  return createResource(['listings', limit, after], getListingsSnapshot(limit, after));
 }

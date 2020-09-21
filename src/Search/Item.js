@@ -15,6 +15,8 @@ function Item({ layout, data }) {
 
   const { theme } = useBoaterBase();
 
+  const profileHandle = data.profile?.name.split('::')[1] || data.profile?.id;
+
   // Get the price the user entered by default data.price is indexed usd conversion.
   let displayPrice = data.displayPrice;
   let displayCurrency = data.currency;
@@ -88,12 +90,12 @@ function Item({ layout, data }) {
             </div>
           )}
           {data.profile?.avatar && (
-            <a href="#avatar">
+            <Link title={data.profile.name} to={`/profiles/${profileHandle}`}>
               <img
                 src={data.profile.avatar}
                 className="bb-absolute bb-top-2 bb-right-2 bb-w-12 bb-h-12 md:bb-w-13 md:bb-h-13 bb-shadow-lg bb-border-2 bb-border-white bb-rounded-full bb-bg-gray-400 bb-object-cover"
               />
-            </a>
+            </Link>
           )}
 
           <div
@@ -188,12 +190,12 @@ function Item({ layout, data }) {
               </div>
             )}
             {data.profile?.avatar && (
-              <a href="#avatar">
+              <Link title={data.profile.name} to={`/profiles/${profileHandle}`}>
                 <img
                   src={data.profile.avatar}
                   className="bb-absolute bb-top-2 bb-right-2 bb-w-12 bb-h-12 md:bb-w-13 md:bb-h-13 bb-shadow-lg bb-border-2 bb-border-white bb-rounded-full bb-bg-gray-400 bb-object-cover"
                 />
-              </a>
+              </Link>
             )}
             {data.images?.length && data.images?.length > 1 && (
               <button
@@ -283,12 +285,12 @@ function Item({ layout, data }) {
               </div>
             )}
             {data.profile?.avatar && (
-              <a href="#avatar">
+              <Link title={data.profile.name} to={`/profiles/${profileHandle}`}>
                 <img
                   src={data.profile.avatar}
                   className="bb-absolute bb-top-2 bb-right-2 bb-w-12 bb-h-12 md:bb-w-13 md:bb-h-13 bb-shadow-lg bb-border-2 bb-border-white bb-rounded-full bb-bg-gray-400 bb-object-cover"
                 />
-              </a>
+              </Link>
             )}
 
             {data.images?.length && data.images?.length > 1 && (

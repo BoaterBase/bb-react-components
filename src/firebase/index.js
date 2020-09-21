@@ -17,11 +17,11 @@ try {
 } catch (e) {
   app = firebase.initializeApp(firebaseConfig, 'BoaterBaseComponents');
   // Try and enable persistence on the browser
-  if (typeof window !== 'undefined') {
-    app
-      .firestore()
-      .enablePersistence()
-      .catch((e) => null);
-  }
+  // if (typeof window !== 'undefined') {
+  //   app
+  //     .firestore()
+  //     .enablePersistence()
+  //     .catch((e) => null);
+  // }
 }
 export const firestore = app.firestore();

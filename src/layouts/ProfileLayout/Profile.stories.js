@@ -20,3 +20,16 @@ export const Preview = (props) => {
 Preview.args = {
   handle: 'marinemotion',
 };
+
+export const Sub = (props) => {
+  return (
+    <BoaterBase>
+      <ProfileLayout {...props} />
+    </BoaterBase>
+  );
+};
+//const urlParams = new URLSearchParams(document.location.search);
+//const listingId = urlParams.get('listingId');
+Sub.args = {
+  handle: 'captjoe',
+};
