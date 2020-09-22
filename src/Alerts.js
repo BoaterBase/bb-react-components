@@ -1,7 +1,7 @@
 import React, { createContext, useState, useContext, useEffect } from 'react';
 import classNames from 'classnames';
 
-const Context = createContext({ createAlert: (message, level) => alert(message) });
+const Context = createContext((message, level) => alert(message));
 
 export function useAlerts() {
   const context = useContext(Context);
@@ -27,12 +27,12 @@ function Alerts({ children }) {
 
   function createAlert(message, level = 'warning', to, link) {
     const key = Date.now() + Math.random();
-    setAlerts([...alerts, { key, message, level }]);
+    setAlerts((alerts) => [...alerts, { key, message, level }]);
     setTimeout(() => deleteAlert(key), 5000);
   }
 
   return (
-    <Context.Provider value={{ createAlert }}>
+    <Context.Provider value={createAlert}>
       {children}
       {alerts.length ? (
         <div className="bb-z-50 bb-fixed bb-bottom-0 bb-left-0 bb-w-full bb-space-y-1 bb-p-3">

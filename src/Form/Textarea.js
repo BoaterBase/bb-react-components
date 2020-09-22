@@ -10,7 +10,7 @@ function Textarea({ inputRef, id, className, error, compact, label, message, ...
       <label htmlFor={htmlId} className={compact ? 'bb-sr-only' : 'bb-block bb-mb-1 bb-text-sm bb-font-medium bb-leading-5 bb-text-gray-700'}>
         {label}
       </label>
-      <div className="bb-max-w-lg bb-flex bb-relative bb-rounded-md bb-shadow-sm">
+      <div className="bb-flex bb-relative bb-rounded-md bb-shadow-sm">
         <textarea
           ref={inputRef}
           id={htmlId}

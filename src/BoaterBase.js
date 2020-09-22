@@ -5,6 +5,7 @@ import qs from 'qs';
 import { version } from '../package.json';
 import Currency from './Currency';
 import Alerts from './Alerts';
+import Modal from './Modal';
 
 const Context = createContext();
 
@@ -52,7 +53,9 @@ function BoaterBase({ linker, theme, children }) {
     >
       <CloudinaryContext cloudName="boaterbase" secure>
         <Currency>
-          <Alerts>{children}</Alerts>
+          <Modal>
+            <Alerts>{children}</Alerts>
+          </Modal>
         </Currency>
       </CloudinaryContext>
     </Context.Provider>

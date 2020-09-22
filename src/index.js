@@ -3,6 +3,7 @@ export { default as BoaterBase, useBoaterBase } from './BoaterBase';
 
 export { useCurrency } from './Currency';
 export { useAlerts } from './Alerts';
+export { useModal } from './Modal';
 
 /** Data */
 export { default as getListing } from './data/getListing';

@@ -1,6 +1,12 @@
-import React, { useState } from 'react';
+import React from 'react';
+
 import getListing from '../../data/getListing';
+import createListingMessage from '../../data/createListingMessage';
+
 import Suspend from '../../data/Suspend';
+
+import { useModal } from '../../Modal';
+import { useAlerts } from '../../Alerts';
 
 import ListingLoading from './ListingLoading';
 
@@ -16,6 +22,8 @@ import Share from '../../parts/Share';
 
 import ContactSection from '../../sections/ContactSection';
 import ListingUpdatesSection from '../../sections/ListingUpdatesSection';
+
+import MessageForm from '../../forms/MessageForm';
 
 const specifications = [
   {
@@ -175,10 +183,25 @@ function Specifications({ data }) {
 }
 
 function ListingBlock({ listingResource, Head = () => null }) {
-  const [overlay, setOverlay] = useState({});
+  const setModal = useModal();
+  const createAlert = useAlerts();
 
   const listing = listingResource.read();
-  const updates = undefined;
+
+  async function createMessage(data) {
+    try {
+      await createListingMessage(listing.id, data);
+      createAlert('Message Sent!', 'success');
+      setModal(null);
+    } catch (err) {
+      createAlert('Error sending message!', 'error');
+      console.error(err);
+    }
+  }
+
+  function sendMessage() {
+    setModal(<MessageForm onSubmit={createMessage} className="bb-bg-white bb-shadow-2xl bb-rounded-lg bb-p-4 bb-w-full sm:bb-w-5/6 md:bb-w-1/2" />);
+  }
 
   return (
     <div>
@@ -216,7 +239,7 @@ function ListingBlock({ listingResource, Head = () => null }) {
           <ListingUpdatesSection id={listing.id} slug={listing.slug} limit={6} />
         </div>
         <div className="bb-col-span-1 bb-space-y-4">
-          <ContactSection profileId={listing.profileId} contactId={listing.contactId} Head={Head} />
+          <ContactSection profileId={listing.profileId} contactId={listing.contactId} Head={Head} sendMessage={sendMessage} />
           <Share pathname={`/listings/${listing.slug}`} title={listing.title} summary={listing.summary} />
 
           {listing.geo && (
@@ -240,9 +263,9 @@ function ListingBlock({ listingResource, Head = () => null }) {
             </div>
           </div>
 
-          <div className="bb-hidden xbb-flex bb-rounded-md bb-shadow">
+          <div className="bb-flex bb-rounded-md bb-shadow">
             <button
-              onClick={() => setOverlay('message')}
+              onClick={sendMessage}
               type="button"
               className="bb-flex-auto bb-flex bb-justify-center bb-items-center bb-px-6 bb-py-3 bb-border bb-border-transparent bb-text-lg bb-leading-6 bb-font-medium bb-rounded-md bb-text-white bb-bg-gradient-to-b bb-from-blue-500  bb-to-blue-600 hover:bb-to-blue-700 focus:bb-outline-none focus:bb-border-blue-700 focus:bb-shadow-outline-blue active:bb-bg-blue-700 bb-transition bb-ease-in-out bb-duration-150"
             >
@@ -255,22 +278,6 @@ function ListingBlock({ listingResource, Head = () => null }) {
           </div>
         </div>
       </div>
-
-      {overlay.type === 'map' && (
-        <div>
-          {listing.geo && <div className="bb-mt-2">Map Here</div>}
-
-          {listing.location && (
-            <div className="bb-mt-2 bb-flex bb-items-center">
-              <LocationIcon className="bb-text-gray-300 bb-w-4 bb-h-4 bb-mr-1" />
-              <span className="bb-text-gray-500 bb-text-base bb-flex-auto">{listing.location}</span>
-              {listing.geo && (
-                <span className="bb-text-xs bb-text-gray-300 bb-font-light bb-leading-tight">{formatCoords(listing.geo.latitude, listing.geo.longitude)}</span>
-              )}
-            </div>
-          )}
-        </div>
-      )}
     </div>
   );
 }
