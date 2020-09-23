@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import getListing from '../../data/getListing';
 import createListingMessage from '../../data/createListingMessage';
@@ -14,11 +14,15 @@ import formatCoords from '../../utils/formatCoords';
 import formatNumber from '../../utils/formatNumber';
 import formatCurrency from '../../utils/formatCurrency';
 
-import MapImage from '../../parts/MapImage';
 import LocationIcon from '../../icons/Location';
+import Plus from '../../icons/Plus';
+import Minus from '../../icons/Minus';
+
+import MapImage from '../../parts/MapImage';
 import Content from '../../parts/Content';
 import Gallery from '../../parts/Gallery';
 import Share from '../../parts/Share';
+import Variants from '../../parts/Variants';
 
 import ContactSection from '../../sections/ContactSection';
 import ListingUpdatesSection from '../../sections/ListingUpdatesSection';
@@ -185,6 +189,7 @@ function Specifications({ data }) {
 function ListingBlock({ listingResource, Head = () => null }) {
   const setModal = useModal();
   const createAlert = useAlerts();
+  const [showVariants, setShowVariants] = useState();
 
   const listing = listingResource.read();
 
@@ -201,6 +206,10 @@ function ListingBlock({ listingResource, Head = () => null }) {
 
   function sendMessage() {
     setModal(<MessageForm onSubmit={createMessage} className="bb-bg-white bb-shadow-2xl bb-rounded-lg bb-p-4 bb-w-full sm:bb-w-5/6 md:bb-w-1/2" />);
+  }
+
+  function toggleVariants() {
+    setShowVariants((state) => !state);
   }
 
   return (
@@ -222,19 +231,32 @@ function ListingBlock({ listingResource, Head = () => null }) {
               <Gallery media={listing.media} layout="primary" />
             </div>
           )}
-
+          {listing.message && <div className="bb-text-red-500 bb-font-medium bb-text-lg">{listing.message}</div>}
           <h1 className="bb-text-3xl bb-font-semibold bb-text-gray-800 bb-leading-9">{listing.title}</h1>
           <p className="bb-mt-2 bb-font-serif bb-text-xl bb-font-medium bb-text-gray-500 bb-italic">{listing.summary}</p>
           <button className="bb-flex bb-items-center bb-mt-2 bb-text-blue-400 hover:bb-text-blue-500">
             <LocationIcon className="bb-text-blue-500 bb-w-6 bb-h-6" />
             <span className=" bb-font-medium bb-text-xl bb-mx-1">{listing.location}</span>
           </button>
-          <div>
-            <span className="bb-text-4xl bb-font-medium bb-text-gray-800 bb-mr-1">{formatCurrency(listing.price, listing.currency)}</span>
-            <span className="bb-font-medium bb-text-gray-400">{listing.label}</span>
+          <div className="bb-flex">
+            <div>
+              <span className="bb-text-4xl bb-font-medium bb-text-gray-800 bb-mr-1">{formatCurrency(listing.price, listing.currency)}</span>
+              <span className="bb-font-medium bb-text-gray-400">{listing.label}</span>
+            </div>
+            {listing.variants?.length ? (
+              <button
+                onClick={toggleVariants}
+                className="bb-ml-auto bb-text-orange-500 bb-font-medium bb-flex bb-flex-no-wrap bb-items-center hover:bb-underline focus:bb-outline-none"
+              >
+                {showVariants ? 'Less' : `${listing.variants.length} More`}
+                {showVariants ? <Minus className="bb-ml-1 bb-w-4 bb-h-4" /> : <Plus className="bb-ml-1 bb-w-4 bb-h-4" />}
+              </button>
+            ) : null}
           </div>
+          {showVariants && listing.variants?.length ? <Variants items={listing.variants} sendMessage={sendMessage} /> : null}
           <Specifications data={listing.specifications} />
-          <Content snippet={true} items={listing.content} className="bb-border-t bb-border-gray-100 bb-mt-2" />
+          <Content snippet={true} items={listing.content} className="bb-border-t bb-border-b-2 bb-border-gray-100 bb-mt-2" />
+
           <h2 className="bb-mt-4 bb-mb-4 bb-text-3xl bb-font-semibold bb-text-gray-800">Updates</h2>
           <ListingUpdatesSection id={listing.id} slug={listing.slug} limit={6} />
         </div>

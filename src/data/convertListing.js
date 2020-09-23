@@ -30,6 +30,7 @@ export default function convertListing() {
         price: data.price,
         rate: data.rate,
         media: data.media?.filter(({ info }) => ['image', 'video'].includes(info.resource_type)).map(normalizeMedia),
+        variants: data.variants,
       };
 
       // TODO - We could pass through any cached data as profile here to provide a faster first load
