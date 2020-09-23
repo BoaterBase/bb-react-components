@@ -2,9 +2,19 @@ import React, { useState } from 'react';
 import { Image, Video, Placeholder, Transformation } from 'cloudinary-react';
 import { useModal } from '../Modal';
 import CloseIcon from '../icons/Close';
+import ChevronLeft from '../icons/ChevronLeft';
+import ChevronRight from '../icons/ChevronRight';
 
 function Slideshow({ media = [], close, selected }) {
   const [current, setCurrent] = useState(selected);
+
+  const prev = () => {
+    setCurrent((c) => Math.max(0, c - 1));
+  };
+  const next = () => {
+    setCurrent((c) => Math.min(media.length - 1, c + 1));
+  };
+
   return (
     <div className="bb-fixed bb-inset-0 bb-bg-black bb-bg-opacity-75">
       <div className="bb-text-white bb-font-medium bb-text-base bb-fixed bb-top-2 bb-left-10 bb-right-10 bb-text-center bb-truncate">
@@ -41,21 +51,15 @@ function Slideshow({ media = [], close, selected }) {
           ></Video>
         )}
       </div>
-      <div className="bb-h-16 bb-absolute bb-bottom-1 bb-flex bb-justify-center bb-left-0 bb-right-0 bb-overflow-y-hidden bb-overflow-x-auto">
-        <div className="bb-h-full bb-flex bb-flex-no-wrap">
+      <div className="bb-absolute bb-bottom-1 bb-flex bb-justify-center bb-left-0 bb-right-0 bb-overflow-y-hidden bb-overflow-x-auto">
+        <div className="bb-flex bb-flex-no-wrap">
           {media.map((item, index) => (
             <button
               key={index}
               className="bb-block bb-rounded-sm bb-m-1 bb-flex-none bb-shadow focus:bb-outline-none focus:bb-border-blue-300 focus:bb-shadow-outline-blue"
               onClick={() => setCurrent(index)}
             >
-              <Image
-                className="bb-rounded-sm bb-h-full bb-bg-gray-900 bb-object-cover"
-                publicId={item.id}
-                transformation="small_image"
-                resourceType={item.type}
-                format="jpg"
-              >
+              <Image className="bb-rounded-sm bb-h-16 bb-bg-gray-900" publicId={item.id} transformation="small_image" resourceType={item.type} format="jpg">
                 <Placeholder type="blur" />
               </Image>
             </button>
@@ -63,6 +67,22 @@ function Slideshow({ media = [], close, selected }) {
           <b className="bb-w-1 bb-flex-none"></b>
         </div>
       </div>
+      {current > 0 && (
+        <button
+          className="bb-absolute bb-top-1/2 bb-transform bb--translate-y-7 bb-left-1 bb-rounded-full bb-p-1 bb-bg-transparent focus:bb-outline-none focus:bb-border-blue-300 focus:bb-shadow-outline-blue"
+          onClick={prev}
+        >
+          <ChevronLeft className="bb-text-white bb-w-6 bb-h-6" />
+        </button>
+      )}
+      {current < media.length - 1 && (
+        <button
+          className="bb-absolute bb-top-1/2 bb-transform bb--translate-y-7 bb-right-1 bb-rounded-full bb-p-1 bb-bg-transparent focus:bb-outline-none focus:bb-border-blue-300 focus:bb-shadow-outline-blue"
+          onClick={next}
+        >
+          <ChevronRight className="bb-text-white bb-w-6 bb-h-6" />
+        </button>
+      )}
       <button
         className="bb-absolute bb-top-1 bb-right-1 bb-rounded-full bb-p-1 bb-bg-transparent focus:bb-outline-none focus:bb-border-blue-300 focus:bb-shadow-outline-blue"
         onClick={close}

@@ -239,17 +239,35 @@ function ListingBlock({ listingResource, Head = () => null }) {
             <span className=" bb-font-medium bb-text-xl bb-mx-1">{listing.location}</span>
           </button>
           <div className="bb-flex">
-            <div>
-              <span className="bb-text-4xl bb-font-medium bb-text-gray-800 bb-mr-1">{formatCurrency(listing.price, listing.currency)}</span>
-              <span className="bb-font-medium bb-text-gray-400">{listing.label}</span>
+            <div className="bb-mr-4">
+              <span className="bb-text-4xl bb-font-medium bb-text-gray-800 bb-mr-1">
+                {listing.price ? formatCurrency(listing.price, listing.currency) : 'POA'}
+              </span>
+              <span className="bb-font-medium bb-text-gray-400 bb-truncate">{listing.label}</span>
             </div>
+            {listing.variants?.length ? (
+              <div className="bb-ml-auto bb-relative bb-overflow-hidden bb-max-w-xs bb-mt-1">
+                {!showVariants && (
+                  <div className="bb-hidden md:bb-flex bb-flex-no-wrap bb-opacity-75 bb-divide-x bb-divide-gray-200">
+                    {listing.variants.map((v, index) => (
+                      <div key={index} className="bb-text-center bb-px-2">
+                        <span className="bb-block bb-font-medium bb-text-gray-400 bb-text-sm bb-truncate">{v.label || '–'}</span>
+                        <span className="bb-block bb-text-lg bb-leading-none bb-font-medium bb-text-gray-800 bb-truncate">
+                          {v.amount ? formatCurrency(v.amount, v.currency) : 'POA'}
+                        </span>
+                      </div>
+                    ))}
+                  </div>
+                )}
+                <div className="bb-absolute bb-inset-0" style={{ background: 'linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(255,255,255,1) 100%)' }} />
+              </div>
+            ) : null}
             {listing.variants?.length ? (
               <button
                 onClick={toggleVariants}
-                className="bb-ml-auto bb-text-orange-500 bb-font-medium bb-flex bb-flex-no-wrap bb-items-center hover:bb-underline focus:bb-outline-none"
+                className="bb-text-orange-500 bb-font-medium bb-flex bb-flex-no-wrap bb-items-center hover:bb-underline focus:bb-outline-none"
               >
-                {showVariants ? 'Less' : `${listing.variants.length} More`}
-                {showVariants ? <Minus className="bb-ml-1 bb-w-4 bb-h-4" /> : <Plus className="bb-ml-1 bb-w-4 bb-h-4" />}
+                {showVariants ? <Minus className="bb-w-8 bb-h-8" /> : <Plus className="bb-w-8 bb-h-8" />}
               </button>
             ) : null}
           </div>
@@ -257,7 +275,7 @@ function ListingBlock({ listingResource, Head = () => null }) {
           <Specifications data={listing.specifications} />
           <Content snippet={true} items={listing.content} className="bb-border-t bb-border-b-2 bb-border-gray-100 bb-mt-2" />
 
-          <h2 className="bb-mt-4 bb-mb-4 bb-text-3xl bb-font-semibold bb-text-gray-800">Updates</h2>
+          <h2 className="bb-mt-4 bb-mb-4 bb-text-3xl bb-font-semibold bb-text-gray-800">Blog</h2>
           <ListingUpdatesSection id={listing.id} slug={listing.slug} limit={6} />
         </div>
         <div className="bb-col-span-1 bb-space-y-4">

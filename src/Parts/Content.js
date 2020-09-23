@@ -75,7 +75,12 @@ function Content({ items, className, snippet }) {
               return null;
           }
         })}
-        {!more && <div className="bb-absolute bb-bottom-0 bb-w-full bb-h-24 bb-bg-gradient-to-b bb-from-transparent bb-to-white"></div>}
+        {!more && (
+          <div
+            className="bb-absolute bb-bottom-0 bb-w-full bb-h-24"
+            style={{ background: 'linear-gradient(180deg, rgba(255,255,255,0) 0%, rgba(255,255,255,1) 100%)' }}
+          ></div>
+        )}
       </div>
       {!more && (
         <div className="bb-text-center bb-p-3">

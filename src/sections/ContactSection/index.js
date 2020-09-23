@@ -10,17 +10,31 @@ function Section({ profileResource, contactResource, Head = () => null, sendMess
   const contact = contactResource && contactResource.read();
 
   return (
-    <section className="bb-flex bb-flex-col bb-text-center bb-bg-white bb-rounded-lg bb-shadow">
-      {contact?.avatar && profile?.avatar && (
-        <div className="bb-p-4 bb-border-b bb-border-gray-100 bb-rounded-t-lg bb-bg-white bb-flex bb-justify-center">
-          <Image className="bb-max-w-full bb-max-h-12" publicId={profile.avatar.id}>
-            <Transformation width="600" />
-          </Image>
+    <section className="bb-text-center bb-bg-white bb-rounded-lg bb-shadow">
+      {profile && contact && (
+        <div className="bb-border-b bb-border-gray-100 bb-p-2 bb-pt-4">
+          {contact?.avatar && profile?.avatar && (
+            <Image className="bb-max-w-full bb-max-h-12 bb-m-auto" publicId={profile.avatar.id}>
+              <Transformation width="600" />
+            </Image>
+          )}
+
+          <h4 className="bb-text-gray-400 bb-mt-2 bb-text-lg bb-leading-none bb-font-light">
+            <Link className="hover:bb-underline" to={`/profiles/${profile.handle}`}>
+              {profile.name || profile.handle}
+            </Link>
+          </h4>
+          {profile.telephone && (
+            <a className="bb-text-sm bb-text-blue-400 hover:bb-underline" href={`tel:${profile.telephone}`}>
+              {profile.telephone}
+            </a>
+          )}
         </div>
       )}
-      <div className="bb-flex-1 bb-flex bb-flex-col bb-p-8 bb-items-center">
+
+      <div className="bb-p-8">
         {(contact?.avatar?.id || profile?.avatar?.id) && (
-          <Image className="bb-w-32 bb-h-32 bb-flex-shrink-0 bb-mx-auto bb-bg-black bb-rounded-full" publicId={contact?.avatar?.id || profile.avatar.id}>
+          <Image className="bb-w-32 bb-h-32 bb-mx-auto bb-bg-black bb-rounded-full" publicId={contact?.avatar?.id || profile.avatar.id}>
             <Transformation width="300" height="300" gravity="face" crop="thumb" />
           </Image>
         )}
@@ -30,13 +44,6 @@ function Section({ profileResource, contactResource, Head = () => null, sendMess
             {contact ? contact.name : profile.name}
           </Link>
         </h3>
-        {profile && contact && (
-          <h4 className="bb-text-gray-400 bb-mt-1 bb-text-xl bb-leading-5 bb-font-light">
-            <Link className="hover:bb-underline" to={`/profiles/${profile.handle}`}>
-              {profile.name || profile.handle}
-            </Link>
-          </h4>
-        )}
       </div>
       <div className="bb-border-t bb-border-gray-100 bb-bg-gradient-to-b bb-from-white bb-via-white bb-to-blue-50 bb-rounded-b">
         <div className="bb--mt-px bb-flex">
