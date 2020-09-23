@@ -1,6 +1,7 @@
 import algoliasearch from 'algoliasearch/lite';
 import { InstantSearch, Configure } from 'react-instantsearch-dom';
 import React, { useState, createContext, useContext } from 'react';
+import { useBoaterBase } from '../BoaterBase';
 
 const searchClient = algoliasearch('ZVD9UQIAVD', '4d24114774dc27c20690d04da6962b44');
 
@@ -9,16 +10,20 @@ const Context = createContext();
 export function useSearch() {
   return useContext(Context);
 }
-export default function Search({ filters, hitsPerPage = 24, layout = 'card', children }) {
+export default function Search({ state, children }) {
   const [searchState, setSearchState] = useState({
-    layout,
-    configure: { filters, hitsPerPage },
+    layout: 'card',
+    configure: { filters: '', hitsPerPage: 24 },
+    ...state,
   });
 
-  const onSearchStateChange = (searchState) => {
-    console.log(searchState);
+  const { linker } = useBoaterBase();
 
-    // TODO - shallow update url here
+  const onSearchStateChange = (searchState) => {
+    const permalink = linker.createPermalink({ pathname: '/listings', query: searchState });
+
+    console.log(permalink);
+    linker.updateUrl({ pathname: '/listings', query: searchState });
     setSearchState(searchState);
   };
 
@@ -26,7 +31,7 @@ export default function Search({ filters, hitsPerPage = 24, layout = 'card', chi
   // NOTE: Use context to pass the layout into the hit components without triggering re-render of the hits due to buggy mutating InstantSearch results
   return (
     <InstantSearch searchClient={searchClient} indexName="Listings" searchState={searchState} onSearchStateChange={onSearchStateChange}>
-      <Configure {...searchState.configure} />
+      <Configure {...(searchState.configure || {})} />
       <Context.Provider value={[searchState, setSearchState]}>{children}</Context.Provider>
     </InstantSearch>
   );

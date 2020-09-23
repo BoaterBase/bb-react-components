@@ -1,6 +1,5 @@
 import { connectHits } from 'react-instantsearch-dom';
 import React, { memo } from 'react';
-import { useTransition, animated, config } from 'react-spring';
 import { useSearch } from '../Search';
 import Hit from '../Search/Hit';
 
@@ -66,16 +65,7 @@ const grids = [
 
 const BaseHits = memo(
   ({ hits, columns = 0, ...rest }) => {
-    const [searchState, setSearchState] = useSearch();
-
-    const transitions = useTransition(hits, (item) => item.objectID, {
-      from: { transform: 'scale(0)' },
-      enter: { transform: 'scale(1)' },
-      leave: { transform: 'scale(0)' },
-      trail: 1,
-      config: config.stiff,
-      unique: true,
-    });
+    const [searchState] = useSearch();
 
     columns = Math.min(hits.length, columns);
 
@@ -97,10 +87,8 @@ const BaseHits = memo(
         }}
       >
         <div className={`${columns ? 'bb-grid bb-relative bb-pr-2' : 'bb-grid'} ${grids[columns][searchState.layout]} ${spacing[searchState.layout]}`}>
-          {transitions.map(({ item, props, key }) => (
-            <animated.div style={{ scrollSnapAlign: 'start', ...props }} key={key}>
-              <Hit data={item} />
-            </animated.div>
+          {hits.map((item) => (
+            <Hit data={item} key={item.objectId} />
           ))}
         </div>
       </div>

@@ -15,12 +15,12 @@ import LocationSelector from '../../Search/LocationSelector';
 import Paging from '../../Search/Paging';
 
 /** ListingsLayout component to display a list of BoaterBase listings with search interface and paging */
-function ListingsLayout({ filters, layout }) {
-  const [filtersToggle, setFiltersToggle] = useState(false);
+function ListingsLayout({ searchState }) {
+  const [filtersToggle, setFiltersToggle] = useState(true);
 
   return (
     <div>
-      <Search filters={filters} layout={layout} hitsPerPage={24}>
+      <Search state={searchState}>
         <div className="md:bb-flex">
           <div className="bb-flex-auto bb-flex md:bb-mr-1 bb-mb-1 md:bb-mb-0">
             <SearchInput />
@@ -50,6 +50,6 @@ function ListingsLayout({ filters, layout }) {
 }
 
 ListingsLayout.propTypes = {
-  layout: PropTypes.oneOf(['card', 'list', 'map', 'gallery']),
+  searchState: PropTypes.object,
 };
 export default ListingsLayout;

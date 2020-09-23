@@ -17,5 +17,7 @@ export const Preview = (props) => {
 };
 
 Preview.args = {
-  layout: 'card',
+  searchState: {
+    layout: 'card',
+  },
 };
