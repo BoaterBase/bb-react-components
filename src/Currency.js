@@ -2,7 +2,7 @@ import React, { createContext, useState, useContext, useEffect, memo } from 'rea
 
 /** Get currency rates */
 async function getCurrencyRates() {
-  console.info('getCurrencyRates()');
+  //console.info('getCurrencyRates()');
   return await fetch('https://api.exchangeratesapi.io/latest?base=USD&symbols=USD,GBP,EUR,CAD,AUD,SGD').then((r) => r.json());
 }
 

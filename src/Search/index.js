@@ -1,4 +1,5 @@
 import algoliasearch from 'algoliasearch/lite';
+
 import { InstantSearch, Configure } from 'react-instantsearch-dom';
 import React, { useState, createContext, useContext } from 'react';
 import { useBoaterBase } from '../BoaterBase';
@@ -20,9 +21,8 @@ export default function Search({ state, children }) {
   const { linker } = useBoaterBase();
 
   const onSearchStateChange = (searchState) => {
-    const permalink = linker.createPermalink({ pathname: '/listings', query: searchState });
+    //const permalink = linker.createPermalink({ pathname: '/listings', query: searchState });
 
-    console.log(permalink);
     linker.updateUrl({ pathname: '/listings', query: searchState });
     setSearchState(searchState);
   };

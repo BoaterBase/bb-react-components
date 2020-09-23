@@ -87,9 +87,9 @@ const BaseHits = memo(
         }}
       >
         <div className={`${columns ? 'bb-grid bb-relative bb-pr-2' : 'bb-grid'} ${grids[columns][searchState.layout]} ${spacing[searchState.layout]}`}>
-          {hits.map((item) => (
-            <Hit data={item} key={item.objectId} />
-          ))}
+          {hits.map((item, index) => {
+            return <Hit data={item} key={item.objectID} />;
+          })}
         </div>
       </div>
     );

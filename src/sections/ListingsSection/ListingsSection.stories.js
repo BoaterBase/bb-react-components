@@ -17,6 +17,5 @@ export const Preview = (props) => {
 };
 
 Preview.args = {
-  limit: 12,
-  columns: 4,
+  searchState: { layout: 'gallery', configure: { hitsPerPage: 6 }, refinementList: { 'specifications.condition': ['New'] } },
 };
