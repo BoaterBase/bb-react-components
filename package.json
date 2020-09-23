@@ -17,7 +17,7 @@
     "watch": "npm run watch-test & npm run watch-bundle",
     "watch-test": "jest --watch --runInBand --detectOpenHandles",
     "watch-bundle": "microbundle watch --jsx React.createElement --no-compress --format cjs --strict",
-    "build": "npm run build-module && npm run build-browser && npm run build-css --strict",
+    "build": "npm run build-css && npm run build-module && npm run build-browser",
     "build-module": "NODE_ENV=production microbundle --jsx React.createElement --no-compress --format cjs,modern,es --strict",
     "build-browser": "NODE_ENV=production microbundle --external react --jsx React.createElement --compress --format umd --strict",
     "build-css": "NODE_ENV=production npx tailwindcss build src/styles.css -o dist/styles.css && csso dist/styles.css --output dist/styles.min.css",
