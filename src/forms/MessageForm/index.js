@@ -48,7 +48,7 @@ export default function MessageForm({ onSubmit, name, className }) {
       />
       <Textarea
         inputRef={register({ required: 'A message is required.' })}
-        error={errors.message}
+        error={errors.content}
         name="content"
         placeholder="Enter a message..."
         rows={3}

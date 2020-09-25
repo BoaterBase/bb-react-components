@@ -31,12 +31,13 @@ function Content({ items, className, snippet }) {
           switch (item.kind) {
             case 'heading':
               return (
-                <h2
-                  key={index}
-                  className="bb-mt-3 bb-mb-4 bb-text-2xl bb-leading-8 bb-font-semibold bb-tracking-tight bb-text-gray-800 sm:bb-text-3xl sm:bb-leading-10"
-                >
-                  {item.text}
-                </h2>
+                <div key={index} className="bb-mt-4 bb-mb-5 bb-flex bb-items-center bb-flex-no-wrap">
+                  <span className="bb-flex-auto bb-border-t-2 bb-border-gray-100"></span>
+                  <h2 className="bb-mx-4 bb-text-center bb-leading-8 bb-font-medium bb-tracking-tight bb-text-gray-600 bb-text-xl sm:bb-text-2xl sm:bb-leading-10">
+                    {item.text}
+                  </h2>
+                  <span className="bb-flex-auto bb-border-t-2 bb-border-gray-100"></span>
+                </div>
               );
             case 'quote':
               return (
@@ -68,7 +69,7 @@ function Content({ items, className, snippet }) {
             case 'media':
               return (
                 <div key={index} className="bb-my-3">
-                  <Gallery media={item.items} layout="gallery" />
+                  <Gallery media={item.items} layout="grid" />
                 </div>
               );
             default:

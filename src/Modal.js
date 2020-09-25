@@ -26,7 +26,7 @@ function Modal({ children }) {
     <Context.Provider value={setModal}>
       {children}
       {state.modal ? (
-        <div className="bb-fixed bb-inset-0 bb-z-10">
+        <div className="bb-fixed bb-inset-0 bb-z-40">
           <div
             style={{ backdropFilter: 'blur(5px)' }}
             onClick={onBackdropClick}

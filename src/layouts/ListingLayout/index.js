@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 
 import getListing from '../../data/getListing';
 import createListingMessage from '../../data/createListingMessage';
+import createListingSubscriber from '../../data/createListingSubscriber';
 
 import Suspend from '../../data/Suspend';
 
@@ -28,6 +29,7 @@ import ContactSection from '../../sections/ContactSection';
 import ListingUpdatesSection from '../../sections/ListingUpdatesSection';
 
 import MessageForm from '../../forms/MessageForm';
+import WatchForm from '../../forms/WatchForm';
 
 const specifications = [
   {
@@ -186,10 +188,12 @@ function Specifications({ data }) {
   ) : null;
 }
 
-function ListingBlock({ listingResource, Head = () => null }) {
+function ListingBlock({ listingResource, Head = () => null, onReady }) {
   const setModal = useModal();
   const createAlert = useAlerts();
   const [showVariants, setShowVariants] = useState();
+  const [snippet, setShowSnippet] = useState(true);
+  const [gallery, setGallery] = useState();
 
   const listing = listingResource.read();
 
@@ -204,6 +208,17 @@ function ListingBlock({ listingResource, Head = () => null }) {
     }
   }
 
+  async function createSubscriber(data, el) {
+    try {
+      await createListingSubscriber(listing.id, data);
+      createAlert('Added to watch list!', 'success');
+    } catch (err) {
+      createAlert('Error creating subscription!', 'error');
+      console.error(err);
+    }
+    el.target.reset();
+  }
+
   function sendMessage() {
     setModal(<MessageForm onSubmit={createMessage} className="bb-bg-white bb-shadow-2xl bb-rounded-lg bb-p-4 bb-w-full sm:bb-w-5/6 md:bb-w-1/2" />);
   }
@@ -211,6 +226,39 @@ function ListingBlock({ listingResource, Head = () => null }) {
   function toggleVariants() {
     setShowVariants((state) => !state);
   }
+
+  // Section Refs
+  const titleRef = useRef();
+  const specsRef = useRef();
+  const contentRef = useRef();
+  const updatesRef = useRef();
+  const priceRef = useRef();
+
+  // Give parent access to data and actions
+  useEffect(() => {
+    onReady &&
+      onReady({
+        showSendMessage: sendMessage,
+        showSlideshow: gallery && gallery.showSlideshow,
+        showTitle: () => {
+          titleRef.current.scrollIntoView({ block: 'start', behavior: 'smooth' });
+        },
+        showSpecifications: () => {
+          specsRef.current.scrollIntoView({ block: 'start', behavior: 'smooth' });
+        },
+        showContent: () => {
+          setShowSnippet(false);
+          contentRef.current.scrollIntoView({ block: 'start', behavior: 'smooth' });
+        },
+        showPrice: () => {
+          setShowVariants(true);
+          priceRef.current.scrollIntoView({ block: 'start', behavior: 'smooth' });
+        },
+        showUpdates: () => {
+          updatesRef.current.scrollIntoView({ block: 'start', behavior: 'smooth' });
+        },
+      });
+  }, [onReady, gallery]);
 
   return (
     <div>
@@ -220,7 +268,7 @@ function ListingBlock({ listingResource, Head = () => null }) {
       </Head>
       {listing.media && listing.media[0]?.width >= 900 && (
         <div className="bb-mb-3">
-          <Gallery media={listing.media} layout="primary" />
+          <Gallery media={listing.media} layout="primary" onReady={setGallery} />
         </div>
       )}
 
@@ -232,13 +280,15 @@ function ListingBlock({ listingResource, Head = () => null }) {
             </div>
           )}
           {listing.message && <div className="bb-text-red-500 bb-font-medium bb-text-lg">{listing.message}</div>}
-          <h1 className="bb-text-3xl bb-font-semibold bb-text-gray-800 bb-leading-9">{listing.title}</h1>
+          <h1 ref={titleRef} className="bb-text-3xl bb-font-semibold bb-text-gray-800 bb-leading-9">
+            {listing.title}
+          </h1>
           <p className="bb-mt-2 bb-font-serif bb-text-xl bb-font-medium bb-text-gray-500 bb-italic">{listing.summary}</p>
           <button className="bb-flex bb-items-center bb-mt-2 bb-text-blue-400 hover:bb-text-blue-500">
             <LocationIcon className="bb-text-blue-500 bb-w-6 bb-h-6" />
             <span className=" bb-font-medium bb-text-xl bb-mx-1">{listing.location}</span>
           </button>
-          <div className="bb-flex">
+          <div ref={priceRef} className="bb-flex">
             <div className="bb-mr-4">
               <span className="bb-text-4xl bb-font-medium bb-text-gray-800 bb-mr-1">
                 {listing.price ? formatCurrency(listing.price, listing.currency) : 'POA'}
@@ -246,7 +296,7 @@ function ListingBlock({ listingResource, Head = () => null }) {
               <span className="bb-font-medium bb-text-gray-400 bb-truncate">{listing.label}</span>
             </div>
             {listing.variants?.length ? (
-              <div className="bb-ml-auto bb-relative bb-overflow-hidden bb-max-w-xs bb-mt-1">
+              <div className="bb-ml-auto bb-relative bb-overflow-hidden bb-max-w-sm bb-mt-1">
                 {!showVariants && (
                   <div className="bb-hidden md:bb-flex bb-flex-no-wrap bb-opacity-75 bb-divide-x bb-divide-gray-200">
                     {listing.variants.map((v, index) => (
@@ -259,24 +309,43 @@ function ListingBlock({ listingResource, Head = () => null }) {
                     ))}
                   </div>
                 )}
-                <div className="bb-absolute bb-inset-0" style={{ background: 'linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(255,255,255,1) 100%)' }} />
+                <div className="bb-absolute bb-inset-0" style={{ background: 'linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(255,255,255,1) 60%)' }} />
+                {listing.variants?.length ? (
+                  <button
+                    onClick={toggleVariants}
+                    className="bb-absolute bb-right-0 bb-top-2 bb-text-orange-500 bb-font-medium bb-flex bb-flex-no-wrap bb-items-center hover:bb-underline focus:bb-outline-none"
+                  >
+                    More Options {showVariants ? <Minus className="bb-w-8 bb-h-8" /> : <Plus className="bb-w-8 bb-h-8" />}
+                  </button>
+                ) : null}
               </div>
             ) : null}
-            {listing.variants?.length ? (
+            {listing.variants?.length && showVariants ? (
               <button
                 onClick={toggleVariants}
                 className="bb-text-orange-500 bb-font-medium bb-flex bb-flex-no-wrap bb-items-center hover:bb-underline focus:bb-outline-none"
               >
-                {showVariants ? <Minus className="bb-w-8 bb-h-8" /> : <Plus className="bb-w-8 bb-h-8" />}
+                <Minus className="bb-w-8 bb-h-8" />
               </button>
             ) : null}
           </div>
           {showVariants && listing.variants?.length ? <Variants items={listing.variants} sendMessage={sendMessage} /> : null}
-          <Specifications data={listing.specifications} />
-          <Content snippet={true} items={listing.content} className="bb-border-t bb-border-b-2 bb-border-gray-100 bb-mt-2" />
+          <div ref={specsRef}>
+            <Specifications data={listing.specifications} />
+          </div>
+          {listing.media.length > 1 && (
+            <div className="bb-mt-2">
+              <Gallery media={listing.media} layout="grid" limit={10} />
+            </div>
+          )}
+          <div ref={contentRef}>
+            <Content snippet={snippet} items={listing.content} className="bb-mt-2" />
+          </div>
 
-          <h2 className="bb-mt-4 bb-mb-4 bb-text-3xl bb-font-semibold bb-text-gray-800">Blog</h2>
-          <ListingUpdatesSection id={listing.id} slug={listing.slug} limit={6} />
+          <div ref={updatesRef}>
+            <h2 className="bb-mt-4 bb-mb-4 bb-text-3xl bb-font-semibold bb-text-gray-800">Blog</h2>
+            <ListingUpdatesSection id={listing.id} slug={listing.slug} limit={6} />
+          </div>
         </div>
         <div className="bb-col-span-1 bb-space-y-4">
           <ContactSection profileId={listing.profileId} contactId={listing.contactId} Head={Head} sendMessage={sendMessage} />
@@ -295,6 +364,11 @@ function ListingBlock({ listingResource, Head = () => null }) {
               />
             </div>
           )}
+
+          <div>
+            <h3 className="bb-uppercase bb-text-center bb-mb-1 bb-font-medium bb-text-gray-500 bb-text-sm">Watch Updates</h3>
+            <WatchForm onSubmit={createSubscriber} />
+          </div>
 
           <div>
             <h3 className="bb-uppercase bb-text-center bb-mb-1 bb-font-medium bb-text-gray-500 bb-text-sm">Data</h3>
@@ -322,7 +396,7 @@ function ListingBlock({ listingResource, Head = () => null }) {
   );
 }
 
-export default function ListingLayout({ id, loading, Head }) {
+export default function ListingLayout({ id, loading, Head, onReady }) {
   // If the server is rendering a loading page it can tell us to show a loading state and we exit early without triggering resource request
   if (loading) return <ListingLoading />;
 
@@ -331,7 +405,7 @@ export default function ListingLayout({ id, loading, Head }) {
 
   return (
     <Suspend resources={listingResource} fallback={<ListingLoading />}>
-      <ListingBlock Head={Head} listingResource={listingResource} />
+      <ListingBlock Head={Head} listingResource={listingResource} onReady={onReady} />
     </Suspend>
   );
 }

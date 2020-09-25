@@ -2,6 +2,9 @@ console.log('\nTailwinds', process.env.NODE_ENV);
 
 module.exports = {
   prefix: 'bb-',
+  variants: {
+    zIndex: ['responsive', 'hover', 'focus'],
+  },
   theme: {
     typography: (theme) => ({
       default: {

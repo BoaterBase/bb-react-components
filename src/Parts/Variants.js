@@ -6,13 +6,13 @@ export default function Variants({ items, sendMessage }) {
   return items ? (
     <ul>
       {items.map((item) => (
-        <li className="bb-border-t bb-border-gray-200 bb-mb-1 bb-flex">
+        <li className="bb-border-t bb-border-gray-100 bb-mb-1 bb-flex bb-pl-1">
           <div>
             <div>
-              <span className="bb-text-2xl bb-font-medium bb-text-gray-800 bb-mr-1">{item.amount ? formatCurrency(item.amount, item.currency) : 'POA'}</span>
+              <span className="bb-text-2xl bb-font-medium bb-text-gray-500 bb-mr-1">{item.amount ? formatCurrency(item.amount, item.currency) : 'POA'}</span>
               <span className="bb-font-medium bb-text-gray-400">{item.label}</span>
             </div>
-            <p className="bb-text-xs bb-text-gray-500">{item.description}</p>
+            <p className="bb-text-xs bb-text-gray-400 bb-font-light">{item.description}</p>
           </div>
           {item.action == 'link' && (
             <a
