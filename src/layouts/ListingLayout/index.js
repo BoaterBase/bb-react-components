@@ -366,7 +366,7 @@ function ListingBlock({ listingResource, Head = () => null, onReady }) {
           )}
 
           <div>
-            <h3 className="bb-uppercase bb-text-center bb-mb-1 bb-font-medium bb-text-gray-500 bb-text-sm">Watch Updates</h3>
+            <h3 className="bb-uppercase bb-text-center bb-mb-1 bb-font-medium bb-text-gray-500 bb-text-sm">Follow Listing</h3>
             <WatchForm onSubmit={createSubscriber} />
           </div>
 
@@ -375,20 +375,6 @@ function ListingBlock({ listingResource, Head = () => null, onReady }) {
             <div className="bb-max-h-20 bb-overflow-y-auto bb-break-all bb-font-mono bb-text-xs bb-bg-gray-800 bb-text-gray-400 bb-rounded bb-shadow bb-p-2">
               <code>{JSON.stringify(listing)}</code>
             </div>
-          </div>
-
-          <div className="bb-flex bb-rounded-md bb-shadow">
-            <button
-              onClick={sendMessage}
-              type="button"
-              className="bb-flex-auto bb-flex bb-justify-center bb-items-center bb-px-6 bb-py-3 bb-border bb-border-transparent bb-text-lg bb-leading-6 bb-font-medium bb-rounded-md bb-text-white bb-bg-gradient-to-b bb-from-blue-500  bb-to-blue-600 hover:bb-to-blue-700 focus:bb-outline-none focus:bb-border-blue-700 focus:bb-shadow-outline-blue active:bb-bg-blue-700 bb-transition bb-ease-in-out bb-duration-150"
-            >
-              Send Message
-              <svg className="bb-ml-3 bb--mr-1 bb-h-5 bb-w-5" viewBox="0 0 20 20" fill="currentColor">
-                <path d="M2 5a2 2 0 012-2h7a2 2 0 012 2v4a2 2 0 01-2 2H9l-3 3v-3H4a2 2 0 01-2-2V5z" />
-                <path d="M15 7v2a4 4 0 01-4 4H9.828l-1.766 1.767c.28.149.599.233.938.233h2l3 3v-3h2a2 2 0 002-2V9a2 2 0 00-2-2h-1z" />
-              </svg>
-            </button>
           </div>
         </div>
       </div>

@@ -7,7 +7,7 @@ import { useSearch } from '../Search';
 import { useCurrency } from '../Currency';
 import Link from '../Link';
 
-function Item({ layout, data }) {
+function Item({ layout, slider = true, data }) {
   const [searchState, setSearchState] = useSearch();
   const { currency, rates, getRate } = useCurrency();
 
@@ -141,7 +141,7 @@ function Item({ layout, data }) {
               <div className="bb-text-orange-400 bb-mt-2 bb-capitalize bb-leading-none bb-text-sm">&nbsp;</div>
             )}
           </div>
-          {data.images?.length && data.images?.length > 1 && (
+          {slider && data.images?.length && data.images?.length > 1 && (
             <button
               onClick={() => setCurrentImage(currentImage - 1)}
               className="bb-absolute bb-top-1/2 bb--mt-3 bb-left-2 bb-appearance-none bb-bg-black bb-bg-opacity-25 bb-text-white bb-opacity-50 hover:bb-opacity-100 bb-w-6 bb-h-6 bb-rounded-full focus:bb-outline-none focus:bb-shadow-outline-yellow"
@@ -155,7 +155,7 @@ function Item({ layout, data }) {
               </svg>
             </button>
           )}
-          {data.images?.length && data.images?.length > 1 && (
+          {slider && data.images?.length && data.images?.length > 1 && (
             <button
               onClick={() => setCurrentImage(currentImage + 1)}
               className="bb-absolute bb-top-1/2 bb--mt-3 bb-right-2 bb-appearance-none bb-bg-black bb-bg-opacity-25 bb-text-white bb-opacity-50 hover:bb-opacity-100 bb-w-6 bb-h-6 bb-rounded-full focus:bb-outline-none focus:bb-shadow-outline-yellow"
@@ -197,7 +197,7 @@ function Item({ layout, data }) {
                 />
               </Link>
             )}
-            {data.images?.length && data.images?.length > 1 && (
+            {slider && data.images?.length && data.images?.length > 1 && (
               <button
                 onClick={() => setCurrentImage(currentImage - 1)}
                 className="bb-absolute bb-top-1/2 bb--mt-3 bb-left-2 bb-appearance-none bb-bg-black bb-bg-opacity-25 bb-text-white bb-opacity-50 hover:bb-opacity-100 bb-w-6 bb-h-6 bb-rounded-full focus:bb-outline-none  focus:bb-shadow-outline-yellow"
@@ -211,7 +211,7 @@ function Item({ layout, data }) {
                 </svg>
               </button>
             )}
-            {data.images?.length && data.images?.length > 1 && (
+            {slider && data.images?.length && data.images?.length > 1 && (
               <button
                 onClick={() => setCurrentImage(currentImage + 1)}
                 className="bb-absolute bb-top-1/2 bb--mt-3 bb-right-2 bb-appearance-none bb-bg-black bb-bg-opacity-25 bb-text-white bb-opacity-50 hover:bb-opacity-100 bb-w-6 bb-h-6 bb-rounded-full focus:bb-outline-none focus:bb-shadow-outline-yellow"
@@ -293,7 +293,7 @@ function Item({ layout, data }) {
               </Link>
             )}
 
-            {data.images?.length && data.images?.length > 1 && (
+            {slider && data.images?.length && data.images?.length > 1 && (
               <button
                 onClick={() => setCurrentImage(currentImage - 1)}
                 className="bb-absolute bb-top-1/2 bb--mt-3 bb-left-2 bb-appearance-none bb-bg-black bb-bg-opacity-25 bb-text-white bb-opacity-50 hover:bb-opacity-100 bb-w-6 bb-h-6 bb-rounded-full focus:bb-outline-none  focus:bb-shadow-outline-yellow"
@@ -307,7 +307,7 @@ function Item({ layout, data }) {
                 </svg>
               </button>
             )}
-            {data.images?.length && data.images?.length > 1 && (
+            {slider && data.images?.length && data.images?.length > 1 && (
               <button
                 onClick={() => setCurrentImage(currentImage + 1)}
                 className="bb-absolute bb-top-1/2 bb--mt-3 bb-right-2 bb-appearance-none bb-bg-black bb-bg-opacity-25 bb-text-white bb-opacity-50 hover:bb-opacity-100 bb-w-6 bb-h-6 bb-rounded-full focus:bb-outline-none  focus:bb-shadow-outline-yellow"

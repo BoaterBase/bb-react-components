@@ -1,6 +1,8 @@
 import React from 'react';
 import BoaterBase from '../../BoaterBase';
 import ListingsSection from './index';
+import Link from '../../Link';
+import Arrow from '../../icons/ArrowRight';
 
 export default {
   title: 'Sections/ListingsSection',
@@ -11,11 +13,29 @@ export default {
 export const Preview = (props) => {
   return (
     <BoaterBase>
-      <ListingsSection {...props} />
+      <br />
+      <br />
+      <ListingsSection
+        {...props}
+        title={
+          <div className="bb-flex bb-mb-2">
+            <h2 className="bb-text-2xl bb-font-bold">Featured</h2>
+            <Link
+              to={{
+                pathname: '/listings',
+                query: { ...props.searchState, layout: undefined, configure: { ...props.searchState.configure, hitsPerPage: undefined } },
+              }}
+              className="bb-text-blue-500 hover:bb-underline bb-ml-auto bb-flex bb-flex-no-wrap bb-items-center"
+            >
+              All <Arrow className="bb-w-4 bb-h-4 bb-ml-0.5" />
+            </Link>
+          </div>
+        }
+      />
     </BoaterBase>
   );
 };
 
 Preview.args = {
-  searchState: { layout: 'gallery', configure: { hitsPerPage: 6 }, refinementList: { 'specifications.condition': ['New'] } },
+  searchState: { layout: 'gallery', configure: { hitsPerPage: 12 }, refinementList: { 'specifications.condition': ['New'] } },
 };
