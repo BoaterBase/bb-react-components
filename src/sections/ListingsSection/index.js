@@ -1,4 +1,4 @@
-import React, { useRef, useEffect, useState } from 'react';
+import React, { Fragment, useRef, useEffect, useState } from 'react';
 
 import Search from '../../Search';
 import Hits from '../../Search/Hits';
@@ -31,7 +31,7 @@ function ScrollEdges({ scrollRef }) {
   }, [scrollRef, scrollRef.current, throttledScrollX, timeout()]);
 
   return (
-    <>
+    <Fragment>
       <button
         onClick={() => {
           scrollRef.current.scrollTo({
@@ -65,7 +65,7 @@ function ScrollEdges({ scrollRef }) {
       >
         <ChevronRight className="bb-w-6 bb-h-6 bb-relative bb-top-1/2" style={{ filter: 'drop-shadow(0px 0px 2px rgba(0, 0, 0, 0.25))' }} />
       </button>
-    </>
+    </Fragment>
   );
 }
 
