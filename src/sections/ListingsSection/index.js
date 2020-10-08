@@ -76,7 +76,7 @@ function HorizontalScroller({ children }) {
     <div className="bb-relative">
       <div
         ref={scrollRef}
-        className="bb-relative bb-w-full bb-overflow-x-auto bb-flex bb-flex-no-wrap bb-space-x-3"
+        className="bb-relative bb-w-full bb-overflow-x-auto bb-overflow-y-visible bb-py-2 bb--my-2 bb-flex bb-flex-no-wrap bb-space-x-3"
         style={{
           scrollSnapType: 'x proximity',
         }}
@@ -87,14 +87,13 @@ function HorizontalScroller({ children }) {
     </div>
   );
 }
-
 export default function ListingsSection({ className, searchState, title }) {
   return (
     <section className={className}>
       {title && <header>{title}</header>}
       <Search state={searchState}>
         <HorizontalScroller>
-          <Hits hitClassName="bb-w-1/3 bb-flex-none" hitSlider={false} />
+          <Hits hitClassName="bb-w-1/3 bb-flex-none" />
         </HorizontalScroller>
         <VirtualSearchBox />
         <VirtualSortBy
@@ -105,11 +104,11 @@ export default function ListingsSection({ className, searchState, title }) {
           ]}
         />
         <VirtualRefinementList attribute="availability" />
-        <VirtualRefinementList attribute="specifications.condition" />
         <VirtualRefinementList attribute="specifications.category" />
         <VirtualRefinementList attribute="specifications.classification" />
         <VirtualRefinementList attribute="specifications.model" />
         <VirtualRefinementList attribute="specifications.manufacturer" />
+        <VirtualRefinementList attribute="business.name" />
       </Search>
     </section>
   );

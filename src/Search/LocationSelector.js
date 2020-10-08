@@ -18,7 +18,7 @@ const LocationSelectorBase = memo(({ currentRefinement, items, refine }) => {
       <button
         onClick={() => setVisible(true)}
         type="button"
-        className="bb-min-w-0 bb-flex bb-items-center bb--ml-px bb-rounded-r-md bb-border bb-border-gray-300 bb-px-3 bb-py-2 bb-bg-white bb-text-base bb-leading-6 sm:bb-text-sm sm:bb-leading-5 bb-font-normal bb-text-gray-500 hover:bb-text-gray-700 focus:bb-outline-none focus:bb-border-blue-300 focus:bb-shadow-outline-blue active:bb-bg-gray-50 active:bb-text-gray-800 bb-transition bb-ease-in-out bb-duration-150"
+        className="bb-min-w-0 bb-flex bb-items-center bb--ml-px bb-rounded-r-md bb-border bb-border-gray-300 bb-px-3 bb-py-2 bb-bg-white bb-text-base bb-leading-6 sm:bb-text-sm sm:bb-leading-5 bb-font-normal bb-text-gray-500 hover:bb-text-gray-700 focus:z-10 focus:bb-outline-none focus:bb-border-blue-300 focus:bb-shadow-outline-blue active:bb-bg-gray-50 active:bb-text-gray-800 bb-transition bb-ease-in-out bb-duration-150"
         id="location-menu"
         aria-haspopup="true"
         aria-expanded={visible}
@@ -43,19 +43,13 @@ const LocationSelectorBase = memo(({ currentRefinement, items, refine }) => {
             <animated.div
               key={key}
               style={props}
-              className="bb-z-10 bb-origin-top-right bb-absolute bb-right-0 bb-top-full bb-mt-2 bb-w-56 bb-rounded-md bb-shadow-lg"
+              className="bb-z-10 bb-origin-top-right bb-absolute bb-right-0 bb-top-full bb-mt-2 bb-w-56 bb-rounded-md bb-shadow-lg bb-max-h-80 bb-overflow-y-auto bb-border bb-border-gray-100"
             >
               <OutsideClickHandler onOutsideClick={() => setVisible(false)}>
-                <div
-                  className="bb-rounded-md bb-bg-white bb-shadow-xs"
-                  role="menu"
-                  aria-orientation="vertical"
-                  aria-labelledby="location-menu"
-                  aria-hidden={!visible}
-                >
-                  <div className="bb-px-4 bb-py-3">
+                <div className="bb-rounded-md bb-bg-white" role="menu" aria-orientation="vertical" aria-labelledby="location-menu" aria-hidden={!visible}>
+                  <div className="bb-flex bb-flex-col bb-pb-2">
                     <button
-                      className="bb-block bb-appearance-none"
+                      className="bb-block bb-rounded-t-md bb-appearance-none bb-py-1 b-px-2 bb-border-b bb-border-gray-200 hover:bb-bg-blue-200 bb-text-gray-700 bb-font-medium"
                       onClick={() => {
                         refine('');
                         setVisible(false);
@@ -66,20 +60,29 @@ const LocationSelectorBase = memo(({ currentRefinement, items, refine }) => {
 
                     {items &&
                       items.map((country) => (
-                        <div key={country.label}>
-                          <button className="bb-block bb-appearance-none" onClick={() => refine(country.value)}>
+                        <div key={country.label} className="bb-w-full bb-flex bb-flex-col">
+                          <button
+                            className="bb-w-full bb-block bb-appearance-none bb-py-1 b-px-2 bb-border-b bb-border-gray-200 hover:bb-bg-blue-200 bb-text-gray-700 bb-font-medium"
+                            onClick={() => refine(country.value)}
+                          >
                             {country.label}
                           </button>
                           {country.items &&
                             country.items.map((region) => (
-                              <div key={region.label}>
-                                <button className="bb-block bb-appearance-none" onClick={() => refine(region.value)}>
+                              <div key={region.label} className="bb-w-full bb-flex bb-flex-col">
+                                <button
+                                  className="bb-block bb-appearance-none bb-py-1 b-px-1 bb-border-b bb-border-gray-200 bb-bg-blue-50 hover:bb-bg-blue-200 bb-text-gray-700 bb-font-medium"
+                                  onClick={() => refine(region.value)}
+                                >
                                   {region.label}
                                 </button>
                                 {region.items &&
                                   region.items.map((city) => (
-                                    <div key={city.label}>
-                                      <button className="bb-block bb-appearance-none" onClick={() => refine(city.value)}>
+                                    <div key={city.label} className="bb-w-full bb-flex bb-flex-col">
+                                      <button
+                                        className="bb-block bb-appearance-none bb-py-1 b-px-2 bb-border-b bb-border-gray-200 hover:bb-bg-blue-200 bb-text-gray-700 bb-font-medium"
+                                        onClick={() => refine(city.value)}
+                                      >
                                         {city.label}
                                       </button>
                                     </div>

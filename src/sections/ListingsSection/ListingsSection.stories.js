@@ -17,6 +17,7 @@ export const Preview = (props) => {
       <br />
       <ListingsSection
         {...props}
+        className=""
         title={
           <div className="bb-flex bb-mb-2">
             <h2 className="bb-text-2xl bb-font-bold">Featured</h2>
@@ -37,5 +38,5 @@ export const Preview = (props) => {
 };
 
 Preview.args = {
-  searchState: { layout: 'gallery', configure: { hitsPerPage: 12 }, refinementList: { 'specifications.condition': ['New'] } },
+  searchState: { layout: 'card', configure: { hitsPerPage: 12 }, refinementList: { 'specifications.condition': ['New'] } },
 };

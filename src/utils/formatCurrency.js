@@ -4,5 +4,6 @@ export default function formatCurrency(amount, currency = 'USD') {
     currency: currency,
     useGrouping: true,
     minimumFractionDigits: 0,
+    maximumFractionDigits: 0,
   }).format(amount);
 }

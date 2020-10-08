@@ -73,10 +73,12 @@ function StatsBase({ processingTimeMS, nbHits }) {
 const Pagination = connectPagination(PaginationBase);
 const Stats = connectStats(StatsBase);
 
-const Paging = () => (
-  <div className="bb-flex bb-justify-between bb-items-center">
-    <Stats />
-    <Pagination />
+const Paging = ({ className }) => (
+  <div className={className}>
+    <div className="bb-flex bb-justify-between bb-items-center">
+      <Stats />
+      <Pagination />
+    </div>
   </div>
 );
 export default Paging;

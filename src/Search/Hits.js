@@ -9,7 +9,7 @@ const BaseHits = memo(
 
     return hits.map((item) => (
       <div className={hitClassName} key={item.objectID} style={{ scrollSnapAlign: 'start' }}>
-        <Hit className={hitClassName} data={item} slider={hitSlider} />
+        <Hit className={hitClassName} data={item} />
       </div>
     ));
   },

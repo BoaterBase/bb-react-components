@@ -35,7 +35,7 @@ function Refinements({ items, refine, createUrl }) {
                   onClick={() => refine(value)}
                   className="bb-inline-flex bb-items-center bb-rounded-full bb-bg-blue-100 hover:bb-bg-blue-200 bb-text-blue-500 bb-text-xs bb-pl-2 bb-mr-0.5 bb-mb-0.5"
                 >
-                  {label}
+                  {label.split('::')[0]}
                   <svg
                     className="bb-w-3 bb-h-3 bb-mx-1"
                     fill="none"

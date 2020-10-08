@@ -3,7 +3,8 @@ console.log('\nTailwinds', process.env.NODE_ENV);
 module.exports = {
   prefix: 'bb-',
   variants: {
-    zIndex: ['responsive', 'hover', 'focus'],
+    zIndex: ['responsive', 'hover', 'focus', 'focus-within'],
+    animation: ['responsive', 'hover'],
   },
   theme: {
     typography: (theme) => ({
@@ -17,6 +18,20 @@ module.exports = {
         },
       },
     }),
+    extend: {
+      animation: {
+        'slide-object': 'slide-object 5s ease infinite',
+      },
+      keyframes: {
+        'slide-object': {
+          '0%': { objectPosition: 'center' },
+          '25%': { objectPosition: '0 0' },
+          '50%': { objectPosition: 'center' },
+          '75%': { objectPosition: '100% 0' },
+          '100%': { objectPosition: 'center' },
+        },
+      },
+    },
   },
   plugins: [require('@tailwindcss/ui')],
   purge: ['./src/**/*.css', './src/**/*.js', './src/**/*.jsx'],

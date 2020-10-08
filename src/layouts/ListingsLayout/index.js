@@ -47,7 +47,7 @@ function ShareSearch() {
 
 /** ListingsLayout component to display a list of BoaterBase listings with search interface and paging */
 function ListingsLayout({ searchState }) {
-  const [filtersToggle, setFiltersToggle] = useState(true);
+  const [filtersToggle, setFiltersToggle] = useState(false);
 
   return (
     <div>
@@ -57,26 +57,29 @@ function ListingsLayout({ searchState }) {
             <SearchInput />
             <LocationSelector />
           </div>
-          <div className="bb-flex-auto bb-flex bb-space-x-1">
+          <div className="bb-flex-auto bb-flex bb-space-x-1 bb-relative">
             <LayoutSelector />
             <CurrencySelector />
             <SortSelector />
             <FilterButton onClick={() => setFiltersToggle((state) => !state)} />
+            <div
+              className={classNames(
+                'bb-z-10 bb-absolute bb-right-0 bb-top-full bb-p-0.5 bb-mt-0.5 bb-max-w-xs bb-max-h-screen bb-overflow-y-auto bb-bg-white bb-rounded-md bb-shadow-lg bb-border bb-border-gray-200',
+                filtersToggle ? 'bb-block' : 'bb-hidden'
+              )}
+            >
+              <Filters />
+              <ShareSearch />
+            </div>
           </div>
         </div>
 
-        <div className="bb-flex bb-mb-4">
-          <div className="bb-flex-auto">
-            <Refinements />
-            <Grid>
-              <Hits />
-            </Grid>
-            <Paging />
-          </div>
-          <div className={classNames('bb-w-30', filtersToggle ? 'bb-block md:bb-hidden' : 'bb-hidden md:bb-block')}>
-            <Filters />
-            <ShareSearch />
-          </div>
+        <div className="bb-mb-4">
+          <Refinements />
+          <Grid>
+            <Hits />
+          </Grid>
+          <Paging className="bb-mt-4" />
         </div>
       </Search>
     </div>

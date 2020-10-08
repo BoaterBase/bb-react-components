@@ -11,7 +11,7 @@ import qs from 'qs';
 import { useBoaterBase } from '../BoaterBase';
 
 function Share({ pathname, query, title, summary }) {
-  const { createAlert } = useAlerts();
+  const createAlert = useAlerts();
 
   const { linker } = useBoaterBase();
   const permalink = linker.createPermalink({ pathname, query });
