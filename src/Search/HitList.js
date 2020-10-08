@@ -29,15 +29,15 @@ export default function HitList({
   return (
     <div className="bb-rounded-md bb-flex bb-bg-gray-50 bb-shadow hover:bb-shadow-md bb-transition-transform bb-duration-300 bb-transform hover:bb--translate-y-px bb-cursor-pointer">
       <div className="bb-relative bb-rounded-l-md bb-flex-none">
-        <svg viewBox="0 0 8 5" className="bb-block bb-w-full bb-rounded-l-md"></svg>
-        {images?.length && (
-          <Link title={title} to={`/listings/${slug}`}>
+        <Link title={title} to={`/listings/${slug}`}>
+          <svg viewBox="0 0 8 5" className="bb-relative bb-block bb-w-full bb-rounded-l-md bb-bg-gradient-to-b bb-from-blue-500 bb-to-blue-400"></svg>
+          {images?.length > 0 && (
             <img
               src={imagePath(images[mod(currentImage, images.length)])}
               className="bb-absolute hover:bb-animate-slide-object bb-w-full bb-rounded-l-md bb-h-full bb-bg-gray-400 bb-inset-0 bb-object-cover"
             />
-          </Link>
-        )}
+          )}
+        </Link>
         {logo && (
           <Link title={businessName} to={`/profiles/${businessHandle}`}>
             <img
@@ -88,7 +88,7 @@ export default function HitList({
           </button>
         )}
       </div>
-      <div className="bb-flex-auto bb-p-2 bb-flex bb-flex-col bb-w-full bb-overflow-hidden">
+      <Link title={title} to={`/listings/${slug}`} className="bb-flex-auto bb-p-2 bb-flex bb-flex-col bb-w-full bb-overflow-hidden">
         {message && (
           <div className={classNames('bb-text-sm bb-font-semibold bb-text-red-500 bb-truncate bb-leading-snug', !message && 'bb-invisible')}>{message}</div>
         )}
@@ -113,7 +113,7 @@ export default function HitList({
         ) : (
           <div className="bb-mt-auto bb-flex bb-items-center bb-justify-end bb-h-8 bb-text-gray-200">Not Available</div>
         )}
-      </div>
+      </Link>
     </div>
   );
 }

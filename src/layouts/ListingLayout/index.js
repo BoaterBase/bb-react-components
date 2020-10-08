@@ -4,6 +4,8 @@ import getListing from '../../data/getListing';
 import createListingMessage from '../../data/createListingMessage';
 import createListingSubscriber from '../../data/createListingSubscriber';
 
+import { cloudUrl } from '../../BoaterBase';
+
 import Suspend from '../../data/Suspend';
 
 import { useModal } from '../../Modal';
@@ -265,6 +267,9 @@ function ListingBlock({ listingResource, Head = () => null, onReady }) {
       <Head>
         <title>{listing.title}</title>
         <meta name="description" content={listing.summary} />
+        <meta name="twitter:site" content="@boaterbase" />
+        {listing.media && listing.media[0] && <meta name="twitter:card" content="summary_large_image" />}
+        {listing.media && listing.media[0] && <meta property="og:image" content={cloudUrl(listing.media[0].id,{transformation:'large_image'})} />}              
       </Head>
       {listing.media && listing.media[0]?.width >= 900 && (
         <div className="bb-mb-3">

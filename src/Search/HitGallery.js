@@ -29,15 +29,17 @@ export default function HitGallery({
   return (
     <div className="bb-rounded-md bb-bg-gray-50 bb-shadow hover:bb-shadow-md bb-transition-transform bb-duration-300 bb-transform hover:bb--translate-y-px bb-cursor-pointer bb-h-full">
       <div className="bb-relative bb-rounded-md">
-        <svg viewBox="0 0 8 7" className="bb-block bb-w-full bb-rounded-md"></svg>
-        {images?.length && (
-          <Link title={title} to={`/listings/${slug}`}>
-            <img
-              src={imagePath(images[mod(currentImage, images.length)])}
-              className="bb-absolute hover:bb-animate-slide-object bb-w-full bb-rounded-md bb-h-full bb-bg-gray-400 bb-inset-0 bb-object-cover"
-            />
-          </Link>
-        )}
+        <Link title={title} to={`/listings/${slug}`}>
+          <svg viewBox="0 0 8 7" className="bb-relative bb-block bb-w-full bb-rounded-md bb-bg-gradient-to-b bb-from-blue-500 bb-to-blue-400"></svg>
+          {images?.length > 0 && (
+            
+              <img
+                src={imagePath(images[mod(currentImage, images.length)])}
+                className="bb-absolute hover:bb-animate-slide-object bb-w-full bb-rounded-md bb-h-full bb-inset-0 bb-object-cover"
+              />
+            
+          )}
+        </Link>
         {logo && (
           <Link title={businessName} to={`/profiles/${businessHandle}`}>
             <img
@@ -59,9 +61,9 @@ export default function HitGallery({
           </Link>
         )}
 
-        <div
+        <Link title={title} to={`/listings/${slug}`}
           style={{ textShadow: '0 0 2px rgba(0,0,0,0.75)' }}
-          className="bb-leading-tight bb-pt-6 bb-rounded-b-md bb-absolute bb-bottom-0 bb-left-0 bb-w-full bb-bg-gradient-to-b bb-from-transparent bb-to-gray-900"
+          className="bb-block bb-leading-tight bb-pt-6 bb-rounded-b-md bb-absolute bb-bottom-0 bb-left-0 bb-w-full bb-bg-gradient-to-b bb-from-transparent bb-to-gray-900"
         >
           <div className={classNames('bb-px-2 bb-text-xs bb-font-bold bb-text-yellow-300 bb-truncate bb-leading-tight', !message && 'bb-invisible')}>
             {message || '-'}
@@ -85,7 +87,7 @@ export default function HitGallery({
           ) : (
             <div className="bb-flex bb-items-center bb-justify-end bb-px-2 bb-pb-1 bb-h-10 bb-text-gray-500">Not Available</div>
           )}
-        </div>
+        </Link>
 
         {images?.length > 1 && (
           <button

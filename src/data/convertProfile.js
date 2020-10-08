@@ -4,9 +4,9 @@ export default function convertProfile() {
   return {
     async fromFirestore(snapshot, options) {
       const data = snapshot.data(options);
-
       const response = {
         id: snapshot.id,
+        business: data.business,
         handle: data.handle,
         name: data.name,
         summary: data.summary,

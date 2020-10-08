@@ -49,7 +49,7 @@ module.exports = {
   // errorOnDeprecated: false,
 
   //https://github.com/firebase/firebase-js-sdk/issues/2701
-  extraGlobals: ['Uint8Array', 'ArrayBuffer'],
+  //extraGlobals: ['Uint8Array', 'ArrayBuffer'],
 
   // Force coverage collection from ignored files using an array of glob patterns
   // forceCoverageMatch: [],

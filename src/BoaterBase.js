@@ -1,6 +1,8 @@
 import React, { createContext, useState, useContext } from 'react';
 import PropTypes from 'prop-types';
 import { CloudinaryContext } from 'cloudinary-react';
+import { Cloudinary } from 'cloudinary-core';
+
 import qs from 'qs';
 import { version } from '../package.json';
 import Currency from './Currency';
@@ -15,6 +17,12 @@ const Context = createContext();
 export function useBoaterBase() {
   const context = useContext(Context);
   return context;
+}
+
+const cloudinaryCore = new Cloudinary({cloud_name: 'boaterbase', secure:true});
+
+export function cloudUrl(id,options) { 
+  return cloudinaryCore.url(id, options)
 }
 
 const defaultTheme = {
