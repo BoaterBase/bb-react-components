@@ -24,19 +24,19 @@ const defaultTheme = {
 const defaultLinker = {
   /** Change the browser url and navigate to page */
   changeUrl: ({ pathname, query }) => {
-    window.location.assign(pathname + (query ? '?' + qs.stringify(query) : ''));
+    window.location.assign(pathname + (query ? '?' + qs.stringify(query, { encodeValuesOnly: true }) : ''));
   },
   /** Update the browser url without navigating */
   updateUrl: ({ pathname, query }) => {
-    window.history.pushState({}, '', pathname + (query ? '?' + qs.stringify(query) : ''));
+    window.history.pushState({}, '', pathname + (query ? '?' + qs.stringify(query, { encodeValuesOnly: true }) : ''));
   },
   /** Create a url for an internal link */
   createUrl: ({ pathname, query }) => {
-    return pathname + (query ? '?' + qs.stringify(query) : '');
+    return pathname + (query ? '?' + qs.stringify(query, { encodeValuesOnly: true }) : '');
   },
   /** Create a url for an external link */
   createPermalink: ({ pathname, query }) => {
-    return 'https://www.boaterbase.com' + pathname + (query ? '?' + qs.stringify(query) : '');
+    return 'https://www.boaterbase.com' + pathname + (query ? '?' + qs.stringify(query, { encodeValuesOnly: true }) : '');
   },
 };
 
