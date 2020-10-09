@@ -20,7 +20,7 @@ function ListingUpdate({ Head = () => null, listingResource, updateResource }) {
       <Head>
         <title>{update.title}</title>
       </Head>
-      <div className="bb-col-span-3">
+      <div className="bb-col-span-4 md:bb-col-span-3">
         <h1 className="bb-text-3xl bb-font-semibold bb-text-gray-800 bb-leading-9">{update.title}</h1>
         <p className="bb-text-sm bb-leading-5 bb-text-gray-500">
           <time dateTime="2020-03-16">{new Date(update.created).toLocaleDateString('en-US', { day: 'numeric', month: 'short', year: 'numeric' })}</time>
@@ -34,7 +34,7 @@ function ListingUpdate({ Head = () => null, listingResource, updateResource }) {
         <Content items={update.content} />
       </div>
 
-      <div className="bb-col-span-1">
+      <div className="bb-col-span-4 md:bb-col-span-1">
         <Share pathname={`/listings/${listing.slug}/updates/${update.slug}`} title={update.title} summary={update.summary} />
       </div>
     </div>

@@ -19,9 +19,9 @@ import Share from '../../parts/Share';
 import { useSearch } from '../../Search';
 
 const layouts = {
-  card: 'bb-grid bb-grid-cols-3 bb-gap-4',
-  gallery: 'bb-grid bb-grid-cols-3 bb-gap-4',
-  list: 'bb-grid bb-grid-cols-1 bb-gap-4',
+  card: 'bb-grid bb-grid-cols-1 sm:bb-grid-cols-2 md:bb-grid-cols-3 bb-gap-2 sm:bb-gap-3 md:bb-gap-4',
+  gallery: 'bb-grid bb-grid-cols-1 sm:bb-grid-cols-2 md:bb-grid-cols-3 bb-gap-2 sm:bb-gap-3 md:bb-gap-4',
+  list: 'bb-grid bb-grid-cols-1 bb-gap-2 sm:bb-gap-3 md:bb-gap-4',
 };
 
 /** We need access to search states layout to format the grid */

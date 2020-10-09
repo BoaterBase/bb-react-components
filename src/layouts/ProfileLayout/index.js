@@ -18,7 +18,7 @@ function Profile({ Head = () => null, profileResource }) {
       <Head>
         <title>{profile.name}</title>
       </Head>
-      <div className="bb-col-span-3 bb-space-y-2">
+      <div className="bb-col-span-4 md:bb-col-span-3 bb-space-y-2">
         {profile.header && (
           <div className="bb-relative bb-rounded-md bb-shadow">
             <svg viewBox="0 0 21 9" className="bb-block bb-w-full bb-invisible"></svg>
@@ -45,7 +45,7 @@ function Profile({ Head = () => null, profileResource }) {
         <ListingsSection title={<div className="bb-flex bb-justify-between bb-items-end bb-my-2">
           <h2 className="bb-text-xl bb-font-bold bb-text-gray-700">Listings</h2>
           <Link to={{
-              pathname: 'listings', query: {
+              pathname: '/listings', query: {
               configure: { filters: profile.business ? `business.id:${profile.id}` : `profile.id:${profile.id}` }}
             }}
             className="bb-font-medium bb-text-blue-500">
@@ -58,7 +58,7 @@ function Profile({ Head = () => null, profileResource }) {
           }}/>
       </div>
 
-      <div className="bb-col-span-1 bb-space-y-2">
+      <div className="bb-col-span-4 md:bb-col-span-1 bb-space-y-2">
         <ContactSection profileId={profileId} contactId={contactId} />
         <Share pathname={`/profiles/${profile.handle}`} title={profile.name} summary={profile.summary} />
       </div>

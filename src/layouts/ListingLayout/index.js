@@ -174,13 +174,13 @@ function Specifications({ data }) {
   return items.length ? (
     <ul className="bb-mt-2 bb-border-t bb-border-gray-100 bb-grid md:bb-grid-cols-2 lg:bb-grid-cols-3">
       {items.map(({ key, title, tip, value, unit }, index) => (
-        <li key={key} className="bb-border-t bb-border-gray-100 bb-py-1 bb-px-0.5">
-          <h4 className="bb-uppercase bb-tracking-tight bb-text-sm bb-font-semibold bb-text-gray-700 bb-truncate">
+        <li key={key} className="bb-border-t bb-border-gray-100 bb-py-1 bb-px-0.5 bb-w-full bb-overflow-hidden">
+          <h4 className="bb-uppercase bb-tracking-tight bb-text-xs md:bb-text-sm bb-font-semibold bb-text-gray-700 bb-truncate">
             <span title={tip} style={{ cursor: !!tip && 'help' }}>
               {title}
             </span>
           </h4>
-          <div className="bb-text-gray-400 bb-font-thin bb-text-lg bb-truncate">
+          <div className="bb-text-gray-400 bb-font-thin md:bb-text-lg bb-truncate">
             {value}
             {unit && <small className="bb-text-xs bb-text-gray-300 bb-ml-0.5">{unit}</small>}
           </div>
@@ -278,27 +278,27 @@ function ListingBlock({ listingResource, Head = () => null, onReady }) {
       )}
 
       <div className="bb-grid bb-grid-cols-4 bb-gap-3">
-        <div className="bb-col-span-3">
+        <div className="bb-col-span-4 md:bb-col-span-3">
           {listing.media && listing.media[0]?.width < 900 && (
             <div className="bb-mb-2">
               <Gallery media={listing.media} layout="primary" />
             </div>
           )}
-          {listing.message && <div className="bb-text-red-500 bb-font-medium bb-text-lg">{listing.message}</div>}
-          <h1 ref={titleRef} className="bb-text-3xl bb-font-semibold bb-text-gray-800 bb-leading-9">
+          {listing.message && <div className="bb-text-red-500 bb-font-medium md:bb-text-lg">{listing.message}</div>}
+          <h1 ref={titleRef} className="bb-text-2xl md:bb-text-3xl bb-font-semibold bb-text-gray-800 bb-leading-9">
             {listing.title}
           </h1>
-          <p className="bb-mt-2 bb-font-serif bb-text-xl bb-font-medium bb-text-gray-500 bb-italic">{listing.summary}</p>
-          <button className="bb-flex bb-items-center bb-mt-2 bb-text-blue-400 hover:bb-text-blue-500">
-            <LocationIcon className="bb-text-blue-500 bb-w-6 bb-h-6" />
-            <span className=" bb-font-medium bb-text-xl bb-mx-1">{listing.location}</span>
+          <p className="bb-mt-2 bb-font-serif bb-text-lg md:bb-text-xl bb-font-medium bb-text-gray-500 bb-italic">{listing.summary}</p>
+          <button className="bb-flex bb-items-start md:bb-items-center bb-text-left bb-mt-2 bb-text-blue-400 hover:bb-text-blue-500">
+            <LocationIcon className="bb-text-blue-500 bb-w-5 bb-h-5" />
+            <span className="bb-font-medium md:bb-text-xl bb-mx-1">{listing.location}</span>
           </button>
           <div ref={priceRef} className="bb-flex">
             <div className="bb-mr-4">
-              <span className="bb-text-4xl bb-font-medium bb-text-gray-800 bb-mr-1">
+              <span className="bb-text-2xl md:bb-text-4xl bb-font-medium bb-text-gray-800 bb-mr-1">
                 {listing.price ? formatCurrency(listing.price, listing.currency) : 'POA'}
               </span>
-              <span className="bb-font-medium bb-text-gray-400 bb-truncate">{listing.label}</span>
+              <span className="bb-font-medium bb-text-gray-400 bb-truncate bb-text-sm md:bb-text-base">{listing.label}</span>
             </div>
             {listing.variants?.length ? (
               <div className="bb-ml-auto bb-relative bb-overflow-hidden bb-max-w-sm bb-mt-1">
@@ -315,17 +315,17 @@ function ListingBlock({ listingResource, Head = () => null, onReady }) {
                   </div>
                 )}
                 <div className="bb-absolute bb-inset-0" style={{ background: 'linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(255,255,255,1) 60%)' }} />
-                {listing.variants?.length ? (
+                {listing.variants?.length > 0? (
                   <button
                     onClick={toggleVariants}
-                    className="bb-absolute bb-right-0 bb-top-2 bb-text-orange-500 bb-font-medium bb-flex bb-flex-no-wrap bb-items-center hover:bb-underline focus:bb-outline-none"
+                    className="bb-absolute bb-right-0 bb-top-1 bb-text-orange-500 bb-font-medium bb-flex bb-flex-no-wrap bb-items-center hover:bb-underline focus:bb-outline-none"
                   >
-                    More Options {showVariants ? <Minus className="bb-w-8 bb-h-8" /> : <Plus className="bb-w-8 bb-h-8" />}
+                    <span className="bb-hidden lg:bb-inline">More Options</span> {showVariants ? <Minus className="bb-w-8 bb-h-8" /> : <Plus className="bb-w-8 bb-h-8" />}
                   </button>
                 ) : null}
               </div>
             ) : null}
-            {listing.variants?.length && showVariants ? (
+            {listing.variants?.length > 0 && showVariants ? (
               <button
                 onClick={toggleVariants}
                 className="bb-text-orange-500 bb-font-medium bb-flex bb-flex-no-wrap bb-items-center hover:bb-underline focus:bb-outline-none"
@@ -335,7 +335,7 @@ function ListingBlock({ listingResource, Head = () => null, onReady }) {
             ) : null}
           </div>
           {showVariants && listing.variants?.length ? <Variants items={listing.variants} sendMessage={sendMessage} /> : null}
-          <div ref={specsRef}>
+          <div ref={specsRef} className="bb-w-full">
             <Specifications data={listing.specifications} />
           </div>
           {listing.media.length > 1 && (
@@ -348,11 +348,11 @@ function ListingBlock({ listingResource, Head = () => null, onReady }) {
           </div>
 
           <div ref={updatesRef}>
-            <h2 className="bb-mt-4 bb-mb-4 bb-text-3xl bb-font-semibold bb-text-gray-800">Blog</h2>
+            <h2 className="bb-mt-4 bb-mb-4 bb-text-3xl bb-font-semibold bb-text-gray-800">Logbook</h2>
             <ListingUpdatesSection id={listing.id} slug={listing.slug} limit={6} />
           </div>
         </div>
-        <div className="bb-col-span-1 bb-space-y-4">
+        <div className="bb-col-span-4 md:bb-col-span-1 bb-space-y-4">
           <ContactSection profileId={listing.profileId} contactId={listing.contactId} Head={Head} sendMessage={sendMessage} />
           <Share pathname={`/listings/${listing.slug}`} title={listing.title} summary={listing.summary} />
 

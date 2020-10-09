@@ -27,14 +27,14 @@ export default function HitList({
   const [currentImage, setCurrentImage] = useState(0);
 
   return (
-    <div className="bb-rounded-md bb-flex bb-bg-gray-50 bb-shadow hover:bb-shadow-md bb-transition-transform bb-duration-300 bb-transform hover:bb--translate-y-px bb-cursor-pointer">
-      <div className="bb-relative bb-rounded-l-md bb-flex-none">
+    <div className="bb-rounded-md bb-flex bb-flex-col md:bb-flex-row bb-bg-gray-50 bb-shadow hover:bb-shadow-md bb-transition-transform bb-duration-300 bb-transform hover:bb--translate-y-px bb-cursor-pointer">
+      <div className="bb-relative bb-rounded-t-md md:bb-rounded-t-none md:bb-rounded-l-md  bb-flex-none">
         <Link title={title} to={`/listings/${slug}`}>
-          <svg viewBox="0 0 8 5" className="bb-relative bb-block bb-w-full bb-rounded-l-md bb-bg-gradient-to-b bb-from-blue-500 bb-to-blue-400"></svg>
+          <svg viewBox="0 0 8 5" className="bb-relative bb-block bb-w-full bb-rounded-t-md md:bb-rounded-t-none md:bb-rounded-l-md  bb-bg-gradient-to-b bb-from-blue-500 bb-to-blue-400"></svg>
           {images?.length > 0 && (
             <img
               src={imagePath(images[mod(currentImage, images.length)])}
-              className="bb-absolute hover:bb-animate-slide-object bb-w-full bb-rounded-l-md bb-h-full bb-bg-gray-400 bb-inset-0 bb-object-cover"
+              className="bb-absolute hover:bb-animate-slide-object bb-w-full bb-rounded-t-md md:bb-rounded-t-none md:bb-rounded-l-md bb-h-full bb-bg-gray-400 bb-inset-0 bb-object-cover"
             />
           )}
         </Link>
