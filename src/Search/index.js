@@ -1,7 +1,7 @@
 import algoliasearch from 'algoliasearch/lite';
 
 import { InstantSearch, Configure } from 'react-instantsearch-dom';
-import React, { useState, createContext, useContext } from 'react';
+import React, { useState, createContext, useContext, useEffect } from 'react';
 import { useBoaterBase } from '../BoaterBase';
 
 const searchClient = algoliasearch('ZVD9UQIAVD', '4d24114774dc27c20690d04da6962b44');
@@ -17,6 +17,14 @@ export default function Search({ state, children }) {
     configure: { filters: '', hitsPerPage: 24 },
     ...state,
   });
+
+  useEffect(() => {
+    setSearchState({
+      layout: 'card',
+      configure: { filters: '', hitsPerPage: 24 },
+      ...state,
+    });
+  }, [state]);
 
   const { linker } = useBoaterBase();
 
