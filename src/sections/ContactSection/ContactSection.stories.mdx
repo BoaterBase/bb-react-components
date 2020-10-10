@@ -40,6 +40,22 @@ import ContactSection from './index';
 </Story>
 
 <Story
+  name="Profile"
+  args={{
+    profileId: 'c0qbzzgr',
+  }}
+  decorators={[
+    (Story) => (
+      <BoaterBase>
+        <Story />
+      </BoaterBase>
+    ),
+  ]}
+>
+  {ContactSection.bind({})}
+</Story>
+
+<Story
   name="Loading"
   args={{
     loading: true,

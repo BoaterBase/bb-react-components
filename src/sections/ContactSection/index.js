@@ -11,14 +11,13 @@ function Section({ profileResource, contactResource, Head = () => null, sendMess
 
   return (
     <section className="bb-text-center bb-bg-white bb-rounded-lg bb-shadow">
-      {profile && contact && (
-        <div className="bb-border-b bb-border-gray-100 bb-p-2 bb-pt-4">
-          {contact?.avatar && profile?.avatar && (
-            <Image className="bb-max-w-full bb-max-h-12 bb-m-auto" publicId={profile.avatar.id}>
-              <Transformation width="600" />
-            </Image>
+      {profile?.business && (
+        <div className="bb-p-2 bb-pt-4">
+          {profile?.avatar && (
+            <Link className="hover:bb-underline" to={`/profiles/${profile.handle}`}>
+              <Image className="bb-max-w-full bb-max-h-12 bb-m-auto" publicId={profile.avatar.id} transformation="small_image" />
+            </Link>
           )}
-
           <h4 className="bb-text-gray-400 bb-mt-2 bb-text-lg bb-leading-none bb-font-light">
             <Link className="hover:bb-underline" to={`/profiles/${profile.handle}`}>
               {profile.name || profile.handle}
@@ -32,19 +31,24 @@ function Section({ profileResource, contactResource, Head = () => null, sendMess
         </div>
       )}
 
-      <div className="bb-p-8">
-        {(contact?.avatar?.id || profile?.avatar?.id) && (
-          <Image className="bb-w-32 bb-h-32 bb-mx-auto bb-bg-black bb-rounded-full" publicId={contact?.avatar?.id || profile.avatar.id}>
-            <Transformation width="300" height="300" gravity="face" crop="thumb" />
-          </Image>
-        )}
+      {(contact || (profile && !profile.business)) && (
+        <div className="bb-p-8 bb-border-t bb-border-gray-200">
+          {(contact?.avatar?.id || profile?.avatar?.id) && (
+            <Link to={`/profiles/${contact ? contact.handle : profile.handle}`}>
+              <Image className="bb-w-32 bb-h-32 bb-mx-auto bb-bg-black bb-rounded-full" publicId={contact?.avatar?.id || profile.avatar.id}>
+                <Transformation width="300" height="300" gravity="face" crop="thumb" />
+              </Image>
+            </Link>
+          )}
 
-        <h3 className="bb-mt-6 bb-text-gray-900 bb-text-base bb-leading-5 bb-font-medium">
-          <Link className="hover:bb-underline" to={`/profiles/${contact ? contact.handle : profile.handle}`}>
-            {contact ? contact.name : profile.name}
-          </Link>
-        </h3>
-      </div>
+          <h3 className="bb-mt-6 bb-text-gray-900 bb-text-base bb-leading-5 bb-font-medium">
+            <Link className="hover:bb-underline" to={`/profiles/${contact ? contact.handle : profile.handle}`}>
+              {contact ? contact.name : profile.name}
+            </Link>
+          </h3>
+        </div>
+      )}
+
       <div className="bb-border-t bb-border-gray-100 bb-bg-gradient-to-b bb-from-white bb-via-white bb-to-blue-50 bb-rounded-b">
         <div className="bb--mt-px bb-flex">
           <div className={classNames('bb-w-0 bb-flex-1 bb-flex bb-border-gray-100', (profile?.telephone || contact?.telephone) && 'bb-border-r')}>
