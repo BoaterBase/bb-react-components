@@ -20,7 +20,7 @@ export default function WatchForm({ onSubmit, className }) {
         className="bb-mt-2"
         append={
           <Button type="submit" appended>
-            Subscribe
+            Watch
           </Button>
         }
       />

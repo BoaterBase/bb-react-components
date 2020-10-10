@@ -377,7 +377,7 @@ function ListingBlock({ listingResource, Head = () => null, onReady }) {
           )}
 
           <div>
-            <h3 className="bb-uppercase bb-text-center bb-mb-1 bb-font-medium bb-text-gray-500 bb-text-sm">Follow Listing</h3>
+            <h3 className="bb-uppercase bb-text-center bb-mb-1 bb-font-medium bb-text-gray-500 bb-text-sm">Follow This Boat</h3>
             <WatchForm onSubmit={createSubscriber} />
           </div>
 
