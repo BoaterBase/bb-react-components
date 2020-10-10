@@ -14,15 +14,15 @@ export function useSearch() {
 export default function Search({ state, children }) {
   const [searchState, setSearchState] = useState({
     layout: 'card',
-    configure: { filters: '', hitsPerPage: 24, ...state.configure },
     ...state,
+    configure: { filters: '', hitsPerPage: 24, ...state.configure },
   });
 
   useEffect(() => {
     setSearchState({
       layout: 'card',
-      configure: { filters: '', hitsPerPage: 24, ...state.configure },
       ...state,
+      configure: { filters: '', hitsPerPage: 24, ...state.configure },
     });
   }, [state]);
 
@@ -30,7 +30,7 @@ export default function Search({ state, children }) {
 
   const onSearchStateChange = (searchState) => {
     //const permalink = linker.createPermalink({ pathname: '/listings', query: searchState });
-
+    // TODO - we should remove the filters and matching defaults here and/or remove them and layout from the share link
     linker.updateUrl({ pathname: '/listings', query: searchState });
     setSearchState(searchState);
   };
