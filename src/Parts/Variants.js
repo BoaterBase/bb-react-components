@@ -5,8 +5,8 @@ import Message from '../icons/Message';
 export default function Variants({ items, sendMessage }) {
   return items ? (
     <ul>
-      {items.map((item) => (
-        <li className="bb-border-t bb-border-gray-100 bb-mb-1 bb-flex bb-pl-1">
+      {items.map((item, index) => (
+        <li key={index} className="bb-border-t bb-border-gray-100 bb-mb-1 bb-flex bb-pl-1">
           <div>
             <div>
               <span className="bb-text-2xl bb-font-medium bb-text-gray-500 bb-mr-1">{item.amount ? formatCurrency(item.amount, item.currency) : 'POA'}</span>
