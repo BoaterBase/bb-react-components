@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import trackHit from '../../utils/trackHit';
-
+import { useDeepCompareEffect } from 'react-use';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 
@@ -19,6 +19,7 @@ import Paging from '../../Search/Paging';
 import Share from '../../parts/Share';
 
 import { useSearch } from '../../Search';
+import { useBoaterBase } from '../../BoaterBase';
 
 const layouts = {
   card: 'bb-grid bb-grid-cols-1 sm:bb-grid-cols-2 md:bb-grid-cols-3 bb-gap-2 sm:bb-gap-3 md:bb-gap-4',
@@ -51,8 +52,8 @@ function ShareSearch() {
 function ListingsLayout({ searchState }) {
   const [filtersToggle, setFiltersToggle] = useState(false);
 
-  // TODO - we need to track search query somehow, maybe move into Search
-  useEffect(() => {
+  // TODO - we need to track search query somehow
+  useDeepCompareEffect(() => {
     setTimeout(async () => {
       try {
         // TODO - figure how to use group or network ids
@@ -63,9 +64,20 @@ function ListingsLayout({ searchState }) {
     }, 100);
   }, [searchState]);
 
+  const { linker } = useBoaterBase();
+
+  //http://localhost:4000/listings?layout=card&configure[filters]=&configure[hitsPerPage]=24&configure[aroundLatLngViaIP]=false&sortBy=ListingsLatest
+  //http://localhost:4000/listings?layout=card&configure[filters]=&configure[hitsPerPage]=24
+
+  // Update the browser when search changes
+  const onSearchStateChange = (searchState) => {
+    //console.log('----onStateChange', JSON.stringify(searchState));
+    linker.updateUrl && linker.updateUrl({ pathname: '/listings', query: searchState });
+  };
+
   return (
     <div>
-      <Search state={searchState}>
+      <Search state={searchState} onStateChange={onSearchStateChange}>
         <div className="md:bb-flex">
           <div className="bb-flex-auto bb-flex md:bb-mr-1 bb-mb-1 md:bb-mb-0">
             <SearchInput />

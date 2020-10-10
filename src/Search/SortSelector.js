@@ -86,7 +86,6 @@ const BaseSortSelector = memo(({ items, currentRefinement }) => {
     </select>
   );
 });
-BaseSortSelector.whyDidYouRender = { customName: 'BaseSortSelector' };
 
 const ConnectedSortSelector = connectSortBy(BaseSortSelector);
 export default function SortSelector() {

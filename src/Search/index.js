@@ -2,7 +2,7 @@ import algoliasearch from 'algoliasearch/lite';
 
 import { InstantSearch, Configure } from 'react-instantsearch-dom';
 import React, { useState, createContext, useContext, useEffect } from 'react';
-import { useBoaterBase } from '../BoaterBase';
+import { useDeepCompareEffect } from 'react-use';
 
 const searchClient = algoliasearch('ZVD9UQIAVD', '4d24114774dc27c20690d04da6962b44');
 
@@ -11,24 +11,26 @@ const Context = createContext();
 export function useSearch() {
   return useContext(Context);
 }
-export default function Search({ state, children }) {
+export default function Search({ state, onStateChange, children }) {
   const [searchState, setSearchState] = useState({
     layout: 'card',
     ...state,
     configure: { filters: '', hitsPerPage: 24, ...state.configure },
   });
 
-  useEffect(() => {
+  // Try and prevent state update loops with deep check
+  useDeepCompareEffect(() => {
     setSearchState({ layout: 'card', ...state, configure: { filters: '', hitsPerPage: 24, ...state.configure } });
   }, [state]);
 
-  const { linker } = useBoaterBase();
+  // NOTE - onSearchStateChange does not always trigger for example when we update via changing setSearchState so listen with effect
+  //      - but other times it does and cause a duplicate so use a deep check on listening for updates
+  useDeepCompareEffect(() => {
+    onStateChange && onStateChange(searchState);
+  }, [searchState]);
 
-  const onSearchStateChange = (searchState) => {
-    setSearchState(searchState);
-    //const permalink = linker.createPermalink({ pathname: '/listings', query: searchState });
-    // TODO - we should remove the filters and matching defaults here and/or remove them and layout from the share link
-    linker.updateUrl({ pathname: '/listings', query: searchState });
+  const onSearchStateChange = (newSearchState) => {
+    setSearchState(newSearchState);
   };
 
   // NOTE: We need to pass the configure state into the Configure component so it triggers updates to InstantSearch
