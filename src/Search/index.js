@@ -14,14 +14,14 @@ export function useSearch() {
 export default function Search({ state, children }) {
   const [searchState, setSearchState] = useState({
     layout: 'card',
-    configure: { filters: '', hitsPerPage: 24 },
+    configure: { filters: '', hitsPerPage: 24, ...state.configure },
     ...state,
   });
 
   useEffect(() => {
     setSearchState({
       layout: 'card',
-      configure: { filters: '', hitsPerPage: 24 },
+      configure: { filters: '', hitsPerPage: 24, ...state.configure },
       ...state,
     });
   }, [state]);
