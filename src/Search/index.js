@@ -19,11 +19,11 @@ export default function Search({ state, children }) {
   });
 
   useEffect(() => {
-    setSearchState({
-      layout: 'card',
+    setSearchState((current) => ({
+      ...current,
       ...state,
-      configure: { filters: '', hitsPerPage: 24, ...state.configure },
-    });
+      configure: { ...current.configure, ...state.configure },
+    }));
   }, [state]);
 
   const { linker } = useBoaterBase();
