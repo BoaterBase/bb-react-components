@@ -19,11 +19,7 @@ export default function Search({ state, children }) {
   });
 
   useEffect(() => {
-    setSearchState((current) => ({
-      ...current,
-      ...state,
-      configure: { ...current.configure, ...state.configure },
-    }));
+    setSearchState({ ...state, configure: { filters: '', hitsPerPage: 24, ...state.configure } });
   }, [state]);
 
   const { linker } = useBoaterBase();
@@ -39,7 +35,7 @@ export default function Search({ state, children }) {
   // NOTE: Use context to pass the layout into the hit components without triggering re-render of the hits due to buggy mutating InstantSearch results
   return (
     <InstantSearch searchClient={searchClient} indexName="Listings" searchState={searchState} onSearchStateChange={onSearchStateChange}>
-      <Configure {...(searchState.configure || {})} />
+      <Configure {...searchState.configure} />
       <Context.Provider value={[searchState, setSearchState]}>{children}</Context.Provider>
     </InstantSearch>
   );
