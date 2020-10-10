@@ -1,5 +1,7 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import getProfileByHandle from '../../data/getProfileByHandle';
+import trackHit from '../../utils/trackHit';
+
 import Suspend from '../../data/Suspend';
 import ContactSection from '../../sections/ContactSection';
 import Share from '../../parts/Share';
@@ -42,20 +44,29 @@ function Profile({ Head = () => null, profileResource }) {
           <p className="bb-mt-2 bb-font-serif bb-text-xl bb-font-medium bb-text-gray-500 bb-italic">{profile.summary}</p>
         </div>
 
-        <ListingsSection title={<div className="bb-flex bb-justify-between bb-items-end bb-my-2">
-          <h2 className="bb-text-xl bb-font-bold bb-text-gray-700">Listings</h2>
-          <Link to={{
-              pathname: '/listings', query: {
-              configure: { filters: profile.business ? `business.id:${profile.id}` : `profile.id:${profile.id}` }}
-            }}
-            className="bb-font-medium bb-text-blue-500">
-            Show All →
-          </Link>
-        </div>} searchState={{
+        <ListingsSection
+          title={
+            <div className="bb-flex bb-justify-between bb-items-end bb-my-2">
+              <h2 className="bb-text-xl bb-font-bold bb-text-gray-700">Listings</h2>
+              <Link
+                to={{
+                  pathname: '/listings',
+                  query: {
+                    configure: { filters: profile.business ? `business.id:${profile.id}` : `profile.id:${profile.id}` },
+                  },
+                }}
+                className="bb-font-medium bb-text-blue-500"
+              >
+                Show All →
+              </Link>
+            </div>
+          }
+          searchState={{
             layout: 'gallery',
             configure: { filters: profile.business ? `business.id:${profile.id}` : `profile.id:${profile.id}`, hitsPerPage: 6 },
             sortBy: 'Listings',
-          }}/>
+          }}
+        />
       </div>
 
       <div className="bb-col-span-4 md:bb-col-span-1 bb-space-y-2">
@@ -76,6 +87,22 @@ export default function ProfileLayout({ handle, loading, Head }) {
 
   // Start data request early so Suspend can use it for ssr fallback
   const profileResource = getProfileByHandle(handle);
+
+  useEffect(() => {
+    setTimeout(async () => {
+      try {
+        const profile = await profileResource.get();
+
+        // TODO - use parent profile / group trackers if available
+        //const profile = await getProfile(listing.profileId).get();
+        //const contact = await getProfile(listing.contactId).get();
+
+        await trackHit([], `/profiles/${profile.handle || profile.id}`, profile.name || profile.handle || profile.id);
+      } catch (err) {
+        console.error(err);
+      }
+    }, 100);
+  }, [profileResource]);
 
   return (
     <Suspend resources={profileResource} fallback={<Loading />}>

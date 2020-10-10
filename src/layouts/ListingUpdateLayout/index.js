@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import Content from '../../parts/Content';
 import getListing from '../../data/getListing';
 import getListingUpdate from '../../data/getListingUpdate';
+import trackHit from '../../utils/trackHit';
 import Share from '../../parts/Share';
 import Suspend from '../../data/Suspend';
 
@@ -48,6 +49,23 @@ export default function ListingUpdateLayout({ listingId, updateId, loading, Head
   // Start data request early so Suspend can use it for ssr fallback
   const listingResource = getListing(listingId);
   const updateResource = getListingUpdate(listingId, updateId);
+
+  useEffect(() => {
+    setTimeout(async () => {
+      try {
+        const listing = await listingResource.get();
+        const update = await updateResource.get();
+
+        // TODO - use parent profile / group trackers if available
+        //const profile = await getProfile(listing.profileId).get();
+        //const contact = await getProfile(listing.contactId).get();
+
+        await trackHit([], `/listings/${listing.slug}/updates/${update.slug}`, update.title);
+      } catch (err) {
+        console.error(err);
+      }
+    }, 100);
+  }, [listingResource, updateResource]);
 
   return (
     <Suspend resources={[listingResource, updateResource]} fallback={<UpdateLoading />}>

@@ -1,6 +1,8 @@
 import React, { useEffect, useState, useRef } from 'react';
-
 import getListing from '../../data/getListing';
+import getProfile from '../../data/getProfile';
+import trackHit from '../../utils/trackHit';
+import trackEvent from '../../utils/trackEvent';
 import createListingMessage from '../../data/createListingMessage';
 import createListingSubscriber from '../../data/createListingSubscriber';
 
@@ -204,6 +206,7 @@ function ListingBlock({ listingResource, Head = () => null, onReady }) {
       await createListingMessage(listing.id, data);
       createAlert('Message Sent!', 'success');
       setModal(null);
+      trackEvent([], 'Message', 'Sent', `/listings/${listing.slug}`);
     } catch (err) {
       createAlert('Error sending message!', 'error');
       console.error(err);
@@ -214,6 +217,7 @@ function ListingBlock({ listingResource, Head = () => null, onReady }) {
     try {
       await createListingSubscriber(listing.id, data);
       createAlert('Added to watch list!', 'success');
+      trackEvent([], 'Watch', 'Subscribed', `/listings/${listing.slug}`);
     } catch (err) {
       createAlert('Error creating subscription!', 'error');
       console.error(err);
@@ -222,6 +226,7 @@ function ListingBlock({ listingResource, Head = () => null, onReady }) {
   }
 
   function sendMessage() {
+    trackEvent([], 'Message', 'Click', `/listings/${listing.slug}`);
     setModal(<MessageForm onSubmit={createMessage} className="bb-bg-white bb-shadow-2xl bb-rounded-lg bb-p-4 bb-w-full sm:bb-w-5/6 md:bb-w-1/2" />);
   }
 
@@ -269,7 +274,7 @@ function ListingBlock({ listingResource, Head = () => null, onReady }) {
         <meta name="description" content={listing.summary} />
         <meta name="twitter:site" content="@boaterbase" />
         {listing.media && listing.media[0] && <meta name="twitter:card" content="summary_large_image" />}
-        {listing.media && listing.media[0] && <meta property="og:image" content={cloudUrl(listing.media[0].id,{transformation:'large_image'})} />}              
+        {listing.media && listing.media[0] && <meta property="og:image" content={cloudUrl(listing.media[0].id, { transformation: 'large_image' })} />}
       </Head>
       {listing.media && listing.media[0]?.width >= 900 && (
         <div className="bb-mb-3">
@@ -315,12 +320,13 @@ function ListingBlock({ listingResource, Head = () => null, onReady }) {
                   </div>
                 )}
                 <div className="bb-absolute bb-inset-0" style={{ background: 'linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(255,255,255,1) 60%)' }} />
-                {listing.variants?.length > 0? (
+                {listing.variants?.length > 0 ? (
                   <button
                     onClick={toggleVariants}
                     className="bb-absolute bb-right-0 bb-top-1 bb-text-orange-500 bb-font-medium bb-flex bb-flex-no-wrap bb-items-center hover:bb-underline focus:bb-outline-none"
                   >
-                    <span className="bb-hidden lg:bb-inline">More Options</span> {showVariants ? <Minus className="bb-w-8 bb-h-8" /> : <Plus className="bb-w-8 bb-h-8" />}
+                    <span className="bb-hidden lg:bb-inline">More Options</span>{' '}
+                    {showVariants ? <Minus className="bb-w-8 bb-h-8" /> : <Plus className="bb-w-8 bb-h-8" />}
                   </button>
                 ) : null}
               </div>
@@ -393,6 +399,23 @@ export default function ListingLayout({ id, loading, Head, onReady }) {
 
   // Start data request early so Suspend can use it for ssr fallback
   const listingResource = getListing(id);
+
+  // Delay hit tracking to wait for cache warmup
+  useEffect(() => {
+    setTimeout(async () => {
+      try {
+        const listing = await listingResource.get();
+
+        // TODO - use profile / group trackers if available
+        //const profile = await getProfile(listing.profileId).get();
+        //const contact = await getProfile(listing.contactId).get();
+
+        await trackHit([], `/listings/${listing.slug}`, listing.title);
+      } catch (err) {
+        console.error(err);
+      }
+    }, 100);
+  }, [listingResource]);
 
   return (
     <Suspend resources={listingResource} fallback={<ListingLoading />}>

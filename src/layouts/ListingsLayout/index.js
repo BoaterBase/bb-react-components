@@ -1,4 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import trackHit from '../../utils/trackHit';
+
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 
@@ -48,6 +50,18 @@ function ShareSearch() {
 /** ListingsLayout component to display a list of BoaterBase listings with search interface and paging */
 function ListingsLayout({ searchState }) {
   const [filtersToggle, setFiltersToggle] = useState(false);
+
+  // TODO - we need to track search query somehow, maybe move into Search
+  useEffect(() => {
+    setTimeout(async () => {
+      try {
+        // TODO - figure how to use group or network ids
+        await trackHit([], '/listings', 'Listings');
+      } catch (err) {
+        console.error(err);
+      }
+    }, 100);
+  }, [searchState]);
 
   return (
     <div>
