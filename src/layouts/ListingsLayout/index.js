@@ -49,15 +49,16 @@ function ShareSearch() {
 }
 
 /** ListingsLayout component to display a list of BoaterBase listings with search interface and paging */
-function ListingsLayout({ searchState }) {
+function ListingsLayout({ searchState, onReady }) {
   const [filtersToggle, setFiltersToggle] = useState(false);
 
   // TODO - we need to track search query somehow
   useDeepCompareEffect(() => {
     setTimeout(async () => {
       try {
-        // TODO - figure how to use group or network ids
+        // TODO - figure how to use profile or group ids without real route
         await trackHit([], '/listings', 'Listings');
+        onReady && onReady({ searchState });
       } catch (err) {
         console.error(err);
       }

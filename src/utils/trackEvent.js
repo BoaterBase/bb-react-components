@@ -7,10 +7,7 @@ import getSessionId from '../data/getSessionId';
  */
 export default async function trackEvent(ids = [], category, action, label, value) {
   try {
-    // Merge ids and global id with ours
-    if (window?.BB_GA_ID) {
-      ids.push(window?.BB_GA_ID);
-    }
+    // Merge ids with ours
     const tids = ['UA-67806188-1', ...ids];
     const cid = getSessionId();
 

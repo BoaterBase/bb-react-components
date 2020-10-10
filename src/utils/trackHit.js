@@ -4,10 +4,7 @@ import getSessionId from '../data/getSessionId';
 /** Track page hit */
 export default async function trackHit(ids = [], path, title) {
   try {
-    // Merge ids and global id with ours
-    if (window?.BB_GA_ID) {
-      ids.push(window?.BB_GA_ID);
-    }
+    // Merge ids with ours
     const tids = ['UA-67806188-1', ...ids];
     const cid = getSessionId();
 

@@ -42,7 +42,7 @@ function ListingUpdate({ Head = () => null, listingResource, updateResource }) {
   );
 }
 
-export default function ListingUpdateLayout({ listingId, updateId, loading, Head }) {
+export default function ListingUpdateLayout({ listingId, updateId, loading, Head, onReady }) {
   // If the server is rendering a loading page it can tell us to show a loading state and we exit early without triggering resource request
   if (loading) return <UpdateLoading />;
 
@@ -61,6 +61,7 @@ export default function ListingUpdateLayout({ listingId, updateId, loading, Head
         //const contact = await getProfile(listing.contactId).get();
 
         await trackHit([], `/listings/${listing.slug}/updates/${update.slug}`, update.title);
+        onReady && onReady({ listing, update });
       } catch (err) {
         console.error(err);
       }

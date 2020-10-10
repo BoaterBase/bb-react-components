@@ -19,10 +19,10 @@ export function useBoaterBase() {
   return context;
 }
 
-const cloudinaryCore = new Cloudinary({cloud_name: 'boaterbase', secure:true});
+const cloudinaryCore = new Cloudinary({ cloud_name: 'boaterbase', secure: true });
 
-export function cloudUrl(id,options) { 
-  return cloudinaryCore.url(id, options)
+export function cloudUrl(id, options) {
+  return cloudinaryCore.url(id, options);
 }
 
 const defaultTheme = {

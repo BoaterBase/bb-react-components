@@ -26,6 +26,7 @@ export default function Search({ state, onStateChange, children }) {
   // NOTE - onSearchStateChange does not always trigger for example when we update via changing setSearchState so listen with effect
   //      - but other times it does and cause a duplicate so use a deep check on listening for updates
   useDeepCompareEffect(() => {
+    // TODO - strip out the default filters, layouts etc.
     onStateChange && onStateChange(searchState);
   }, [searchState]);
 

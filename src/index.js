@@ -12,16 +12,11 @@ export { default as getProfileByHandle } from './data/getProfileByHandle';
 export { default as getListingUpdates } from './data/getListingUpdates';
 export { default as getListingUpdate } from './data/getListingUpdate';
 
-/** Tracking */
-export { default as trackHit } from './utils/trackHit';
-export { default as trackEvent } from './utils/trackEvent';
-
 /** Pages */
 export { default as ListingLayout } from './layouts/ListingLayout';
 export { default as ListingsLayout } from './layouts/ListingsLayout';
 export { default as ListingUpdateLayout } from './layouts/ListingUpdateLayout';
 export { default as ProfileLayout } from './layouts/ProfileLayout';
-export { default as PageLayout } from './layouts/PageLayout';
 
 /** Sections */
 export { default as ListingsSection } from './sections/ListingsSection';

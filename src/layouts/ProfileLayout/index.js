@@ -81,7 +81,7 @@ function Loading() {
   return <div>Loading...</div>;
 }
 
-export default function ProfileLayout({ handle, loading, Head }) {
+export default function ProfileLayout({ handle, loading, Head, onReady, onEvent }) {
   // If the server is rendering a loading page it can tell us to show a loading state and we exit early without triggering resource request
   if (loading) return <Loading />;
 
@@ -98,6 +98,7 @@ export default function ProfileLayout({ handle, loading, Head }) {
         //const contact = await getProfile(listing.contactId).get();
 
         await trackHit([], `/profiles/${profile.handle || profile.id}`, profile.name || profile.handle || profile.id);
+        onReady && onReady({ profile });
       } catch (err) {
         console.error(err);
       }

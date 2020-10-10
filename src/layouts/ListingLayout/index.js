@@ -192,7 +192,7 @@ function Specifications({ data }) {
   ) : null;
 }
 
-function ListingBlock({ listingResource, Head = () => null, onReady }) {
+function ListingBlock({ listingResource, Head = () => null, onReady, onEvent }) {
   const setModal = useModal();
   const createAlert = useAlerts();
   const [showVariants, setShowVariants] = useState();
@@ -207,6 +207,7 @@ function ListingBlock({ listingResource, Head = () => null, onReady }) {
       createAlert('Message Sent!', 'success');
       setModal(null);
       trackEvent([], 'Message', 'Sent', `/listings/${listing.slug}`);
+      onEvent && onEvent({ category: 'Message', action: 'Sent', label: `/listings/${listing.slug}` });
     } catch (err) {
       createAlert('Error sending message!', 'error');
       console.error(err);
@@ -218,6 +219,7 @@ function ListingBlock({ listingResource, Head = () => null, onReady }) {
       await createListingSubscriber(listing.id, data);
       createAlert('Added to watch list!', 'success');
       trackEvent([], 'Watch', 'Subscribed', `/listings/${listing.slug}`);
+      onEvent && onEvent({ category: 'Watch', action: 'Subscribed', label: `/listings/${listing.slug}` });
     } catch (err) {
       createAlert('Error creating subscription!', 'error');
       console.error(err);
@@ -226,8 +228,10 @@ function ListingBlock({ listingResource, Head = () => null, onReady }) {
   }
 
   function sendMessage() {
-    trackEvent([], 'Message', 'Click', `/listings/${listing.slug}`);
     setModal(<MessageForm onSubmit={createMessage} className="bb-bg-white bb-shadow-2xl bb-rounded-lg bb-p-4 bb-w-full sm:bb-w-5/6 md:bb-w-1/2" />);
+
+    trackEvent([], 'Message', 'Click', `/listings/${listing.slug}`);
+    onEvent && onEvent({ category: 'Message', action: 'Click', label: `/listings/${listing.slug}` });
   }
 
   function toggleVariants() {
@@ -245,6 +249,7 @@ function ListingBlock({ listingResource, Head = () => null, onReady }) {
   useEffect(() => {
     onReady &&
       onReady({
+        listing: listing,
         showSendMessage: sendMessage,
         showSlideshow: gallery && gallery.showSlideshow,
         showTitle: () => {
@@ -393,7 +398,7 @@ function ListingBlock({ listingResource, Head = () => null, onReady }) {
   );
 }
 
-export default function ListingLayout({ id, loading, Head, onReady }) {
+export default function ListingLayout({ id, loading, Head, onReady, onEvent }) {
   // If the server is rendering a loading page it can tell us to show a loading state and we exit early without triggering resource request
   if (loading) return <ListingLoading />;
 
@@ -419,7 +424,7 @@ export default function ListingLayout({ id, loading, Head, onReady }) {
 
   return (
     <Suspend resources={listingResource} fallback={<ListingLoading />}>
-      <ListingBlock Head={Head} listingResource={listingResource} onReady={onReady} />
+      <ListingBlock Head={Head} listingResource={listingResource} onReady={onReady} onEvent={onEvent} />
     </Suspend>
   );
 }
