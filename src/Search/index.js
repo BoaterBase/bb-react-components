@@ -29,10 +29,10 @@ export default function Search({ state, children }) {
   const { linker } = useBoaterBase();
 
   const onSearchStateChange = (searchState) => {
+    setSearchState(searchState);
     //const permalink = linker.createPermalink({ pathname: '/listings', query: searchState });
     // TODO - we should remove the filters and matching defaults here and/or remove them and layout from the share link
     linker.updateUrl({ pathname: '/listings', query: searchState });
-    setSearchState(searchState);
   };
 
   // NOTE: We need to pass the configure state into the Configure component so it triggers updates to InstantSearch
