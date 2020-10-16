@@ -25,7 +25,7 @@ export default function Updates({ updates, pathname }) {
       {updates &&
         updates.map((item, index) => (
           <div key={index} className="bb-grid bb-grid-cols-3 bb-border-t bb-border-gray-100 bb-pt-6">
-            <p className="bb-col-span-3 md:bb-col-span-1 bb-mb-2 bb-text-xl md:bb-text-2xl bb-leading-5 bb-text-gray-500 bb-font-thin">
+            <p className="bb-col-span-3 md:bb-col-span-1 bb-mb-2 bb-text-xl md:bb-text-2xl bb-leading-5 bb-text-gray-500 bb-font-extralight">
               <time dateTime="2020-03-16">{new Date(item.created).toLocaleDateString('en-US', { day: 'numeric', month: 'short', year: 'numeric' })}</time>
             </p>
             <div className="bb-col-span-3 md:bb-col-span-2">

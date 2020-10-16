@@ -8,6 +8,7 @@ import Share from '../../parts/Share';
 import { Image, Transformation, Placeholder } from 'cloudinary-react';
 import ListingsSection from '../../sections/ListingsSection';
 import Link from '../../Link';
+import Version from '../../Version';
 
 function Profile({ Head = () => null, profileResource }) {
   const profile = profileResource.read();
@@ -72,6 +73,9 @@ function Profile({ Head = () => null, profileResource }) {
       <div className="bb-col-span-4 md:bb-col-span-1 bb-space-y-2">
         <ContactSection profileId={profileId} contactId={contactId} />
         <Share pathname={`/profiles/${profile.handle}`} title={profile.name} summary={profile.summary} />
+        <div className="bb-text-center bb-mt-3">
+          <Version />
+        </div>
       </div>
     </div>
   );

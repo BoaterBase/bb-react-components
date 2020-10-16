@@ -5,6 +5,7 @@ import trackHit from '../../utils/trackHit';
 import trackEvent from '../../utils/trackEvent';
 import createListingMessage from '../../data/createListingMessage';
 import createListingSubscriber from '../../data/createListingSubscriber';
+import Version from '../../Version';
 
 import { cloudUrl } from '../../BoaterBase';
 
@@ -182,7 +183,7 @@ function Specifications({ data }) {
               {title}
             </span>
           </h4>
-          <div className="bb-text-gray-400 bb-font-thin md:bb-text-lg bb-truncate">
+          <div className="bb-text-gray-400 bb-font-extralight md:bb-text-lg bb-truncate">
             {value}
             {unit && <small className="bb-text-xs bb-text-gray-300 bb-ml-0.5">{unit}</small>}
           </div>
@@ -381,8 +382,8 @@ function ListingBlock({ listingResource, Head = () => null, onReady, onEvent }) 
             </div>
           )}
 
-          <div>
-            <h3 className="bb-uppercase bb-text-center bb-mb-1 bb-font-medium bb-text-gray-500 bb-text-sm">Follow This Boat</h3>
+          <div className="bb-bg-gradient-to-b bb-from-blue-400 bb-to-blue-500 bb-p-2 bb-rounded-md bb-shadow bb-border bb-border-blue-500">
+            <h3 className="bb-uppercase bb-text-center bb-mb-1 bb-font-medium bb-text-gray-50 bb-text-sm">Follow This Boat</h3>
             <WatchForm onSubmit={createSubscriber} />
           </div>
 
@@ -391,6 +392,9 @@ function ListingBlock({ listingResource, Head = () => null, onReady, onEvent }) 
             <div className="bb-max-h-20 bb-overflow-y-auto bb-break-all bb-font-mono bb-text-xs bb-bg-gray-800 bb-text-gray-400 bb-rounded bb-shadow bb-p-2">
               <code>{JSON.stringify(listing)}</code>
             </div>
+          </div>
+          <div className="bb-text-center">
+            <Version />
           </div>
         </div>
       </div>

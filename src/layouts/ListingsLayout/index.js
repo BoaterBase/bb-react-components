@@ -17,6 +17,7 @@ import LocationSelector from '../../Search/LocationSelector';
 import Paging from '../../Search/Paging';
 
 import Share from '../../parts/Share';
+import Version from '../../Version';
 
 import { useSearch } from '../../Search';
 import { useBoaterBase } from '../../BoaterBase';
@@ -97,6 +98,9 @@ function ListingsLayout({ searchState, onReady }) {
             >
               <Filters />
               <ShareSearch />
+              <div className="bb-text-center bb-mb-3 bb-mt-1">
+                <Version />
+              </div>
             </div>
           </div>
         </div>

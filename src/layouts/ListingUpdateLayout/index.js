@@ -5,7 +5,7 @@ import getListingUpdate from '../../data/getListingUpdate';
 import trackHit from '../../utils/trackHit';
 import Share from '../../parts/Share';
 import Suspend from '../../data/Suspend';
-
+import Version from '../../Version';
 import Link from '../../Link';
 
 function UpdateLoading() {
@@ -37,6 +37,9 @@ function ListingUpdate({ Head = () => null, listingResource, updateResource }) {
 
       <div className="bb-col-span-4 md:bb-col-span-1">
         <Share pathname={`/listings/${listing.slug}/updates/${update.slug}`} title={update.title} summary={update.summary} />
+        <div className="bb-text-center bb-mt-3">
+          <Version />
+        </div>
       </div>
     </div>
   );
