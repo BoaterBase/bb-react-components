@@ -42,11 +42,11 @@ function ScrollEdges({ scrollRef }) {
         }}
         style={{ background: 'radial-gradient(ellipse at left center, rgba(0,0,0,0.2) 0%, rgba(0,0,0,0) 70%)' }}
         className={classNames(
-          'bb-absolute bb-top-0 bb-left-0 bb-h-full bb-text-gray-50 hover:bb-text-gray-600 bb-appearance-none focus:bb-outline-none bb-transition-opacity bb-delay-300',
+          'bb-absolute bb-top-0 bb-left-0 bb-w-6 bb-h-full bb-text-gray-50 hover:bb-text-gray-600 bb-appearance-none focus:bb-outline-none bb-transition-opacity bb-delay-300',
           leftEdge ? 'bb-opacity-100' : 'bb-opacity-0 bb-pointer-events-none'
         )}
       >
-        <ChevronLeft className="bb-w-6 bb-h-6 bb-relative bb-top-1/2" style={{ filter: 'drop-shadow(0px 0px 2px rgba(0, 0, 0, 0.25))' }} />
+        <ChevronLeft className="bb-w-6 bb-h-6 bb-absolute bb-top-1/2 bb-left-0" style={{ filter: 'drop-shadow(0px 0px 2px rgba(0, 0, 0, 0.25))' }} />
       </button>
 
       <button
@@ -59,11 +59,11 @@ function ScrollEdges({ scrollRef }) {
         }}
         style={{ background: 'radial-gradient(ellipse at right center, rgba(0,0,0,0.2) 0%, rgba(0,0,0,0) 70%)' }}
         className={classNames(
-          'bb-absolute bb-top-0 bb-right-0 bb-h-full bb-text-gray-50 hover:bb-text-gray-600 bb-appearance-none focus:bb-outline-none bb-transition-opacity bb-delay-300',
+          'bb-absolute bb-top-0 bb-w-6 bb-right-0 bb-h-full bb-text-gray-50 hover:bb-text-gray-600 bb-appearance-none focus:bb-outline-none bb-transition-opacity bb-delay-300',
           rightEdge ? 'bb-opacity-100' : 'bb-opacity-0 bb-pointer-events-none'
         )}
       >
-        <ChevronRight className="bb-w-6 bb-h-6 bb-relative bb-top-1/2" style={{ filter: 'drop-shadow(0px 0px 2px rgba(0, 0, 0, 0.25))' }} />
+        <ChevronRight className="bb-w-6 bb-h-6 bb-absolute bb-right-0 bb-top-1/2" style={{ filter: 'drop-shadow(0px 0px 2px rgba(0, 0, 0, 0.25))' }} />
       </button>
     </Fragment>
   );
