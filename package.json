@@ -1,6 +1,6 @@
 {
   "name": "@boaterbase/bb-react-components",
-  "version": "3.0.4",
+  "version": "3.0.5",
   "description": "BoaterBase React Components",
   "source": "src/index.js",
   "main": "dist/index.js",
@@ -20,7 +20,7 @@
     "build": "npm run build-css && npm run build-module && npm run build-browser",
     "build-module": "NODE_ENV=production microbundle --jsx React.createElement --no-compress --format cjs,modern,es --strict",
     "build-browser": "NODE_ENV=production microbundle --external react --jsx React.createElement --compress --format umd --strict",
-    "build-css":"NODE_ENV=production postcss src/styles.css -o dist/styles.css && csso dist/styles.css --output dist/styles.min.css",
+    "build-css": "NODE_ENV=production postcss src/styles.css -o dist/styles.css && csso dist/styles.css --output dist/styles.min.css",
     "build-storybook": "NODE_ENV=production build-storybook -o docs/",
     "explorer": "source-map-explorer dist/index.umd.js",
     "storybook": "start-storybook -p 6006",
