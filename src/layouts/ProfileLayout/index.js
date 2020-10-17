@@ -1,7 +1,11 @@
 import React, { useEffect } from 'react';
 import getProfileByHandle from '../../data/getProfileByHandle';
 import trackHit from '../../utils/trackHit';
+import trackEvent from '../../utils/trackEvent';
 
+import createProfileMessage from '../../data/createProfileMessage';
+import { useModal } from '../../Modal';
+import { useAlerts } from '../../Alerts';
 import Suspend from '../../data/Suspend';
 import ContactSection from '../../sections/ContactSection';
 import Share from '../../parts/Share';
@@ -9,12 +13,36 @@ import { Image, Transformation, Placeholder } from 'cloudinary-react';
 import ListingsSection from '../../sections/ListingsSection';
 import Link from '../../Link';
 import Version from '../../Version';
+import MessageForm from '../../forms/MessageForm';
 
-function Profile({ Head = () => null, profileResource }) {
+function Profile({ Head = () => null, profileResource, onEvent }) {
+  const setModal = useModal();
+  const createAlert = useAlerts();
+
   const profile = profileResource.read();
 
   const profileId = profile.teamProfileId || profile.id;
   const contactId = profile.teamProfileId && profile.id;
+
+  async function createMessage(data) {
+    try {
+      await createProfileMessage(profile.id, data);
+      createAlert('Message Sent!', 'success');
+      setModal(null);
+      trackEvent([], 'Message', 'Sent', `/profiles/${profile.handle}`);
+      onEvent && onEvent({ category: 'Message', action: 'Sent', label: `/profiles/${profile.handle}` });
+    } catch (err) {
+      createAlert('Error sending message!', 'error');
+      console.error(err);
+    }
+  }
+
+  function sendMessage() {
+    setModal(<MessageForm onSubmit={createMessage} className="bb-bg-white bb-shadow-2xl bb-rounded-lg bb-p-4 bb-w-full sm:bb-w-5/6 md:bb-w-1/2" />);
+
+    trackEvent([], 'Message', 'Click', `/profiles/${profile.handle}`);
+    onEvent && onEvent({ category: 'Message', action: 'Click', label: `/profiles/${profile.handle}` });
+  }
 
   return (
     <div className="bb-grid bb-grid-cols-4 bb-gap-3">
@@ -71,7 +99,7 @@ function Profile({ Head = () => null, profileResource }) {
       </div>
 
       <div className="bb-col-span-4 md:bb-col-span-1 bb-space-y-2">
-        <ContactSection profileId={profileId} contactId={contactId} />
+        <ContactSection profileId={profileId} contactId={contactId} sendMessage={sendMessage} />
         <Share pathname={`/profiles/${profile.handle}`} title={profile.name} summary={profile.summary} />
         <div className="bb-text-center bb-mt-3">
           <Version />
