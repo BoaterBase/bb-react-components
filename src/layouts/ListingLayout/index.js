@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useRef } from 'react';
 import getListing from '../../data/getListing';
-import getProfile from '../../data/getProfile';
+//import getProfile from '../../data/getProfile';
 import trackHit from '../../utils/trackHit';
 import trackEvent from '../../utils/trackEvent';
 import createListingMessage from '../../data/createListingMessage';
@@ -16,7 +16,7 @@ import { useAlerts } from '../../Alerts';
 
 import ListingLoading from './ListingLoading';
 
-import formatCoords from '../../utils/formatCoords';
+//import formatCoords from '../../utils/formatCoords';
 import formatNumber from '../../utils/formatNumber';
 import formatCurrency from '../../utils/formatCurrency';
 
@@ -29,6 +29,7 @@ import Content from '../../parts/Content';
 import Gallery from '../../parts/Gallery';
 import Share from '../../parts/Share';
 import Variants from '../../parts/Variants';
+//import QRCode from '../../parts/QRCode';
 
 import ContactSection from '../../sections/ContactSection';
 import ListingUpdatesSection from '../../sections/ListingUpdatesSection';
@@ -387,6 +388,9 @@ function ListingBlock({ listingResource, Head = () => null, onReady, onEvent }) 
             <WatchForm onSubmit={createSubscriber} />
           </div>
 
+          {/* <div className="bb-p-2">
+            <QRCode pathname={`/listings/${listing.slug}`} />
+          </div> */}
           <div>
             <h3 className="bb-uppercase bb-text-center bb-mb-1 bb-font-medium bb-text-gray-500 bb-text-sm">Data</h3>
             <div className="bb-max-h-20 bb-overflow-y-auto bb-break-all bb-font-mono bb-text-xs bb-bg-gray-800 bb-text-gray-400 bb-rounded bb-shadow bb-p-2">
