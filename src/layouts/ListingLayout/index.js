@@ -25,6 +25,8 @@ import Plus from '../../icons/Plus';
 import Minus from '../../icons/Minus';
 
 import MapImage from '../../parts/MapImage';
+import MapBox from '../../parts/MapBox';
+
 import Content from '../../parts/Content';
 import Gallery from '../../parts/Gallery';
 import Share from '../../parts/Share';
@@ -240,6 +242,10 @@ function ListingBlock({ listingResource, Head = () => null, onReady, onEvent }) 
     setShowVariants((state) => !state);
   }
 
+  function showMap() {
+    setModal(<MapBox latitude={listing.geo.latitude} longitude={listing.geo.longitude} zoom={10} />);
+  }
+
   // Section Refs
   const titleRef = useRef();
   const specsRef = useRef();
@@ -301,11 +307,15 @@ function ListingBlock({ listingResource, Head = () => null, onReady, onEvent }) 
             {listing.title}
           </h1>
           <p className="bb-mt-2 bb-font-serif bb-text-lg md:bb-text-xl bb-font-medium bb-text-gray-500 bb-italic">{listing.summary}</p>
-          <button className="bb-flex bb-items-start md:bb-items-center bb-text-left bb-mt-2 bb-text-blue-400 hover:bb-text-blue-500">
+          <button
+            onClick={showMap}
+            type="button"
+            className="bb-flex bb-items-start md:bb-items-center bb-text-left bb-mt-2 bb-text-blue-400 hover:bb-text-blue-500"
+          >
             <LocationIcon className="bb-text-blue-500 bb-w-5 bb-h-5" />
             <span className="bb-font-medium md:bb-text-xl bb-mx-1">{listing.location}</span>
           </button>
-          <div ref={priceRef} className="bb-flex">
+          <div ref={priceRef} className="bb-flex bb-mt-2">
             <div className="bb-mr-4">
               <span className="bb-text-2xl md:bb-text-4xl bb-font-medium bb-text-gray-800 bb-mr-1">
                 {listing.price ? formatCurrency(listing.price, listing.currency) : 'POA'}
@@ -374,7 +384,8 @@ function ListingBlock({ listingResource, Head = () => null, onReady, onEvent }) 
               <h3 className="bb-mb-1 bb-uppercase bb-text-center bb-font-medium bb-text-gray-500 bb-text-sm">Map</h3>
 
               <MapImage
-                className="bb-shadow bb-rounded-md bb-w-full"
+                className="bb-shadow bb-rounded-md bb-w-full bb-cursor-pointer"
+                onClick={showMap}
                 width={400}
                 height={300}
                 latitude={listing.geo.latitude}

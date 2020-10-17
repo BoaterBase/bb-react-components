@@ -4,6 +4,13 @@
 
 @import 'tailwindcss/utilities';
 
+@import 'mapbox-gl/dist/mapbox-gl.css';
+
 .bb {
   content: 'BoaterBase';
+}
+
+/* MapBox */
+.mapboxgl-canvas-container :focus {
+  outline: none;
 }
