@@ -11,3 +11,19 @@
 .mapboxgl-canvas-container :focus {
   outline: none;
 }
+
+/* Microlink */
+a.microlink_card {
+  width: 100%;
+  text-decoration: none;
+}
+
+a.microlink_card video,
+a.microlink_card image,
+a.microlink_card iframe {
+  margin-top: 0;
+}
+
+.microlink_card__content .microlink_card__content-description p {
+  margin: 0;
+}

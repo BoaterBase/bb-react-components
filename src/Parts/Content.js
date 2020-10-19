@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import Markdown from 'markdown-to-jsx';
 import Gallery from './Gallery';
 import classNames from 'classnames';
+import Microlink from '@microlink/react';
 
 const H2 = (props) => <h2 {...props} />;
 const H3 = (props) => <h3 {...props} />;
@@ -59,10 +60,22 @@ function Content({ items, className, snippet }) {
                         h4: B,
                         h5: P,
                         h6: P,
+                        Embed: {
+                          component: Microlink,
+                          props: {
+                            lazy: true,
+                            size: 'large',
+                            className: 'bb-rounded-sm bb-shadow-sm bb-overflow:hidden bb-mx-auto bb-my-4',
+                            media: ['video', 'image', 'logo'],
+                            style: {
+                              width: '100%',
+                            },
+                          },
+                        },
                       },
                     }}
                   >
-                    {item.text}
+                    {item.text.replace(/^((http|https):\/\/\S+)$/gm, '<Embed url="$1" />')}
                   </Markdown>
                 </div>
               );
