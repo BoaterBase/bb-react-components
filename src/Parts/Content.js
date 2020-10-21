@@ -79,6 +79,19 @@ function Content({ items, className, snippet }) {
                   </Markdown>
                 </div>
               );
+            case 'embed':
+              return (
+                <Microlink
+                  url={item.link}
+                  size={item.size}
+                  lazy={true}
+                  className="bb-rounded-sm bb-shadow-sm bb-overflow:hidden bb-mx-auto bb-my-4"
+                  media={['video', 'image', 'logo']}
+                  style={{
+                    width: '100%',
+                  }}
+                />
+              );
             case 'media':
               return (
                 <div key={index} className="bb-my-3">
