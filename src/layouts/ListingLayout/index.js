@@ -199,7 +199,7 @@ function Specifications({ data }) {
 function ListingBlock({ listingResource, Head = () => null, onReady, onEvent }) {
   const setModal = useModal();
   const createAlert = useAlerts();
-  const [showVariants, setShowVariants] = useState();
+  //const [showVariants, setShowVariants] = useState();
   const [snippet, setShowSnippet] = useState(true);
   const [gallery, setGallery] = useState();
 
@@ -238,9 +238,9 @@ function ListingBlock({ listingResource, Head = () => null, onReady, onEvent }) 
     onEvent && onEvent({ category: 'Message', action: 'Click', label: `/listings/${listing.slug}` });
   }
 
-  function toggleVariants() {
-    setShowVariants((state) => !state);
-  }
+  // function toggleVariants() {
+  //   setShowVariants((state) => !state);
+  // }
 
   function showMap() {
     setModal(<MapBox latitude={listing.geo.latitude} longitude={listing.geo.longitude} zoom={10} />);
@@ -271,7 +271,7 @@ function ListingBlock({ listingResource, Head = () => null, onReady, onEvent }) 
           contentRef.current.scrollIntoView({ block: 'start', behavior: 'smooth' });
         },
         showPrice: () => {
-          setShowVariants(true);
+          //setShowVariants(true);
           priceRef.current.scrollIntoView({ block: 'start', behavior: 'smooth' });
         },
         showUpdates: () => {
@@ -286,6 +286,9 @@ function ListingBlock({ listingResource, Head = () => null, onReady, onEvent }) 
         <title>{listing.title}</title>
         <meta name="description" content={listing.summary} />
         <meta name="twitter:site" content="@boaterbase" />
+        <meta name="og:title" content={listing.title} />
+        <meta name="og:description" content={listing.summary} />
+
         {listing.media && listing.media[0] && <meta name="twitter:card" content="summary_large_image" />}
         {listing.media && listing.media[0] && <meta property="og:image" content={cloudUrl(listing.media[0].id, { transformation: 'large_image' })} />}
       </Head>
@@ -322,42 +325,8 @@ function ListingBlock({ listingResource, Head = () => null, onReady, onEvent }) 
               </span>
               <span className="bb-font-medium bb-text-gray-400 bb-truncate bb-text-sm md:bb-text-base">{listing.label}</span>
             </div>
-            {listing.variants?.length ? (
-              <div className="bb-ml-auto bb-relative bb-overflow-hidden bb-max-w-sm bb-mt-1">
-                {!showVariants && (
-                  <div className="bb-hidden md:bb-flex bb-flex-no-wrap bb-opacity-75 bb-divide-x bb-divide-gray-200">
-                    {listing.variants.map((v, index) => (
-                      <div key={index} className="bb-text-center bb-px-2">
-                        <span className="bb-block bb-font-medium bb-text-gray-400 bb-text-sm bb-truncate">{v.label || '–'}</span>
-                        <span className="bb-block bb-text-lg bb-leading-none bb-font-medium bb-text-gray-800 bb-truncate">
-                          {v.amount ? formatCurrency(v.amount, v.currency) : 'POA'}
-                        </span>
-                      </div>
-                    ))}
-                  </div>
-                )}
-                <div className="bb-absolute bb-inset-0" style={{ background: 'linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(255,255,255,1) 60%)' }} />
-                {listing.variants?.length > 0 ? (
-                  <button
-                    onClick={toggleVariants}
-                    className="bb-absolute bb-right-0 bb-top-1 bb-text-orange-500 bb-font-medium bb-flex bb-flex-no-wrap bb-items-center hover:bb-underline focus:bb-outline-none"
-                  >
-                    <span className="bb-hidden lg:bb-inline">More Options</span>{' '}
-                    {showVariants ? <Minus className="bb-w-8 bb-h-8" /> : <Plus className="bb-w-8 bb-h-8" />}
-                  </button>
-                ) : null}
-              </div>
-            ) : null}
-            {listing.variants?.length > 0 && showVariants ? (
-              <button
-                onClick={toggleVariants}
-                className="bb-text-orange-500 bb-font-medium bb-flex bb-flex-no-wrap bb-items-center hover:bb-underline focus:bb-outline-none"
-              >
-                <Minus className="bb-w-8 bb-h-8" />
-              </button>
-            ) : null}
           </div>
-          {showVariants && listing.variants?.length ? <Variants items={listing.variants} sendMessage={sendMessage} /> : null}
+          {listing.variants?.length ? <Variants items={listing.variants} sendMessage={sendMessage} /> : null}
           <div ref={specsRef} className="bb-w-full">
             <Specifications data={listing.specifications} />
           </div>

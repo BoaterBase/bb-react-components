@@ -4,7 +4,7 @@ import ExternalLink from '../icons/ExternalLink';
 import Message from '../icons/Message';
 export default function Variants({ items, sendMessage }) {
   return items ? (
-    <ul>
+    <ul className="bb-my-2">
       {items.map((item, index) => (
         <li key={index} className="bb-border-t bb-border-gray-100 bb-mb-1 bb-flex bb-pl-1">
           <div>
