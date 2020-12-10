@@ -75,7 +75,7 @@ const BaseSortSelector = memo(({ items, currentRefinement }) => {
     <select
       value={aroundMe ? 'nearest' : currentRefinement}
       onChange={selectSort}
-      className="bb-cursor-pointer bb-flex-auto bb-form-select bb-block bb-pl-2 sm:bb-pl-3 bb-pr-10 bb-py-2 bb-text-gray-500 bb-font-normal hover:bb-text-gray-700 bb-border-gray-300 focus:bb-outline-none focus:bb-shadow-outline-blue focus:bb-border-blue-300 bb-text-base bb-leading-6 sm:bb-text-sm sm:bb-leading-5"
+      className="bb-cursor-pointer bb-flex-auto bb-rounded-md bb-block bb-pl-2 sm:bb-pl-3 bb-pr-10 bb-py-2 bb-text-gray-500 bb-font-normal hover:bb-text-gray-700 bb-border-gray-300 focus:bb-outline-none focus:bb-shadow-outline-blue focus:bb-border-blue-300 bb-text-base bb-leading-6 sm:bb-text-sm sm:bb-leading-5"
     >
       {items.map((item) => (
         <option key={item.value} value={item.value}>

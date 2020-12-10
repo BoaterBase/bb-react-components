@@ -60,7 +60,7 @@ function Slideshow({ media = [], close, selected }) {
         )}
       </div>
       <div className="bb-absolute bb-bottom-1 bb-flex bb-justify-center bb-left-0 bb-right-0 bb-overflow-y-hidden bb-overflow-x-auto">
-        <div className="bb-flex bb-flex-no-wrap">
+        <div className="bb-flex bb-flex-nowrap">
           {media.map((item, index) => (
             <button
               key={index}
@@ -169,7 +169,7 @@ function Gallery({ media = [], layout, limit = 14, onReady }) {
               {items.map((item, index) => (
                 <li
                   key={index}
-                  className="bb-relative bb-rounded-sm bb-shadow-sm hover:bb-shadow-xs hover:bb-opacity-75 bb-transform hover:bb--translate-y-px hover:bb-z-10"
+                  className="bb-relative bb-rounded-sm bb-shadow-sm hover:bb-shadow-sm hover:bb-opacity-75 bb-transform hover:bb--translate-y-px hover:bb-z-10"
                 >
                   {items.length < 4 && <svg viewBox="0 0 16 9" className="bb-block bb-w-full bb-invisible"></svg>}
                   {items.length > 3 && <svg viewBox="0 0 6 4" className="bb-block bb-w-full bb-invisible"></svg>}

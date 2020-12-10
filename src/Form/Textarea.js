@@ -15,8 +15,8 @@ function Textarea({ inputRef, id, className, error, compact, label, message, ...
           ref={inputRef}
           id={htmlId}
           className={classNames(
-            'bb-form-textarea bb-block bb-w-full bb-transition bb-duration-150 bb-ease-in-out sm:bb-text-sm sm:bb-leading-5',
-            error && 'bb-pr-10 bb-border-red-300 bb-text-red-900 bb-placeholder-red-300 focus:bb-border-red-300 focus:bb-shadow-outline-red'
+            'bb-rounded-md bb-border-gray-300 bb-block bb-w-full bb-transition bb-duration-150 bb-ease-in-out sm:bb-text-sm sm:bb-leading-5 focus:bb-ring',
+            error && 'bb-pr-10 bb-border-red-300 bb-text-red-900 bb-placeholder-red-300 focus:bb-border-red-300 focus:bb-ring-red-300'
           )}
           {...props}
         />

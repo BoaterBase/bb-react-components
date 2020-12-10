@@ -31,7 +31,7 @@ function MapBox({ latitude, longitude }) {
           <span class="bb-absolute bb-right-0 bb-m-2 bb-z-0 bb-inline-flex bb-shadow-sm bb-opacity-75">
             <button
               type="button"
-              class="bb-relative bb-inline-flex bb-items-center bb-px-2 bb-py-1 bb-rounded-l-lg bb-border bb-border-gray-300 bb-bg-white bb-text-sm bb-leading-5 bb-font-bold bb-text-gray-500 hover:bb-text-gray-400 focus:bb-z-10 focus:bb-outline-none focus:bb-border-blue-300 focus:bb-shadow-outline-blue active:bb-bg-gray-100 active:bb-text-gray-500 bb-transition bb-ease-in-out bb-duration-150"
+              class="bb-relative bb-inline-flex bb-items-center bb-px-2 bb-py-1 bb-rounded-l-lg bb-border bb-border-gray-300 bb-bg-white bb-text-sm bb-leading-5 bb-font-bold bb-text-gray-500 hover:bb-text-gray-400 focus:bb-z-10 focus:bb-outline-none focus:bb-border-blue-300 focus:bb-ring bb-ring-blue-500 active:bb-bg-gray-100 active:bb-text-gray-500 bb-transition bb-ease-in-out bb-duration-150"
               aria-label="Zoom In"
               onClick={() => setViewport({ ...viewport, zoom: Math.min(17, Math.round(viewport.zoom) + 1) })}
             >
@@ -39,7 +39,7 @@ function MapBox({ latitude, longitude }) {
             </button>
             <button
               type="button"
-              class="bb--ml-px bb-relative bb-inline-flex bb-items-center bb-px-2 bb-py-1 bb-rounded-r-lg bb-border bb-border-gray-300 bb-bg-white bb-text-sm bb-leading-5 bb-font-bold bb-text-gray-500 hover:bb-text-gray-400 focus:bb-z-10 focus:bb-outline-none focus:bb-border-blue-300 focus:bb-shadow-outline-blue active:bb-bg-gray-100 active:bb-text-gray-500 bb-transition bb-ease-in-out bb-duration-150"
+              class="bb--ml-px bb-relative bb-inline-flex bb-items-center bb-px-2 bb-py-1 bb-rounded-r-lg bb-border bb-border-gray-300 bb-bg-white bb-text-sm bb-leading-5 bb-font-bold bb-text-gray-500 hover:bb-text-gray-400 focus:bb-z-10 focus:bb-outline-none focus:bb-border-blue-300 focus:bb-ring bb-ring-blue-500 active:bb-bg-gray-100 active:bb-text-gray-500 bb-transition bb-ease-in-out bb-duration-150"
               aria-label="Zoom Out"
               onClick={() => setViewport({ ...viewport, zoom: Math.max(1, Math.round(viewport.zoom) - 1) })}
             >

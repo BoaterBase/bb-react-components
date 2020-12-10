@@ -26,7 +26,7 @@ export const Preview = (props) => {
                 pathname: '/listings',
                 query: { ...props.searchState, layout: undefined, configure: { ...props.searchState.configure, hitsPerPage: undefined } },
               }}
-              className="bb-text-blue-500 hover:bb-underline bb-ml-auto bb-flex bb-flex-no-wrap bb-items-center"
+              className="bb-text-blue-500 hover:bb-underline bb-ml-auto bb-flex bb-flex-nowrap bb-items-center"
             >
               All <Arrow className="bb-w-4 bb-h-4 bb-ml-0.5" />
             </Link>

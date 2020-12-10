@@ -17,10 +17,13 @@ function Input({ inputRef, id, className, error, compact, label, message, append
             ref={inputRef}
             id={htmlId}
             className={classNames(
-              'bb-form-input bb-block bb-w-full sm:bb-text-sm sm:bb-leading-5',
+              'bb-block bb-w-full sm:bb-text-sm sm:bb-leading-5 bb-rounded-md focus:bb-ring',
               append && 'bb-rounded-r-none',
               prepend && 'bb-rounded-l-none',
-              error && 'bb-pr-10 bb-border-red-300 bb-text-red-900 bb-placeholder-red-300 focus:bb-border-red-300 focus:bb-shadow-outline-red'
+              error && 'bb-pr-10',
+              error
+                ? 'focus:bb-ring-red-300 bb-border-red-300 focus:bb-border-red-300 bb-text-red-900 bb-placeholder-red-300'
+                : 'bb-border-gray-300 focus:bb-ring-blue-500'
             )}
             {...props}
           />

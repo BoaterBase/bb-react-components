@@ -18,7 +18,7 @@ export default function Variants({ items, sendMessage }) {
             <a
               href={item.link}
               target="_external"
-              className="bb-ml-auto bb-text-orange-500 bb-font-medium bb-flex bb-flex-no-wrap bb-items-center hover:bb-underline"
+              className="bb-ml-auto bb-text-orange-500 bb-font-medium bb-flex bb-flex-nowrap bb-items-center hover:bb-underline"
             >
               <span className="bb-truncate">{item.button}</span> <ExternalLink className="bb-w-4 bb-h-4 bb-ml-1" />
             </a>
@@ -27,7 +27,7 @@ export default function Variants({ items, sendMessage }) {
             <button
               type="button"
               onClick={sendMessage}
-              className="bb-ml-auto bb-text-orange-500 bb-font-medium bb-flex bb-flex-no-wrap bb-items-center focus:bb-outline-none hover:bb-underline"
+              className="bb-ml-auto bb-text-orange-500 bb-font-medium bb-flex bb-flex-nowrap bb-items-center focus:bb-outline-none hover:bb-underline"
             >
               <span className="bb-truncate">{item.button}</span> <Message className="bb-w-4 bb-h-4 bb-ml-1" />
             </button>

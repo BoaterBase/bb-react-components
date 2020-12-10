@@ -10,7 +10,7 @@ export default memo(function CurrencySelector() {
       <select
         onChange={onChange}
         value={currency}
-        className="bb-cursor-pointer bb-flex-auto bb-form-select bb-block bb-pl-2 sm:bb-pl-3 bb-pr-10 bb-py-2 bb-text-gray-500 bb-text-base bb-leading-6 bb-border-gray-300 focus:bb-outline-none focus:bb-shadow-outline-blue focus:bb-border-blue-300 sm:bb-text-sm sm:bb-leading-5"
+        className="bb-cursor-pointer bb-flex-auto bb-rounded-md bb-block bb-pl-2 sm:bb-pl-3 bb-pr-10 bb-py-2 bb-text-gray-500 bb-text-base bb-leading-6 bb-border-gray-300 focus:bb-outline-none focus:bb-shadow-outline-blue focus:bb-border-blue-300 sm:bb-text-sm sm:bb-leading-5"
       >
         <option value="">{currency ? 'Default' : 'Currency'}</option>
         {rates.map(({ code, symbol }) => (

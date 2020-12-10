@@ -17,7 +17,7 @@ const SearchBox = memo(({ currentRefinement, refine, isSearchStalled }) => {
         value={currentRefinement}
         onChange={(event) => refine(event.currentTarget.value)}
         type="search"
-        className="bb-form-input bb-rounded-r-none bb-block bb-w-full bb-pl-10 bb-text-base bb-leading-6 sm:bb-text-sm md:bb-leading-5"
+        className="bb-rounded-l-md bb-border-gray-300 bb-block bb-w-full bb-pl-10 bb-text-base bb-leading-6 sm:bb-text-sm md:bb-leading-5 focus:bb-ring focus:bb-ring-blue-300"
         placeholder="Search..."
       />
       {isSearchStalled ? (
@@ -38,7 +38,7 @@ const SearchBox = memo(({ currentRefinement, refine, isSearchStalled }) => {
             event.preventDefault();
             refine(currentRefinement);
           }}
-          className="bb-absolute bb-inset-y-0 bb-left-0 bb-px-2 bb-flex bb-items-center bb-bg-transparent bb-rounded-l-md focus:bb-outline-none focus:bb-shadow-outline-blue focus:bb-border-blue-300 hover:bb-cursor-pointer "
+          className="bb-absolute bb-inset-y-0 bb-left-0 bb-px-2 bb-flex bb-items-center bb-bg-transparent bb-rounded-l-md focus:bb-outline-none focus:bb-ring bb-ring-blue-300 hover:bb-cursor-pointer "
         >
           <svg
             className="bb-h-5 bb-w-5 bb-text-gray-400"

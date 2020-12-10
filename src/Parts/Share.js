@@ -99,9 +99,10 @@ function Share({ pathname, query, title, summary }) {
       </div>
       <div className="bb-mt-1 bb-relative bb-rounded-md bb-shadow-sm">
         <input
+          type="text"
           value={permalink}
           readOnly
-          className="bb-form-input bb-block bb-w-full bb-pr-10 bb-bg-gray-200 bb-text-gray-500 bb-font-mono bb-text-xs bb-leading-5"
+          className="bb-rounded-md bb-block bb-w-full bb-pr-10 bb-border-gray-300 bb-bg-gray-200 bb-text-gray-500 bb-font-mono bb-text-xs bb-leading-5"
           placeholder="000-00-0000"
         />
         <button

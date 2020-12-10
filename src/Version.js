@@ -7,7 +7,7 @@ import { useBoaterBase } from './BoaterBase';
 const Version = () => {
   const { version } = useBoaterBase();
   return (
-    <a href="https://www.boaterbase.com" className="bb-inline-flex bb-items-baseline bb-leading-none bb-opacity-75 hover:bb-opacity-100">
+    <a href="https://www.boaterbase.com" target="_blank" className="bb-inline-flex bb-items-baseline bb-leading-none bb-opacity-75 hover:bb-opacity-100">
       <small className="bb-mr-0.5 bb-text-gray-400 bb-opacity-75" style={{ fontSize: '9px' }}>
         Powered by
       </small>

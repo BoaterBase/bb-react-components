@@ -76,7 +76,7 @@ function HorizontalScroller({ children }) {
     <div className="bb-relative">
       <div
         ref={scrollRef}
-        className="bb-relative bb-w-full bb-overflow-x-auto bb-overflow-y-visible bb-py-2 bb--my-2 bb-flex bb-flex-no-wrap bb-space-x-3"
+        className="bb-relative bb-w-full bb-overflow-x-auto bb-overflow-y-visible bb-py-2 bb--my-2 bb-flex bb-flex-nowrap bb-space-x-3"
         style={{
           scrollSnapType: 'x proximity',
         }}

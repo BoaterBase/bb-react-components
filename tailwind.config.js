@@ -1,23 +1,32 @@
 console.log('\nTailwinds', process.env.NODE_ENV);
 
+const colors = require('tailwindcss/colors');
+
 module.exports = {
   prefix: 'bb-',
+  plugins: [require('@tailwindcss/forms'), require('@tailwindcss/typography'), require('@tailwindcss/aspect-ratio')],
   variants: {
     zIndex: ['responsive', 'hover', 'focus', 'focus-within'],
     animation: ['responsive', 'hover'],
   },
   theme: {
-    typography: (theme) => ({
-      default: {
-        css: {
-          color: theme('colors.gray.500'),
-          h1: { color: theme('colors.gray.700'), fontWeight: '700' },
-          h2: { color: theme('colors.gray.700'), fontWeight: '600' },
-          h3: { color: theme('colors.gray.700'), fontWeight: '500' },
-          h4: { color: theme('colors.gray.700'), fontWeight: '500' },
-        },
-      },
-    }),
+    colors: {
+      transparent: 'transparent',
+      current: 'currentColor',
+      black: '#000',
+      white: '#fff',
+      gray: colors.coolGray,
+      red: colors.red,
+      orange: colors.orange,
+      yellow: colors.amber,
+      green: colors.green,
+      teal: colors.teal,
+      blue: colors.blue,
+      indigo: colors.indigo,
+      purple: colors.purple,
+      pink: colors.pink,
+    },
+
     extend: {
       animation: {
         'slide-object': 'slide-object 5s ease infinite',
@@ -31,14 +40,18 @@ module.exports = {
           '100%': { objectPosition: 'center' },
         },
       },
+      typography: (theme) => ({
+        DEFAULT: {
+          css: {
+            color: theme('colors.gray.500'),
+            h1: { color: theme('colors.gray.700'), fontWeight: '700' },
+            h2: { color: theme('colors.gray.700'), fontWeight: '600' },
+            h3: { color: theme('colors.gray.700'), fontWeight: '500' },
+            h4: { color: theme('colors.gray.700'), fontWeight: '500' },
+          },
+        },
+      }),
     },
   },
-  plugins: [require('@tailwindcss/ui')],
   purge: ['./src/**/*.css', './src/**/*.js', './src/**/*.jsx'],
-  future: {
-    removeDeprecatedGapUtilities: true,
-    purgeLayersByDefault: true,
-    defaultLineHeights: true,
-    standardFontWeights: true,
-  },
 };

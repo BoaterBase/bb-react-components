@@ -32,7 +32,7 @@ function Content({ items, className, snippet }) {
           switch (item.kind) {
             case 'heading':
               return (
-                <div key={index} className="bb-mt-4 bb-mb-5 bb-flex bb-items-center bb-flex-no-wrap">
+                <div key={index} className="bb-mt-4 bb-mb-5 bb-flex bb-items-center bb-flex-nowrap">
                   <span className="bb-flex-auto bb-border-t-2 bb-border-gray-100"></span>
                   <h2 className="bb-mx-4 bb-text-center bb-leading-8 bb-font-medium bb-tracking-tight bb-text-gray-600 bb-text-xl sm:bb-text-2xl sm:bb-leading-10">
                     {item.text}

@@ -28,7 +28,7 @@ function RefinementListBase({
 
         {searchable && (
           <input
-            className="bb-form-input bb-py-1 bb-px-2 bb-w-full bb-mb-1 bb-text-base"
+            className="bb-rounded-md bb-border-gray-300 bb-py-0.5 bb-px-2 bb-w-full bb-mb-1 bb-text-base bb-placeholder-gray-400"
             type="search"
             placeholder="Find..."
             onChange={(event) => searchForItems(event.currentTarget.value)}
