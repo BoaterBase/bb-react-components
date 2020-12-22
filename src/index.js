@@ -11,6 +11,9 @@ export { default as getProfile } from './data/getProfile';
 export { default as getWebsite } from './data/getWebsite';
 export { default as getDomain } from './data/getDomain';
 export { default as getProfileByHandle } from './data/getProfileByHandle';
+export { default as getProfileUpdates } from './data/getProfileUpdates';
+export { default as getProfileUpdateByHandle } from './data/getProfileUpdateByHandle';
+
 export { default as getListingUpdates } from './data/getListingUpdates';
 export { default as getListingUpdate } from './data/getListingUpdate';
 
@@ -19,6 +22,7 @@ export { default as ListingLayout } from './layouts/ListingLayout';
 export { default as ListingsLayout } from './layouts/ListingsLayout';
 export { default as ListingUpdateLayout } from './layouts/ListingUpdateLayout';
 export { default as ProfileLayout } from './layouts/ProfileLayout';
+export { default as ProfileUpdateLayout } from './layouts/ProfileUpdateLayout';
 
 /** Sections */
 export { default as ListingsSection } from './sections/ListingsSection';
