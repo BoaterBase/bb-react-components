@@ -11,9 +11,11 @@ import ContactSection from '../../sections/ContactSection';
 import Share from '../../parts/Share';
 import { Image, Transformation, Placeholder } from 'cloudinary-react';
 import ListingsSection from '../../sections/ListingsSection';
+import ProfileUpdatesSection from '../../sections/ProfileUpdatesSection';
 import Link from '../../Link';
 import Version from '../../Version';
 import MessageForm from '../../forms/MessageForm';
+import Content from '../../parts/Content';
 
 function Profile({ Head = () => null, profileResource, onEvent }) {
   const setModal = useModal();
@@ -96,6 +98,15 @@ function Profile({ Head = () => null, profileResource, onEvent }) {
             sortBy: 'Listings',
           }}
         />
+
+        <div>
+          <Content items={profile.content} className="bb-mt-2" />
+        </div>
+
+        <div>
+          <h2 className="bb-mt-4 bb-mb-4 bb-text-3xl bb-font-semibold bb-text-gray-800">Updates</h2>
+          <ProfileUpdatesSection id={profile.id} slug={profile.handle} limit={6} />
+        </div>
       </div>
 
       <div className="bb-col-span-4 md:bb-col-span-1 bb-space-y-2">

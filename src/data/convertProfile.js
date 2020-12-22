@@ -1,4 +1,5 @@
 import normalizeMedia from './normalizeMedia';
+import normalizeContent from './normalizeContent';
 
 export default function convertProfile() {
   return {
@@ -10,6 +11,7 @@ export default function convertProfile() {
         handle: data.handle,
         name: data.name,
         summary: data.summary,
+        content: normalizeContent(data.content),
         email: data.email,
         telephone: data.telephone,
         website: data.website,

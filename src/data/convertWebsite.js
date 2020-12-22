@@ -1,7 +1,7 @@
 //import normalizeMedia from './normalizeMedia';
 //import normalizeContent from './normalizeContent';
 
-export default function convertListing() {
+export default function convertWebsite() {
   return {
     async fromFirestore(snapshot, options) {
       const data = snapshot.data(options);

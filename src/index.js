@@ -9,6 +9,7 @@ export { useModal } from './Modal';
 export { default as getListing } from './data/getListing';
 export { default as getProfile } from './data/getProfile';
 export { default as getWebsite } from './data/getWebsite';
+export { default as getDomain } from './data/getDomain';
 export { default as getProfileByHandle } from './data/getProfileByHandle';
 export { default as getListingUpdates } from './data/getListingUpdates';
 export { default as getListingUpdate } from './data/getListingUpdate';
