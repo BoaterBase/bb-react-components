@@ -27,6 +27,9 @@ export { default as ProfileUpdateLayout } from './layouts/ProfileUpdateLayout';
 /** Sections */
 export { default as ListingsSection } from './sections/ListingsSection';
 
+/** Parts */
+export { default as ContentPart } from './parts/Content';
+
 export * as store from './data/store';
 
 export { default as Link } from './Link';
