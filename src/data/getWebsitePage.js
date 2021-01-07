@@ -3,7 +3,7 @@ import convertPage from './convertPage';
 import { createResource } from './store';
 
 async function getWebsitePageSnapshot(websiteId, pageId) {
-  const snapshot = await firestore.collection('websites').doc(websiteId).collection('pages').withConverter(convertPage()).doc(id).get();
+  const snapshot = await firestore.collection('websites').doc(websiteId).collection('pages').withConverter(convertPage()).doc(pageId).get();
   return Promise.resolve(snapshot.data());
 }
 
