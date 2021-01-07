@@ -29,6 +29,7 @@ export { default as ListingsSection } from './sections/ListingsSection';
 
 /** Parts */
 export { default as ContentPart } from './parts/Content';
+export { default as UpdatesPart } from './parts/Updates';
 
 export * as store from './data/store';
 
