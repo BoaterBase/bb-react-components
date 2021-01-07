@@ -15,8 +15,12 @@ export default function convertProfile() {
         email: data.email,
         telephone: data.telephone,
         website: data.website,
+        twitter: data.twitter,
+        facebook: data.facebook,
+        instagram: data.instagram,
         avatar: data?.avatar?.info?.resource_type === 'image' && normalizeMedia(data.avatar),
         header: data?.header?.info?.resource_type === 'image' && normalizeMedia(data.header),
+        locations: data.locations,
       };
 
       if (data.teamProfile?.id) {
