@@ -7,7 +7,7 @@ export default function convertPage() {
       const data = snapshot.data(options);
       const response = {
         id: snapshot.id,
-        title: data.name,
+        title: data.title,
         summary: data.summary,
         content: normalizeContent(data.content),
         header: data?.header?.info?.resource_type === 'image' && normalizeMedia(data.header),
