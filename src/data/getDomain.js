@@ -3,7 +3,7 @@ import convertDomain from './convertDomain';
 import { createResource } from './store';
 
 async function getDomainSnapshot(id) {
-  const snapshot = await firestore.collection('websites').withConverter(convertDomain()).doc(id).get();
+  const snapshot = await firestore.collection('domains').withConverter(convertDomain()).doc(id).get();
   return Promise.resolve(snapshot.data());
 }
 
