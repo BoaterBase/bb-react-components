@@ -2,8 +2,21 @@ import React, { createContext, useState, useContext, useEffect, memo } from 'rea
 
 /** Get currency rates */
 async function getCurrencyRates() {
+  // TODO - use rates from db cache!!
   //console.info('getCurrencyRates()');
-  return await fetch('https://api.exchangeratesapi.io/latest?base=USD&symbols=USD,GBP,EUR,CAD,AUD,SGD').then((r) => r.json());
+  //return await fetch('https://api.exchangeratesapi.io/latest?base=USD&symbols=USD,GBP,EUR,CAD,AUD,SGD').then((r) => r.json());
+  return {
+    rates: {
+      CAD: 1.2688163265,
+      EUR: 0.8163265306,
+      SGD: 1.3247346939,
+      USD: 1,
+      AUD: 1.2863673469,
+      GBP: 0.7357387755,
+    },
+    base: 'USD',
+    date: '2021-01-08',
+  };
 }
 
 const currencySymbols = {
