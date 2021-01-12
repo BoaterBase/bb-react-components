@@ -50,7 +50,7 @@ function ShareSearch() {
 }
 
 /** ListingsLayout component to display a list of BoaterBase listings with search interface and paging */
-function ListingsLayout({ searchState, onReady }) {
+function ListingsLayout({ searchState, onReady, defaultProfileId }) {
   const [filtersToggle, setFiltersToggle] = useState(false);
 
   // TODO - we need to track search query somehow
@@ -108,7 +108,7 @@ function ListingsLayout({ searchState, onReady }) {
         <div className="bb-mb-4">
           <Refinements />
           <Grid>
-            <Hits />
+            <Hits defaultProfileId={defaultProfileId} />
           </Grid>
           <Paging className="bb-mt-4" />
         </div>
@@ -119,5 +119,6 @@ function ListingsLayout({ searchState, onReady }) {
 
 ListingsLayout.propTypes = {
   searchState: PropTypes.object,
+  defaultProfileId: PropTypes.string,
 };
 export default ListingsLayout;

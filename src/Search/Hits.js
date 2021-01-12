@@ -4,12 +4,12 @@ import { useSearch } from '../Search';
 import Hit from '../Search/Hit';
 
 const BaseHits = memo(
-  ({ hits, hitClassName, hitSlider }) => {
+  ({ hits, hitClassName, hitSlider, defaultProfileId }) => {
     const [searchState] = useSearch();
 
     return hits.map((item) => (
       <div className={hitClassName} key={item.objectID} style={{ scrollSnapAlign: 'start' }}>
-        <Hit className={hitClassName} data={item} />
+        <Hit className={hitClassName} data={item} defaultProfileId={defaultProfileId} />
       </div>
     ));
   },
