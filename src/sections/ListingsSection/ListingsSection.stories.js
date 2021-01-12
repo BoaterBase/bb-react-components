@@ -39,4 +39,5 @@ export const Preview = (props) => {
 
 Preview.args = {
   searchState: { layout: 'card', configure: { hitsPerPage: 12 }, refinementList: { 'specifications.condition': ['New'] } },
+  defaultProfileId: '',
 };

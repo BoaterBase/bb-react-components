@@ -87,13 +87,13 @@ function HorizontalScroller({ children }) {
     </div>
   );
 }
-export default function ListingsSection({ className, searchState, title }) {
+export default function ListingsSection({ className, searchState, title, defaultProfileId }) {
   return (
     <section className={className}>
       {title && <header>{title}</header>}
       <Search state={searchState}>
         <HorizontalScroller>
-          <Hits hitClassName="bb-w-full sm:bb-w-1/2 md:bb-w-1/3 bb-flex-none" />
+          <Hits hitClassName="bb-w-full sm:bb-w-1/2 md:bb-w-1/3 bb-flex-none" defaultProfileId={defaultProfileId} />
         </HorizontalScroller>
         <VirtualSearchBox />
         <VirtualSortBy
