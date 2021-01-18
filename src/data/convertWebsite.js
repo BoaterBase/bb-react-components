@@ -1,4 +1,4 @@
-//import normalizeMedia from './normalizeMedia';
+import normalizeMedia from './normalizeMedia';
 //import normalizeContent from './normalizeContent';
 
 export default function convertWebsite() {
@@ -16,6 +16,10 @@ export default function convertWebsite() {
         menu: data.menu,
         footer: data.footer,
         header: data.header,
+        contact: data.contact,
+        message: data.message,
+        copyright: data.copyright,
+        icon: data?.icon?.info?.resource_type === 'image' && normalizeMedia(data.icon),
       };
 
       return response;
