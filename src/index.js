@@ -14,6 +14,7 @@ export { default as getProfileByHandle } from './data/getProfileByHandle';
 export { default as getProfileUpdates } from './data/getProfileUpdates';
 export { default as getProfileUpdateByHandle } from './data/getProfileUpdateByHandle';
 export { default as getWebsitePage } from './data/getWebsitePage';
+export { default as getWebsitePageByPath } from './data/getWebsitePageByPath';
 
 export { default as getListingUpdates } from './data/getListingUpdates';
 export { default as getListingUpdate } from './data/getListingUpdate';
