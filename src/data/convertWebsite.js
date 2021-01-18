@@ -22,6 +22,10 @@ export default function convertWebsite() {
         icon: data?.icon?.info?.resource_type === 'image' && normalizeMedia(data.icon),
       };
 
+      if (data.homepage?.id) {
+        response.homepageId = data.homepage?.id;
+      }
+
       return response;
     },
   };
