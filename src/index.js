@@ -13,6 +13,7 @@ export { default as getDomain } from './data/getDomain';
 export { default as getProfileByHandle } from './data/getProfileByHandle';
 export { default as getProfileUpdates } from './data/getProfileUpdates';
 export { default as getProfileUpdateByHandle } from './data/getProfileUpdateByHandle';
+export { default as getProfileUpdatesByHandle } from './data/getProfileUpdatesByHandle';
 export { default as getWebsitePage } from './data/getWebsitePage';
 export { default as getWebsitePageByPath } from './data/getWebsitePageByPath';
 

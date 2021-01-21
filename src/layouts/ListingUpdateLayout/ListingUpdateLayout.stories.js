@@ -17,6 +17,6 @@ export const Preview = (props) => {
 };
 
 Preview.args = {
-  listingId: 'g5nm2l6X',
-  updateId: 'w1R0mZGm',
+  listingId: 'P6dZ578k',
+  updateId: '6tHPijYc',
 };

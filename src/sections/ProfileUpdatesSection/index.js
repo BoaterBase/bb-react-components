@@ -1,6 +1,8 @@
 import React from 'react';
 import Suspend from '../../data/Suspend';
-import getProfileUpdates from '../../data/getProfileUpdates';
+import getProfileUpdatesByHandle from '../../data/getProfileUpdatesByHandle';
+//import getProfileUpdates from '../../data/getProfileUpdates';
+
 import Updates from '../../parts/Updates';
 
 function Section({ Head, resource, slug }) {
@@ -20,8 +22,8 @@ export default function ProfileUpdatesSection({ id, slug, Head, loading, limit }
   if (loading) return <Loading />;
 
   // Start data request early so Suspend can use it for ssr fallback
-  const resource = getProfileUpdates(id, limit);
-
+  //const resource = getProfileUpdates(id, limit);
+  const resource = getProfileUpdatesByHandle(id, limit);
   return (
     <Suspend resources={resource} fallback={<Loading />}>
       <Section Head={Head} slug={slug} resource={resource} />

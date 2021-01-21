@@ -33,3 +33,16 @@ export const Sub = (props) => {
 Sub.args = {
   handle: 'captjoe',
 };
+
+export const Embeds = (props) => {
+  return (
+    <BoaterBase>
+      <ProfileLayout {...props} />
+    </BoaterBase>
+  );
+};
+//const urlParams = new URLSearchParams(document.location.search);
+//const listingId = urlParams.get('listingId');
+Embeds.args = {
+  handle: 'acorcutt',
+};

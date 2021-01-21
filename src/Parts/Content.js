@@ -3,6 +3,10 @@ import Markdown from 'markdown-to-jsx';
 import Gallery from './Gallery';
 import classNames from 'classnames';
 import Microlink from '@microlink/react';
+import ListingsSection from '../sections/ListingsSection';
+import ProfileUpdatesSection from '../sections/ProfileUpdatesSection';
+import ListingUpdatesSection from '../sections/ListingUpdatesSection';
+import qs from 'qs';
 
 const H2 = (props) => <h2 {...props} />;
 const H3 = (props) => <h3 {...props} />;
@@ -10,7 +14,7 @@ const H4 = (props) => <h4 {...props} />;
 const B = (props) => <b {...props} />;
 const P = (props) => <p {...props} />;
 
-function Content({ items, className, snippet }) {
+function Content({ items, className, snippet, defaultProfileId }) {
   const length = items
     ? items.reduce((ret, item) => {
         if (item.text) {
@@ -80,6 +84,32 @@ function Content({ items, className, snippet }) {
                 </div>
               );
             case 'embed':
+              if (item.link.startsWith('https://www.boaterbase.com/listings?')) {
+                //const searchState = { layout: 'card', configure: { hitsPerPage: 12 }, refinementList: { 'specifications.condition': ['New'] } };
+                const searchState = qs.parse(item.link.split('?')[1], {
+                  decoder(str, decoder, charset) {
+                    const keywords = {
+                      true: true,
+                      false: false,
+                      null: null,
+                      undefined,
+                    };
+                    if (str in keywords) {
+                      return keywords[str];
+                    }
+                    return decoder(str, decoder, charset);
+                  },
+                });
+                return <ListingsSection defaultProfileId={defaultProfileId} searchState={searchState} />;
+              }
+              if (item.link.startsWith('https://www.boaterbase.com/listings/') && item.link.endsWith('/updates')) {
+                const listingSlug = item.link.split('/')[4];
+                return <ListingUpdatesSection id={listingSlug} slug={listingSlug} limit={3} />;
+              }
+              if (item.link.startsWith('https://www.boaterbase.com/profiles/') && item.link.endsWith('/updates')) {
+                const profileHandle = item.link.split('/')[4];
+                return <ProfileUpdatesSection id={profileHandle} slug={profileHandle} limit={3} />;
+              }
               return (
                 <Microlink
                   url={item.link}
