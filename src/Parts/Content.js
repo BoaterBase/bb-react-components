@@ -7,6 +7,7 @@ import ListingsSection from '../sections/ListingsSection';
 import ProfileUpdatesSection from '../sections/ProfileUpdatesSection';
 import ListingUpdatesSection from '../sections/ListingUpdatesSection';
 import qs from 'qs';
+import Link from '../Link';
 
 const H2 = (props) => <h2 {...props} />;
 const H3 = (props) => <h3 {...props} />;
@@ -35,15 +36,26 @@ function Content({ items, className, snippet, defaultProfileId }) {
         {items.map((item, index) => {
           switch (item.kind) {
             case 'heading':
-              return (
-                <div key={index} className="bb-mt-4 bb-mb-5 bb-flex bb-items-center bb-flex-nowrap">
-                  <span className="bb-flex-auto bb-border-t-2 bb-border-gray-100"></span>
-                  <h2 className="bb-mx-4 bb-text-center bb-leading-8 bb-font-medium bb-tracking-tight bb-text-gray-600 bb-text-xl sm:bb-text-2xl sm:bb-leading-10">
-                    {item.text}
-                  </h2>
-                  <span className="bb-flex-auto bb-border-t-2 bb-border-gray-100"></span>
-                </div>
-              );
+              if (item.link && item.action)
+                return (
+                  <div key={index} className="bb-mt-4 bb-mb-5 bb-flex bb-items-center bb-flex-nowrap">
+                    <h2 className="bb-leading-8 bb-font-medium bb-tracking-tight bb-text-gray-600 bb-text-xl sm:bb-text-2xl sm:bb-leading-10">{item.text}</h2>
+                    <span className="bb-flex-auto"></span>
+                    <Link to={item.link} className="bb-font-medium bb-text-blue-500">
+                      {item.action} →
+                    </Link>
+                  </div>
+                );
+              else
+                return (
+                  <div key={index} className="bb-mt-4 bb-mb-5 bb-flex bb-items-center bb-flex-nowrap">
+                    <span className="bb-flex-auto bb-border-t-2 bb-border-gray-100"></span>
+                    <h2 className="bb-mx-4 bb-text-center bb-leading-8 bb-font-medium bb-tracking-tight bb-text-gray-600 bb-text-xl sm:bb-text-2xl sm:bb-leading-10">
+                      {item.link ? <Link to={item.link}>{item.text}</Link> : item.text}
+                    </h2>
+                    <span className="bb-flex-auto bb-border-t-2 bb-border-gray-100"></span>
+                  </div>
+                );
             case 'quote':
               return (
                 <blockquote key={index} className="bb-block bb-text-center bb-mt-12">
