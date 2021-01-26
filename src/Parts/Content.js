@@ -112,18 +112,19 @@ function Content({ items, className, snippet, defaultProfileId }) {
                     return decoder(str, decoder, charset);
                   },
                 });
-                return <ListingsSection defaultProfileId={defaultProfileId} searchState={searchState} />;
+                return <ListingsSection key={index} defaultProfileId={defaultProfileId} searchState={searchState} />;
               }
               if (item.link.startsWith('https://www.boaterbase.com/listings/') && item.link.endsWith('/updates')) {
                 const listingSlug = item.link.split('/')[4];
-                return <ListingUpdatesSection id={listingSlug} slug={listingSlug} limit={3} />;
+                return <ListingUpdatesSection key={index} id={listingSlug} slug={listingSlug} limit={3} />;
               }
               if (item.link.startsWith('https://www.boaterbase.com/profiles/') && item.link.endsWith('/updates')) {
                 const profileHandle = item.link.split('/')[4];
-                return <ProfileUpdatesSection id={profileHandle} slug={profileHandle} limit={3} />;
+                return <ProfileUpdatesSection key={index} id={profileHandle} slug={profileHandle} limit={3} />;
               }
               return (
                 <Microlink
+                  key={index}
                   url={item.link}
                   size={item.size}
                   lazy={true}
@@ -137,7 +138,7 @@ function Content({ items, className, snippet, defaultProfileId }) {
             case 'media':
               return (
                 <div key={index} className="bb-my-3">
-                  <Gallery media={item.items} layout="grid" />
+                  <Gallery key={index} media={item.items} layout="grid" />
                 </div>
               );
             default:
