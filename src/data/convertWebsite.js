@@ -15,7 +15,7 @@ export default function convertWebsite() {
         theme: data.theme,
         menu: data.menu,
         footer: data.footer,
-        header: data?.header?.info && normalizeMedia(data.header),
+        header: data?.header?.info?.resource_type && normalizeMedia(data.header),
         contact: data.contact,
         message: data.message,
         copyright: data.copyright,
