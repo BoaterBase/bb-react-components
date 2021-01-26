@@ -38,6 +38,8 @@ export * as store from './data/store';
 
 export { default as Link } from './Link';
 
+export { Image, Video, Placeholder, Transformation } from 'cloudinary-react';
+
 // export { default as Version } from './Version';
 // export { default as Logo } from './Logo';
 // export { default as Listing } from './Listing';
