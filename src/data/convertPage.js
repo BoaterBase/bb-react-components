@@ -11,7 +11,7 @@ export default function convertPage() {
         title: data.title,
         summary: data.summary,
         content: normalizeContent(data.content),
-        header: data?.header?.info?.resource_type === 'image' && normalizeMedia(data.header),
+        header: data?.header?.info?.resource_type && normalizeMedia(data.header),
       };
 
       return response;
