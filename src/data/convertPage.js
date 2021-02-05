@@ -12,6 +12,10 @@ export default function convertPage() {
         summary: data.summary,
         content: normalizeContent(data.content),
         media: data.media?.filter(({ info }) => ['image', 'video'].includes(info.resource_type)).map(normalizeMedia),
+        aspect: data.aspect,
+        head: data.head,
+        raw: data.raw,
+        layout: data.layout,
       };
 
       return response;

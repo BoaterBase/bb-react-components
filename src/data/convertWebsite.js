@@ -12,7 +12,7 @@ export default function convertWebsite() {
         sourceId: data.sourceId,
         created: data.created?.toDate(),
         updated: data.updated?.toDate(),
-        theme: data.theme,
+        head: data.head,
         menu: data.menu,
         footer: data.footer,
         header: data?.header,
