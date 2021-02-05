@@ -1,4 +1,4 @@
-export default function normalizeMedia({ description, info }) {
+export default function normalizeMedia({ description, link, label, info }) {
   return {
     type: info.resource_type,
     id: info.public_id,
