@@ -27,8 +27,8 @@ function PreviewGallery({ content }) {
         .filter(({ kind }) => ['media'].includes(kind))
         .slice(0, 1)
         .map(({ items }, index) => (
-          <div className="bb-mt-2">
-            <Gallery key={index} media={items} layout="grid" limit={3} />
+          <div className="bb-mt-2" key={index}>
+            <Gallery media={items} layout="grid" limit={3} />
           </div>
         ))
     : null;
