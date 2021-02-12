@@ -1,3 +1,4 @@
+import React from 'react';
 import Markdown from 'markdown-to-jsx';
 
 const H2 = (props) => <h2 {...props} className="bb-text-2xl md:bb-text-4xl bb-font-bold" />;
