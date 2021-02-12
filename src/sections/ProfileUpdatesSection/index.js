@@ -1,15 +1,25 @@
 import React from 'react';
-import Suspend from '../../data/Suspend';
 import getProfileUpdatesByHandle from '../../data/getProfileUpdatesByHandle';
+import Suspend from '../../data/Suspend';
 //import getProfileUpdates from '../../data/getProfileUpdates';
-
 import Updates from '../../parts/Updates';
+import Link from '../../Link';
 
 function Section({ Head, resource, slug }) {
+  const updates = resource.read();
   return (
-    <section>
-      <Updates pathname={`/profiles/${slug}`} updates={resource.read()} />
-    </section>
+    !!updates.length && (
+      <section>
+        <div className="bb-flex bb-items-center">
+          <h2 className="bb-mt-4 bb-mb-4 bb-text-3xl bb-font-semibold bb-text-gray-800">Logbook</h2>
+          <Link to={`/profiles/${slug}/updates`} className="bb-text-blue-500 bb-font-semibold bb-ml-auto hover:bb-underline">
+            Show All →
+          </Link>
+        </div>
+
+        <Updates pathname={`/profiles/${slug}`} updates={updates} />
+      </section>
+    )
   );
 }
 

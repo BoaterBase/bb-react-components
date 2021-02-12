@@ -6,7 +6,14 @@ import ListingLoading from './ListingLoading';
 export default {
   title: 'Layouts/ListingLayout',
   component: ListingLayout,
-  argTypes: {},
+  argTypes: {
+    id: {
+      control: {
+        type: 'select',
+        options: ['Awwe1IQm', 'g5nm2l6X'],
+      },
+    },
+  },
 };
 
 export const Preview = (props) => {
@@ -49,7 +56,7 @@ export const Preview = (props) => {
 //const urlParams = new URLSearchParams(document.location.search);
 //const listingId = urlParams.get('listingId');
 Preview.args = {
-  id: 'g5nm2l6X',
+  id: 'Awwe1IQm',
 };
 
 export const Loading = (props) => {

@@ -5,6 +5,10 @@ import { Image, Transformation } from 'cloudinary-react';
 import classNames from 'classnames';
 import Link from '../../Link';
 
+import Facebook from '../../icons/Facebook';
+import Twitter from '../../icons/Twitter';
+import Website from '../../icons/Website';
+
 function Section({ profileResource, contactResource, Head = () => null, sendMessage }) {
   const profile = profileResource && profileResource.read();
   const contact = contactResource && contactResource.read();
@@ -23,11 +27,37 @@ function Section({ profileResource, contactResource, Head = () => null, sendMess
               {profile.name || profile.handle}
             </Link>
           </h4>
-          {profile.telephone && (
-            <a className="bb-text-sm bb-text-blue-400 hover:bb-underline" href={`tel:${profile.telephone}`}>
-              {profile.telephone}
-            </a>
-          )}
+          <div>
+            {profile.telephone && (
+              <a className="bb-text-sm bb-text-blue-400 hover:bb-underline" href={`tel:${profile.telephone}`}>
+                {profile.telephone}
+              </a>
+            )}
+            {profile.telephone && profile.email && ' · '}
+            {profile.email && (
+              <a className="bb-text-sm bb-text-blue-400 hover:bb-underline" href={`mailto:${profile.email}`}>
+                {profile.email}
+              </a>
+            )}
+          </div>
+
+          <div className="bb-flex bb-items-center bb-justify-center">
+            {profile.facebook && (
+              <a href={`https://facebook.com/${profile.facebook}`} target="_blank" className="bb-p-1 bb-bg-gray-50 bb-rounded bb-m-1 bb-text-blue-300">
+                <Facebook />
+              </a>
+            )}
+            {profile.twitter && (
+              <a href={`https://twitter.com/${profile.twitter}`} target="_blank" className="bb-p-1 bb-bg-gray-50 bb-rounded bb-m-1 bb-text-blue-300">
+                <Twitter />
+              </a>
+            )}
+            {profile.website && (
+              <a href={profile.website} target="_blank" className="bb-p-1 bb-bg-gray-50 bb-rounded bb-m-1 bb-text-blue-300">
+                <Website />
+              </a>
+            )}
+          </div>
         </div>
       )}
 
@@ -46,6 +76,74 @@ function Section({ profileResource, contactResource, Head = () => null, sendMess
               {contact ? contact.name : profile.name}
             </Link>
           </h3>
+          {contact ? (
+            <>
+              <div>
+                {contact.telephone && (
+                  <a className="bb-text-sm bb-text-blue-400 hover:bb-underline" href={`tel:${contact.telephone}`}>
+                    {contact.telephone}
+                  </a>
+                )}
+                {contact.telephone && contact.email && ' · '}
+                {contact.email && (
+                  <a className="bb-text-sm bb-text-blue-400 hover:bb-underline" href={`mailto:${contact.email}`}>
+                    {contact.email}
+                  </a>
+                )}
+              </div>
+              <div className="bb-flex bb-items-center bb-justify-center">
+                {contact.facebook && (
+                  <a href={`https://facebook.com/${contact.facebook}`} target="_blank" className="bb-p-1 bb-bg-gray-50 bb-rounded bb-m-1 bb-text-blue-300">
+                    <Facebook />
+                  </a>
+                )}
+                {contact.twitter && (
+                  <a href={`https://twitter.com/${contact.twitter}`} target="_blank" className="bb-p-1 bb-bg-gray-50 bb-rounded bb-m-1 bb-text-blue-300">
+                    <Twitter />
+                  </a>
+                )}
+                {contact.website && (
+                  <a href={contact.website} target="_blank" className="bb-p-1 bb-bg-gray-50 bb-rounded bb-m-1 bb-text-blue-300">
+                    <Website />
+                  </a>
+                )}
+              </div>
+            </>
+          ) : (
+            <>
+              <div>
+                {profile.telephone && (
+                  <a className="bb-text-sm bb-text-blue-400 hover:bb-underline" href={`tel:${profile.telephone}`}>
+                    {profile.telephone}
+                  </a>
+                )}
+                {profile.telephone && profile.email && ' · '}
+                {profile.email && (
+                  <a className="bb-text-sm bb-text-blue-400 hover:bb-underline" href={`mailto:${profile.email}`}>
+                    {profile.email}
+                  </a>
+                )}
+              </div>
+
+              <div className="bb-flex bb-items-center bb-justify-center">
+                {profile.facebook && (
+                  <a href={`https://facebook.com/${profile.facebook}`} target="_blank" className="bb-p-1 bb-bg-gray-50 bb-rounded bb-m-1 bb-text-blue-300">
+                    <Facebook />
+                  </a>
+                )}
+                {profile.twitter && (
+                  <a href={`https://twitter.com/${profile.twitter}`} target="_blank" className="bb-p-1 bb-bg-gray-50 bb-rounded bb-m-1 bb-text-blue-300">
+                    <Twitter />
+                  </a>
+                )}
+                {profile.website && (
+                  <a href={profile.website} target="_blank" className="bb-p-1 bb-bg-gray-50 bb-rounded bb-m-1 bb-text-blue-300">
+                    <Website />
+                  </a>
+                )}
+              </div>
+            </>
+          )}
         </div>
       )}
 

@@ -2,11 +2,12 @@ import React, { useState, useEffect } from 'react';
 import { Image, Video, Placeholder, Transformation } from 'cloudinary-react';
 import classNames from 'classnames';
 import { useModal } from '../Modal';
-
+import Slider from './Slider';
 import Expand from '../icons/Expand';
 import CloseIcon from '../icons/Close';
 import ChevronLeft from '../icons/ChevronLeft';
 import ChevronRight from '../icons/ChevronRight';
+import RichText from './RichText';
 
 function Slideshow({ media = [], close, selected }) {
   // Set current to selected id index
@@ -140,7 +141,84 @@ function Gallery({ media = [], layout, limit = 14, onReady }) {
           </a>
         </div>
       );
+
+    case 'flex':
+      return (
+        <div class="bb-flex bb-flex-wrap bb-items-center bb-justify-center">
+          {media.map((item, index) => (
+            <a key={index} href={item.link} title={item.label}>
+              <Image
+                className={'bb-h-20 bb-m-2' + (item.link ? ' hover:bb-shadow-lg hover:bb-rounded-md' : '')}
+                publicId={item.id}
+                resourceType={item.type}
+                dpr="auto"
+                responsive
+                width="auto"
+                responsiveUseBreakpoints="true"
+              >
+                {item.type == 'image' && <Placeholder type="blur" />}
+                <Transformation quality="auto" fetchFormat="auto" />
+              </Image>
+            </a>
+          ))}
+        </div>
+      );
+
+    case 'slider':
+      return <Slider slides={media} aspect={16 / 9} delay={5} autoplay={false} />;
+
+    case 'alternate':
+      return (
+        <div className="bb-divide-y bb-divide-gray-100">
+          {media.map((item, index) => (
+            <div key={index} className="">
+              <div className="md:bb-flex">
+                {item.description && (
+                  <div className={'bb-w-1/2 bb-flex-none ' + (index % 2 ? 'bb-order-first' : 'bb-order-last')}>
+                    <div className="bb-prose">
+                      <RichText text={item.description} />
+                    </div>
+                    {item.link && item.label && (
+                      <a
+                        href={item.link}
+                        className="bb-inline-block bb-py-3 bb-px-5 bb-mt-4 bb-bg-blue-500 bb-rounded bb-no-underline bb-shadow-md bb-text-white bb-font-semibold"
+                      >
+                        {item.label}
+                      </a>
+                    )}
+                  </div>
+                )}
+                <a key={index} href={item.link} title={item.label} className="bb-w-auto bb-m-auto">
+                  <Image
+                    className="bb-w-full bb-my-6"
+                    publicId={item.id}
+                    resourceType={item.type}
+                    dpr="auto"
+                    responsive
+                    width="auto"
+                    responsiveUseBreakpoints="true"
+                  >
+                    {item.type == 'image' && <Placeholder type="blur" />}
+                    <Transformation quality="auto" fetchFormat="auto" />
+                  </Image>
+                </a>
+              </div>
+              {!item.description && item.link && item.label && (
+                <div className="bb-flex bb-justify-center">
+                  <a
+                    href={item.link}
+                    className="bb-inline-block bb-py-3 bb-px-5 bb-mt-4 bb-bg-blue-500 bb-shadow-md bb-rounded bb-no-underline bb-text-white bb-font-semibold"
+                  >
+                    {item.label}
+                  </a>
+                </div>
+              )}
+            </div>
+          ))}
+        </div>
+      );
     default:
+      // 'gallery'
       // Split into grids of 3,4 upto max of 4 rows
       const limited = media.slice(0, limit);
       const rows = [];

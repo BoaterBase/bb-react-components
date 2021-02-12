@@ -340,7 +340,6 @@ function ListingBlock({ listingResource, Head = () => null, onReady, onEvent }) 
           </div>
 
           <div ref={updatesRef}>
-            <h2 className="bb-mt-4 bb-mb-4 bb-text-3xl bb-font-semibold bb-text-gray-800">Logbook</h2>
             <ListingUpdatesSection id={listing.id} slug={listing.slug} limit={6} />
           </div>
         </div>

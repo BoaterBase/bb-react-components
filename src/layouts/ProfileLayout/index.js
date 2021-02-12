@@ -104,7 +104,6 @@ function Profile({ Head = () => null, profileResource, onEvent }) {
         </div>
 
         <div>
-          <h2 className="bb-mt-4 bb-mb-4 bb-text-3xl bb-font-semibold bb-text-gray-800">Updates</h2>
           <ProfileUpdatesSection id={profile.id} slug={profile.handle} limit={6} />
         </div>
       </div>

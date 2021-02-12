@@ -6,6 +6,7 @@ import Microlink from '@microlink/react';
 import ListingsSection from '../sections/ListingsSection';
 import ProfileUpdatesSection from '../sections/ProfileUpdatesSection';
 import ListingUpdatesSection from '../sections/ListingUpdatesSection';
+
 import qs from 'qs';
 import Link from '../Link';
 
@@ -138,7 +139,7 @@ function Content({ items, className, snippet, defaultProfileId }) {
             case 'media':
               return (
                 <div key={index} className="bb-my-3">
-                  <Gallery key={index} media={item.items} layout="grid" />
+                  <Gallery key={index} media={item.items} layout={item.display} />
                 </div>
               );
             default:
