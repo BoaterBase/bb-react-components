@@ -77,7 +77,7 @@ function Section({ profileResource, contactResource, Head = () => null, sendMess
             </Link>
           </h3>
           {contact ? (
-            <>
+            <Fragment>
               <div>
                 {contact.telephone && (
                   <a className="bb-text-sm bb-text-blue-400 hover:bb-underline" href={`tel:${contact.telephone}`}>
@@ -108,9 +108,9 @@ function Section({ profileResource, contactResource, Head = () => null, sendMess
                   </a>
                 )}
               </div>
-            </>
+            </Fragment>
           ) : (
-            <>
+            <Fragment>
               <div>
                 {profile.telephone && (
                   <a className="bb-text-sm bb-text-blue-400 hover:bb-underline" href={`tel:${profile.telephone}`}>
@@ -142,7 +142,7 @@ function Section({ profileResource, contactResource, Head = () => null, sendMess
                   </a>
                 )}
               </div>
-            </>
+            </Fragment>
           )}
         </div>
       )}
