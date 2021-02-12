@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import Suspend from '../../data/Suspend';
 import getProfile from '../../data/getProfile';
 import { Image, Transformation } from 'cloudinary-react';
