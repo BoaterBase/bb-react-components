@@ -148,7 +148,7 @@ function Gallery({ media = [], layout, limit = 14, onReady }) {
           {media.map((item, index) => (
             <a key={index} href={item.link} title={item.label}>
               <Image
-                className={'bb-h-20 bb-m-2' + (item.link ? ' hover:bb-shadow-lg hover:bb-rounded-md' : '')}
+                className={'bb-h-24 bb-m-2' + (item.link ? ' hover:bb-shadow-lg hover:bb-rounded-md' : '')}
                 publicId={item.id}
                 resourceType={item.type}
                 dpr="auto"
@@ -166,15 +166,14 @@ function Gallery({ media = [], layout, limit = 14, onReady }) {
 
     case 'slider':
       return <Slider slides={media} aspect={16 / 9} delay={5} autoplay={false} />;
-
     case 'alternate':
       return (
         <div className="bb-divide-y bb-divide-gray-100">
           {media.map((item, index) => (
-            <div key={index} className="">
-              <div className="md:bb-flex">
+            <div key={index}>
+              <div className="md:bb-flex bb-items-center">
                 {item.description && (
-                  <div className={'bb-w-1/2 bb-flex-none ' + (index % 2 ? 'bb-order-first' : 'bb-order-last')}>
+                  <div className={'bb-p-3 bb-w-1/2 bb-flex-none ' + (index % 2 ? 'bb-order-first' : 'bb-order-last')}>
                     <div className="bb-prose">
                       <RichText text={item.description} />
                     </div>

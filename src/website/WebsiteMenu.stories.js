@@ -5,16 +5,15 @@ import getWebsite from '../data/getWebsite';
 import getProfile from '../data/getProfile';
 
 export default {
-  title: 'Website/Preview',
-  //component: Menu,
-  //argTypes: {},
+  title: 'Website/WebsiteMenu',
+  component: WebsiteMenu,
+  argTypes: {},
 };
 
 export const Preview = (props, { loaded: { website, profile } }) => {
   return (
     <BoaterBase>
       <WebsiteMenu {...props} />
-      Preview
       {JSON.stringify(website)}
       {JSON.stringify(profile)}
     </BoaterBase>

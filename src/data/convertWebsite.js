@@ -8,8 +8,12 @@ export default function convertWebsite() {
 
       const response = {
         id: snapshot.id,
+        // TODO -remove these
         source: data.source, // profile || listing || group
         sourceId: data.sourceId,
+        // END
+        profileId: data.profileId, // profile id for default listings & contact
+        collectionId: data.collectionId, // sub collection for custom listings query
         created: data.created?.toDate(),
         updated: data.updated?.toDate(),
         head: data.head,
@@ -24,6 +28,7 @@ export default function convertWebsite() {
         linkedin: data.linkedin,
         youtube: data.youtube,
         message: data.message,
+        contact: data.contact, // contact message
         copyright: data.copyright,
         icon: data?.icon?.info?.resource_type === 'image' && normalizeMedia(data.icon),
         logo: data?.logo?.info?.resource_type === 'image' && normalizeMedia(data.logo),

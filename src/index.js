@@ -34,6 +34,9 @@ export { default as ListingsSection } from './sections/ListingsSection';
 export { default as ContentPart } from './parts/Content';
 export { default as UpdatesPart } from './parts/Updates';
 
+/** Website */
+export { default as WebsiteContact } from './website/WebsiteContact';
+
 export * as store from './data/store';
 
 export { default as Link } from './Link';

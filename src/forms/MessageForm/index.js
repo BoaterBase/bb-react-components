@@ -4,12 +4,17 @@ import { useForm } from 'react-hook-form';
 import Input from '../../form/Input';
 import Textarea from '../../form/Textarea';
 
-export default function MessageForm({ onSubmit, name, className }) {
+export default function MessageForm({ onSubmit, name, heading = true, className }) {
   const { register, handleSubmit, watch, errors } = useForm();
 
+  const doSubmit = (data, e) => {
+    e.target.reset(); // reset after form submit
+    onSubmit && onSubmit(data, e);
+  };
+
   return (
-    <form className={className} onSubmit={handleSubmit(onSubmit)}>
-      <h1 className="bb-text-xl bb-font-medium">Send a message...</h1>
+    <form className={className} onSubmit={handleSubmit(doSubmit)}>
+      {heading && <h1 className="bb-text-xl bb-font-medium">Send a message...</h1>}
       {name && (
         <p className="bb-text-sm bb-text-gray-600">
           to <b>{name}</b>
@@ -33,7 +38,7 @@ export default function MessageForm({ onSubmit, name, className }) {
         compact
         label="Telephone"
         placeholder="Telephone Number"
-        type="telephone"
+        type="tel"
         className="bb-mt-2"
       />
       <Input
