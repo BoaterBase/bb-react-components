@@ -11,9 +11,11 @@ import Linkedin from '../icons/Linkedin';
 import Pinterest from '../icons/Pinterest';
 import Instagram from '../icons/Instagram';
 import Youtube from '../icons/Youtube';
+import Location from '../icons/Location';
+import MapGL from '../parts/MapGL';
 
 /** Website Contact Section*/
-function WebsiteContact({ profile, website, ...props }) {
+function WebsiteContact({ profile, ...props }) {
   const createAlert = useAlerts();
 
   async function sendMessage(data) {
@@ -60,10 +62,10 @@ function WebsiteContact({ profile, website, ...props }) {
               },
             }}
           >
-            {website.contact || '# Contact'}
+            {profile.message || '# Contact'}
           </Markdown>
           {(profile.telephone || profile.email) && (
-            <ul className="bb-mt-4 bb-text-blue-500 bb-space-y-2">
+            <ul className="bb-mt-8 bb-text-blue-500 bb-space-y-2">
               {profile.telephone && (
                 <li>
                   <a className="bb-flex bb-items-center hover:bb-underline hover:bb-text-blue-700" href={'tel:' + profile.telephone}>
@@ -98,16 +100,27 @@ function WebsiteContact({ profile, website, ...props }) {
         </div>
       </div>
 
-      {!!profile.locations?.length && (
-        <div className="bb-mt-16 bb-pt-16 lg:bb-grid lg:bb-grid-cols-3 lg:bb-gap-8">
-          <h2 className="bb-text-2xl bb-font-extrabold bb-text-gray-900 sm:bb-text-3xl">Location</h2>
-          <div className="bb-mt-8 bb-grid bb-grid-cols-1 bb-gap-12 sm:bb-grid-cols-2 sm:bb-gap-x-8 sm:bb-gap-y-12 lg:bb-mt-0 lg:bb-col-span-2">
-            <div>
-              <h3 className="bb-text-lg bb-leading-6 bb-font-medium bb-text-gray-900">Los Angeles</h3>
-              <div className="bb-mt-2 bb-text-base bb-text-gray-500">
-                <p>4556 Brendan Ferry</p>
-                <p className="bb-mt-1">Los Angeles, CA 90210</p>
-              </div>
+      {profile.location && profile.geo?.latitude && profile.geo?.longitude && (
+        <div className="lg:bb-grid lg:bb-grid-cols-5">
+          <div className="bb-py-16 bb-px-4 sm:bb-px-6 lg:bb-col-span-2 lg:bb-px-8 lg:bb-py-24 xl:bb-pr-12">
+            <h2 className="bb-text-2xl bb-font-extrabold bb-text-gray-900 sm:bb-text-3xl">Location</h2>
+
+            <div className="bb-mt-6 bb-text-base bb-text-gray-500 bb-flex bb-items-center">
+              <Location className="bb-w-5 bb-h-5 bb-mr-2 bb-opacity-80" />
+
+              {profile.location}
+            </div>
+          </div>
+          <div className="bb-py-16 bb-px-4 sm:bb-px-6 lg:bb-col-span-3 lg:bb-px-8 lg:bb-py-24 xl:bb-pr-12">
+            <div className="bb-relative bb-rounded-md bb-shadow-xl">
+              <svg viewBox="0 0 4 3" className="bb-relative bb-block bb-w-full bb-rounded-md bb-bg-gradient-to-b bb-from-blue-500 bb-to-blue-400"></svg>
+
+              <MapGL
+                latitude={profile.geo.latitude}
+                longitude={profile.geo.longitude}
+                zoom={10}
+                className="bb-absolute bb-top-0 bb-left-0 bb-w-full bb-h-full bb-rounded-md bb-overflow-hidden"
+              />
             </div>
           </div>
         </div>

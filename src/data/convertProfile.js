@@ -23,7 +23,13 @@ export default function convertProfile() {
         pinterest: data.pinterest,
         avatar: data?.avatar?.info?.resource_type === 'image' && normalizeMedia(data.avatar),
         header: data?.header?.info?.resource_type === 'image' && normalizeMedia(data.header),
-        locations: data.locations,
+        location: data.location,
+        geo: data.geo &&
+          (data.geo.latitude || data.geo.longitude) && {
+            latitude: data.geo.latitude || 0,
+            longitude: data.geo.longitude || 0,
+          },
+        message: data.message,
       };
 
       if (data.teamProfile?.id) {

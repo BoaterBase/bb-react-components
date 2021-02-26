@@ -16,6 +16,8 @@ import Link from '../../Link';
 import Version from '../../Version';
 import MessageForm from '../../forms/MessageForm';
 import Content from '../../parts/Content';
+import MapImage from '../../parts/MapImage';
+import MapBox from '../../parts/MapBox';
 
 function Profile({ Head = () => null, profileResource, onEvent }) {
   const setModal = useModal();
@@ -45,7 +47,9 @@ function Profile({ Head = () => null, profileResource, onEvent }) {
     trackEvent([], 'Message', 'Click', `/profiles/${profile.handle}`);
     onEvent && onEvent({ category: 'Message', action: 'Click', label: `/profiles/${profile.handle}` });
   }
-
+  function showMap() {
+    setModal(<MapBox latitude={profile.geo.latitude} longitude={profile.geo.longitude} zoom={10} />);
+  }
   return (
     <div className="bb-grid bb-grid-cols-4 bb-gap-3">
       <Head>
@@ -110,6 +114,20 @@ function Profile({ Head = () => null, profileResource, onEvent }) {
 
       <div className="bb-col-span-4 md:bb-col-span-1 bb-space-y-2">
         <ContactSection profileId={profileId} contactId={contactId} sendMessage={sendMessage} />
+        {profile.geo && profile.geo.latitude && (
+          <div>
+            <h3 className="bb-mb-1 bb-uppercase bb-text-center bb-font-medium bb-text-gray-500 bb-text-sm">Map</h3>
+
+            <MapImage
+              className="bb-shadow bb-rounded-md bb-w-full bb-cursor-pointer"
+              onClick={showMap}
+              width={400}
+              height={300}
+              latitude={profile.geo.latitude}
+              longitude={profile.geo.longitude}
+            />
+          </div>
+        )}
         <Share pathname={`/profiles/${profile.handle}`} title={profile.name} summary={profile.summary} />
         <div className="bb-text-center bb-mt-3">
           <Version />

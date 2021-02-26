@@ -28,7 +28,6 @@ export default function convertWebsite() {
         linkedin: data.linkedin,
         youtube: data.youtube,
         message: data.message,
-        contact: data.contact, // contact message
         copyright: data.copyright,
         icon: data?.icon?.info?.resource_type === 'image' && normalizeMedia(data.icon),
         logo: data?.logo?.info?.resource_type === 'image' && normalizeMedia(data.logo),

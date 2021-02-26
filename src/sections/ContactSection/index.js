@@ -8,6 +8,7 @@ import Link from '../../Link';
 import Facebook from '../../icons/Facebook';
 import Twitter from '../../icons/Twitter';
 import Website from '../../icons/Website';
+import Location from '../../icons/Location';
 
 function Section({ profileResource, contactResource, Head = () => null, sendMessage }) {
   const profile = profileResource && profileResource.read();
@@ -40,7 +41,12 @@ function Section({ profileResource, contactResource, Head = () => null, sendMess
               </a>
             )}
           </div>
-
+          {profile.location && (
+            <div className="bb-m-1 bb-text-xs bb-text-gray-400 bb-flex bb-items-center bb-justify-center">
+              <Location className="bb-w-3 bb-h-3 bb-mr-1 bb-opacity-80" />
+              {profile.location}
+            </div>
+          )}
           <div className="bb-flex bb-items-center bb-justify-center">
             {profile.facebook && (
               <a href={`https://facebook.com/${profile.facebook}`} target="_blank" className="bb-p-1 bb-bg-gray-50 bb-rounded bb-m-1 bb-text-blue-300">
@@ -91,6 +97,12 @@ function Section({ profileResource, contactResource, Head = () => null, sendMess
                   </a>
                 )}
               </div>
+              {contact.location && (
+                <div className="bb-m-1 bb-text-xs bb-text-gray-400 bb-flex bb-items-center bb-justify-center">
+                  <Location className="bb-w-3 bb-h-3 bb-mr-1 bb-opacity-80" />
+                  {contact.location}
+                </div>
+              )}
               <div className="bb-flex bb-items-center bb-justify-center">
                 {contact.facebook && (
                   <a href={`https://facebook.com/${contact.facebook}`} target="_blank" className="bb-p-1 bb-bg-gray-50 bb-rounded bb-m-1 bb-text-blue-300">
@@ -124,7 +136,12 @@ function Section({ profileResource, contactResource, Head = () => null, sendMess
                   </a>
                 )}
               </div>
-
+              {profile.location && (
+                <div className="bb-m-1 bb-text-xs bb-text-gray-400 bb-flex bb-items-center bb-justify-center">
+                  <Location className="bb-w-3 bb-h-3 bb-mr-1 bb-opacity-80" />
+                  {profile.location}
+                </div>
+              )}
               <div className="bb-flex bb-items-center bb-justify-center">
                 {profile.facebook && (
                   <a href={`https://facebook.com/${profile.facebook}`} target="_blank" className="bb-p-1 bb-bg-gray-50 bb-rounded bb-m-1 bb-text-blue-300">

@@ -63,7 +63,7 @@ export default function MessageForm({ onSubmit, name, heading = true, className 
         <span className="bb-flex bb-w-full bb-rounded-md bb-shadow-sm">
           <button
             type="submit"
-            className="bb-inline-flex bb-justify-center bb-w-full bb-rounded-md bb-border bb-border-transparent bb-px-4 bb-py-2 bb-bg-indigo-600 bb-text-base bb-leading-6 bb-font-medium bb-text-white bb-shadow-sm hover:bb-bg-indigo-500 focus:bb-outline-none focus:bb-border-indigo-700 focus:bb-shadow-outline-indigo bb-transition bb-ease-in-out bb-duration-150 sm:bb-text-sm sm:bb-leading-5"
+            className="bb-inline-flex bb-justify-center bb-w-full bb-rounded-md bb-border bb-border-transparent bb-px-4 bb-py-2 bb-bg-blue-600 bb-text-base bb-leading-6 bb-font-medium bb-text-white bb-shadow-sm hover:bb-bg-blue-500 focus:bb-outline-none focus:bb-border-indigo-700 focus:bb-shadow-outline-indigo bb-transition bb-ease-in-out bb-duration-150 sm:bb-text-sm sm:bb-leading-5"
           >
             Send Message
           </button>
