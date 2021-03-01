@@ -16,6 +16,8 @@ export default function convertWebsite() {
         collectionId: data.collectionId, // sub collection for custom listings query
         created: data.created?.toDate(),
         updated: data.updated?.toDate(),
+        title: data.title,
+        summary: data.summary,
         head: data.head,
         menu: data.menu,
         footer: data.footer,
