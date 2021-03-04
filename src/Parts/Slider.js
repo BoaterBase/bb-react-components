@@ -72,25 +72,30 @@ export default function Slider({ slides, aspect = 2, delay = 5, autoplay = true 
           ></Video>
         )}
       </div>
-      <div className="bb-absolute bb-top-0 bb-left-0 bb-w-full bb-h-full bb-flex bb-items-center bb-justify-center">
-        <div className="bb-flex bb-flex-col bb-items-center bb-justify-center">
-          {slide.description && (
-            <div className="bb-text-white bb-opacity-80 bb-tracking-wide">
-              <RichText text={slide.description} />
-            </div>
-          )}
+      {(slide.description || (slide.label && slide.link)) && (
+        <div
+          className="bb-absolute bb-bottom-0 bb-left-0 bb-w-full bb-pb-10 bb-pt-20 bb-flex bb-items-center bb-justify-center"
+          style={{ background: 'linear-gradient(0deg, rgba(18,41,69,0.5) 0%, rgba(18,41,69,0.1) 50%,rgba(18,41,69,0) 100%)' }}
+        >
+          <div className="bb-flex bb-flex-col bb-items-center bb-justify-center">
+            {slide.description && (
+              <div className="bb-text-white bb-opacity-80 bb-tracking-wide bb-text-center bb-px-8" style={{ textShadow: '0 0 15px rgba(0,0,0,0.4)' }}>
+                <RichText text={slide.description} />
+              </div>
+            )}
 
-          {slide.label && slide.link && (
-            <a
-              href={slide.link}
-              className="bb-mt-4 bb-inline-block bb-rounded bb-px-4 bb-py-2 bb-bg-white bb-text-gray-700 bb-text-xl bb-font-semibold bb-opacity-80 hover:bb-opacity-95"
-            >
-              {slide.label}
-            </a>
-          )}
+            {slide.label && slide.link && (
+              <a
+                href={slide.link}
+                className="bb-mt-4 bb-inline-block bb-rounded bb-px-4 bb-py-2 bb-bg-white bb-text-gray-700 bb-text-xl bb-font-semibold bb-opacity-80 hover:bb-opacity-95"
+              >
+                {slide.label}
+              </a>
+            )}
+          </div>
+          {!slide.label && slide.link && <a href={slide.link} className="bb-absolute bb-block bb-inset-0" />}
         </div>
-        {!slide.label && slide.link && <a href={slide.link} className="bb-absolute bb-block bb-inset-0" />}
-      </div>
+      )}
       {slides.length > 1 && (
         <ul className="bb-absolute bb-bottom-0 bb-w-full bb-h-auto bb-flex bb-items-center">
           <li className="bb-w-full bb-flex bb-flex-auto">

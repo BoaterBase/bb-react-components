@@ -216,6 +216,57 @@ function Gallery({ media = [], layout, limit = 14, onReady }) {
           ))}
         </div>
       );
+    case 'stacked':
+      return (
+        <div className="">
+          {media.map((item, index) => (
+            <div key={index}>
+              <div className="bb-items-center">
+                {item.description && (
+                  <div className={'bb-p-3'}>
+                    <div className="bb-prose">
+                      <RichText text={item.description} />
+                    </div>
+                    {item.link && item.label && (
+                      <a
+                        href={item.link}
+                        className="bb-inline-block bb-py-3 bb-px-5 bb-mt-4 bb-bg-blue-500 bb-rounded bb-no-underline bb-shadow-md bb-text-white bb-font-semibold"
+                      >
+                        {item.label}
+                      </a>
+                    )}
+                  </div>
+                )}
+                <a key={index} href={item.link} title={item.label} className="bb-w-auto bb-m-auto">
+                  <Image
+                    className="bb-w-auto bb-max-w-full bb-my-6 bb-m-auto"
+                    publicId={item.id}
+                    resourceType={item.type}
+                    dpr="auto"
+                    responsive
+                    width="auto"
+                    responsiveUseBreakpoints="true"
+                  >
+                    {item.type == 'image' && <Placeholder type="blur" />}
+                    <Transformation quality="auto" fetchFormat="auto" />
+                  </Image>
+                </a>
+              </div>
+              {!item.description && item.link && item.label && (
+                <div className="bb-flex bb-justify-center">
+                  <a
+                    href={item.link}
+                    className="bb-inline-block bb-py-3 bb-px-5 bb-mt-4 bb-bg-blue-500 bb-shadow-md bb-rounded bb-no-underline bb-text-white bb-font-semibold"
+                  >
+                    {item.label}
+                  </a>
+                </div>
+              )}
+            </div>
+          ))}
+        </div>
+      );
+
     default:
       // 'gallery'
       // Split into grids of 3,4 upto max of 4 rows
