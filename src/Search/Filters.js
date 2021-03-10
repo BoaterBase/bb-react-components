@@ -2,6 +2,8 @@ import { connectRefinementList } from 'react-instantsearch-dom';
 import classNames from 'classnames';
 import React, { memo, useState } from 'react';
 
+import TagRefinement from './TagRefinement';
+
 function RefinementListBase({
   title,
   attribute,
@@ -130,6 +132,7 @@ export default function Filters() {
       <RefinementList title="Manufacturer" attribute="specifications.manufacturer" searchable limit={8} showMore showMoreLimit={64} />
       <RefinementList title="Model" attribute="specifications.model" searchable limit={8} showMore showMoreLimit={64} />
       <RefinementList title="Business" attribute="business.name" searchable limit={8} showMore showMoreLimit={64} />
+      <TagRefinement />
     </div>
   );
 }

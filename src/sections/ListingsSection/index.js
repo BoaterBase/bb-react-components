@@ -8,10 +8,12 @@ import classNames from 'classnames';
 import { useScroll, useThrottle, useTimeout } from 'react-use';
 
 import { connectRefinementList, connectSearchBox, connectSortBy } from 'react-instantsearch-dom';
+import { connectTag } from '../../Search/TagRefinement';
 
 const VirtualRefinementList = connectRefinementList(() => null);
 const VirtualSearchBox = connectSearchBox(() => null);
 const VirtualSortBy = connectSortBy(() => null);
+const VirtualTags = connectTag(() => null);
 
 // TODO - Remove the grid from the hits component so we can memo outside of scroller
 
@@ -109,6 +111,7 @@ export default function ListingsSection({ className, searchState, title, default
         <VirtualRefinementList attribute="specifications.model" />
         <VirtualRefinementList attribute="specifications.manufacturer" />
         <VirtualRefinementList attribute="business.name" />
+        <VirtualTags />
       </Search>
     </section>
   );
