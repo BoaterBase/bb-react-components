@@ -1,3 +1,5 @@
+import React from 'react';
+
 import { createConnector } from 'react-instantsearch-dom';
 
 const connectTag = createConnector({
