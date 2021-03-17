@@ -113,7 +113,15 @@ function Content({ items, className, snippet, defaultProfileId }) {
                     return decoder(str, decoder, charset);
                   },
                 });
-                return <ListingsSection key={index} defaultProfileId={defaultProfileId} searchState={searchState} />;
+
+                return (
+                  <ListingsSection
+                    key={index}
+                    defaultProfileId={defaultProfileId}
+                    searchState={searchState}
+                    direction={item.size == 'large' ? 'vertical' : 'horizontal'}
+                  />
+                );
               }
               if (item.link.startsWith('https://www.boaterbase.com/listings/') && item.link.endsWith('/updates')) {
                 const listingSlug = item.link.split('/')[4];
