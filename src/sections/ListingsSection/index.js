@@ -89,14 +89,21 @@ function HorizontalScroller({ children }) {
     </div>
   );
 }
-export default function ListingsSection({ className, searchState, title, defaultProfileId }) {
+export default function ListingsSection({ className, searchState, title, defaultProfileId, direction = 'horizontal' }) {
   return (
     <section className={className}>
       {title && <header>{title}</header>}
       <Search state={searchState}>
-        <HorizontalScroller>
-          <Hits hitClassName="bb-w-full sm:bb-w-1/2 md:bb-w-1/3 bb-flex-none" defaultProfileId={defaultProfileId} />
-        </HorizontalScroller>
+        {direction != 'vertical' ? (
+          <HorizontalScroller>
+            <Hits hitClassName="bb-w-full sm:bb-w-1/2 md:bb-w-1/3 bb-flex-none" defaultProfileId={defaultProfileId} />
+          </HorizontalScroller>
+        ) : (
+          <div className="bb-grid bb-grid-cols-1 sm:bb-grid-cols-2 md:bb-grid-cols-3 bb-gap-2 sm:bb-gap-3 md:bb-gap-4">
+            <Hits defaultProfileId={defaultProfileId} />
+          </div>
+        )}
+
         <VirtualSearchBox />
         <VirtualSortBy
           defaultRefinement="Listings"

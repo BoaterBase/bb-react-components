@@ -7,7 +7,14 @@ import Arrow from '../../icons/ArrowRight';
 export default {
   title: 'Sections/ListingsSection',
   component: ListingsSection,
-  argTypes: {},
+  argTypes: {
+    direction: {
+      control: {
+        type: 'select',
+        options: ['horizontal', 'vertical'],
+      },
+    },
+  },
 };
 
 export const Preview = (props) => {
@@ -40,4 +47,5 @@ export const Preview = (props) => {
 Preview.args = {
   searchState: { layout: 'card', configure: { hitsPerPage: 12 }, refinementList: { 'specifications.condition': ['New'] } },
   defaultProfileId: '',
+  direction: 'horizontal',
 };
