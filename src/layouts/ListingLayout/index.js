@@ -178,7 +178,6 @@ const specifications = [
 ];
 
 function Specifications({ data }) {
-  console.log(specifications, data);
   const items = specifications
     .filter(({ key }) => !!data[key])
     .map(({ key, title, tip, unit, measurement }) => ({
