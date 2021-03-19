@@ -19,6 +19,7 @@ import ListingLoading from './ListingLoading';
 //import formatCoords from '../../utils/formatCoords';
 import formatNumber from '../../utils/formatNumber';
 import formatCurrency from '../../utils/formatCurrency';
+import { converter, converterAltUnit } from '../../utils/converter';
 
 import LocationIcon from '../../icons/Location';
 import Plus from '../../icons/Plus';
@@ -86,40 +87,47 @@ const specifications = [
     title: 'Length Overall',
     tip: 'The total length from bow to stern (LOA)',
     unit: 'm',
+    measurement: 'length',
   },
   {
     key: 'lwl',
     title: 'Length at Waterline',
     tip: 'The total length at the waterline (LWL)',
     unit: 'm',
+    measurement: 'length',
   },
   {
     key: 'beam',
     title: 'Beam',
     tip: 'The total width of the boat',
     unit: 'm',
+    measurement: 'length',
   },
   {
     key: 'draft',
     title: 'Draft',
     unit: 'm',
+    measurement: 'length',
   },
   {
     key: 'haw',
     title: 'Height at Waterline',
     unit: 'm',
+    measurement: 'length',
   },
   {
     key: 'displacement',
     title: 'Displacement',
     tip: 'The amount of water the boat displaces',
     unit: 'kg',
+    measurement: 'mass',
   },
   {
     key: 'weight',
     title: 'Weight',
     tip: 'The dry weight',
     unit: 'kg',
+    measurement: 'mass',
   },
   {
     key: 'material',
@@ -133,11 +141,13 @@ const specifications = [
     key: 'fuelcapacity',
     title: 'Fuel Capacity',
     unit: 'l',
+    measurement: 'volume',
   },
   {
     key: 'power',
     title: 'Power',
     unit: 'kw',
+    measurement: 'power',
   },
   {
     key: 'propulsion',
@@ -147,6 +157,7 @@ const specifications = [
     key: 'watercapacity',
     title: 'Water Capacity',
     unit: 'l',
+    measurement: 'volume',
   },
   {
     key: 'berths',
@@ -167,19 +178,22 @@ const specifications = [
 ];
 
 function Specifications({ data }) {
+  console.log(specifications, data);
   const items = specifications
     .filter(({ key }) => !!data[key])
-    .map(({ key, title, tip, unit }) => ({
+    .map(({ key, title, tip, unit, measurement }) => ({
       key,
       title,
       tip,
       value: unit ? formatNumber(data[key]) : data[key],
       unit: unit,
+      altValue: measurement && unit && formatNumber(converter(measurement, unit, null, data[key])),
+      altUnit: measurement && unit && converterAltUnit(measurement, unit),
     }));
 
   return items.length ? (
     <ul className="bb-mt-2 bb-border-t bb-border-gray-100 bb-grid md:bb-grid-cols-2 lg:bb-grid-cols-3">
-      {items.map(({ key, title, tip, value, unit }, index) => (
+      {items.map(({ key, title, tip, value, unit, altUnit, altValue }, index) => (
         <li key={key} className="bb-border-t bb-border-gray-100 bb-py-1 bb-px-0.5 bb-w-full bb-overflow-hidden">
           <h4 className="bb-uppercase bb-tracking-tight bb-text-xs md:bb-text-sm bb-font-semibold bb-text-gray-700 bb-truncate">
             <span title={tip} style={{ cursor: !!tip && 'help' }}>
@@ -189,6 +203,13 @@ function Specifications({ data }) {
           <div className="bb-text-gray-400 bb-font-extralight md:bb-text-lg bb-truncate">
             {value}
             {unit && <small className="bb-text-xs bb-text-gray-300 bb-ml-0.5">{unit}</small>}
+            {altUnit && (
+              <span>
+                <small> / </small>
+                {altValue}
+                <small className="bb-text-xs bb-text-gray-300 bb-ml-0.5">{altUnit}</small>
+              </span>
+            )}
           </div>
         </li>
       ))}
@@ -321,7 +342,7 @@ function ListingBlock({ listingResource, Head = () => null, onReady, onEvent }) 
           <div ref={priceRef} className="bb-flex bb-mt-2">
             <div className="bb-mr-4">
               <span className="bb-text-2xl md:bb-text-4xl bb-font-medium bb-text-gray-800 bb-mr-1">
-                {listing.price ? formatCurrency(listing.price, listing.currency) : 'POA'}
+                {listing.price && formatCurrency(listing.price, listing.currency)}
               </span>
               <span className="bb-font-medium bb-text-gray-400 bb-truncate bb-text-sm md:bb-text-base">{listing.label}</span>
             </div>

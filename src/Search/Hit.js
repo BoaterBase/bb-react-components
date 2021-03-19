@@ -45,7 +45,7 @@ export default memo(function Hit({ data, defaultProfileId }) {
     businessHandle: data.business?.name.split('::')[1] || data.business?.id,
     availability: data.availability || [],
     label: data.label,
-    price: displayPrice ? formatCurrency(displayPrice, displayCurrency) : 'POA',
+    price: displayPrice ? formatCurrency(displayPrice, displayCurrency) : '',
     location: location.length ? location.join(' · ') : 'Location Not Set',
     specifications: specifications.length ? specifications.join(' · ') : 'Contact for Specifications',
   };

@@ -10,7 +10,7 @@ export default {
     id: {
       control: {
         type: 'select',
-        options: ['Awwe1IQm', 'g5nm2l6X'],
+        options: ['g5nm2l6X', 'Awwe1IQm'],
       },
     },
   },
@@ -56,7 +56,7 @@ export const Preview = (props) => {
 //const urlParams = new URLSearchParams(document.location.search);
 //const listingId = urlParams.get('listingId');
 Preview.args = {
-  id: 'Awwe1IQm',
+  id: 'g5nm2l6X',
 };
 
 export const Loading = (props) => {
