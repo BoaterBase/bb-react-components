@@ -19,7 +19,7 @@ import ListingLoading from './ListingLoading';
 //import formatCoords from '../../utils/formatCoords';
 import formatNumber from '../../utils/formatNumber';
 import formatCurrency from '../../utils/formatCurrency';
-import { converter, converterAltUnit } from '../../utils/converter';
+import { converter, converterAltUnit } from '../../utils/converter.ts';
 
 import LocationIcon from '../../icons/Location';
 import Plus from '../../icons/Plus';
