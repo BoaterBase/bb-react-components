@@ -167,13 +167,14 @@ function Gallery({ media = [], layout, limit = 14, onReady }) {
     case 'slider':
       return <Slider slides={media} aspect={16 / 9} delay={5} autoplay={false} />;
     case 'alternate':
+    case 'alternate-right':
       return (
         <div className="bb-divide-y bb-divide-gray-100">
           {media.map((item, index) => (
             <div key={index}>
               <div className="md:bb-flex bb-items-center">
                 {item.description && (
-                  <div className={'bb-p-3 bb-w-1/2 bb-flex-none ' + (index % 2 ? 'bb-order-first' : 'bb-order-last')}>
+                  <div className={'bb-p-3 bb-w-1/2 bb-flex-none ' + ((layout == 'alternate' ? index % 2 : !(index % 2)) ? 'bb-order-first' : 'bb-order-last')}>
                     <div className="bb-prose">
                       <RichText text={item.description} />
                     </div>
