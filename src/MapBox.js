@@ -28,10 +28,10 @@ function MapBox({ latitude, longitude }) {
               <path fillRule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clipRule="evenodd" />
             </svg>
           </Marker>
-          <span class="bb-absolute bb-right-0 bb-m-2 bb-z-0 bb-inline-flex bb-shadow-sm bb-opacity-75">
+          <span className="bb-absolute bb-right-0 bb-m-2 bb-z-0 bb-inline-flex bb-shadow-sm bb-opacity-75">
             <button
               type="button"
-              class="bb-relative bb-inline-flex bb-items-center bb-px-2 bb-py-1 bb-rounded-l-lg bb-border bb-border-gray-300 bb-bg-white bb-text-sm bb-leading-5 bb-font-bold bb-text-gray-500 hover:bb-text-gray-400 focus:bb-z-10 focus:bb-outline-none focus:bb-border-blue-300 focus:bb-ring bb-ring-blue-500 active:bb-bg-gray-100 active:bb-text-gray-500 bb-transition bb-ease-in-out bb-duration-150"
+              className="bb-relative bb-inline-flex bb-items-center bb-px-2 bb-py-1 bb-rounded-l-lg bb-border bb-border-gray-300 bb-bg-white bb-text-sm bb-leading-5 bb-font-bold bb-text-gray-500 hover:bb-text-gray-400 focus:bb-z-10 focus:bb-outline-none focus:bb-border-blue-300 focus:bb-ring bb-ring-blue-500 active:bb-bg-gray-100 active:bb-text-gray-500 bb-transition bb-ease-in-out bb-duration-150"
               aria-label="Zoom In"
               onClick={() => setViewport({ ...viewport, zoom: Math.min(17, Math.round(viewport.zoom) + 1) })}
             >
@@ -39,7 +39,7 @@ function MapBox({ latitude, longitude }) {
             </button>
             <button
               type="button"
-              class="bb--ml-px bb-relative bb-inline-flex bb-items-center bb-px-2 bb-py-1 bb-rounded-r-lg bb-border bb-border-gray-300 bb-bg-white bb-text-sm bb-leading-5 bb-font-bold bb-text-gray-500 hover:bb-text-gray-400 focus:bb-z-10 focus:bb-outline-none focus:bb-border-blue-300 focus:bb-ring bb-ring-blue-500 active:bb-bg-gray-100 active:bb-text-gray-500 bb-transition bb-ease-in-out bb-duration-150"
+              className="bb--ml-px bb-relative bb-inline-flex bb-items-center bb-px-2 bb-py-1 bb-rounded-r-lg bb-border bb-border-gray-300 bb-bg-white bb-text-sm bb-leading-5 bb-font-bold bb-text-gray-500 hover:bb-text-gray-400 focus:bb-z-10 focus:bb-outline-none focus:bb-border-blue-300 focus:bb-ring bb-ring-blue-500 active:bb-bg-gray-100 active:bb-text-gray-500 bb-transition bb-ease-in-out bb-duration-150"
               aria-label="Zoom Out"
               onClick={() => setViewport({ ...viewport, zoom: Math.max(1, Math.round(viewport.zoom) - 1) })}
             >
