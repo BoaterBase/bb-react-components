@@ -144,11 +144,33 @@ function Gallery({ media = [], layout, limit = 14, onReady }) {
 
     case 'flex':
       return (
-        <div class="bb-flex bb-flex-wrap bb-items-center bb-justify-center">
+        <div className="bb-flex bb-flex-wrap bb-items-center bb-justify-center">
           {media.map((item, index) => (
             <a key={index} href={item.link} title={item.label}>
               <Image
                 className={'bb-h-24 bb-m-2' + (item.link ? ' hover:bb-shadow-lg hover:bb-rounded-md' : '')}
+                publicId={item.id}
+                resourceType={item.type}
+                dpr="auto"
+                responsive
+                width="auto"
+                responsiveUseBreakpoints="true"
+              >
+                {item.type == 'image' && <Placeholder type="blur" />}
+                <Transformation quality="auto" fetchFormat="auto" />
+              </Image>
+            </a>
+          ))}
+        </div>
+      );
+
+    case 'flow':
+      return (
+        <div className="bb-flex bb-flex-wrap bb-items-center bb-justify-center bb-space-x-4 bb-space-y-4">
+          {media.map((item, index) => (
+            <a key={index} href={item.link} title={item.label}>
+              <Image
+                className={'bb-max-w-full' + (item.link ? ' hover:bb-shadow-lg hover:bb-rounded-md' : '')}
                 publicId={item.id}
                 resourceType={item.type}
                 dpr="auto"
