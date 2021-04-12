@@ -32,15 +32,15 @@ export default memo(function Hit({ data, defaultProfileId }) {
   );
 
   const props = {
-    slug: data.slug,
+    slug: data.slug + (searchState.hideContact === true ? '?hideContact=true' : ''),
     title: theme.hitTitle(data),
     summary: data.summary,
     images: data.images || [],
     message: data.message,
-    avatar: data.profile?.avatar,
+    avatar: searchState.hideContact === true ? undefined : data.profile?.avatar,
     name: data.profile?.name.split('::')[0],
     handle: data.profile?.name.split('::')[1] || data.profile?.id,
-    logo: defaultProfileId != data.business?.id ? data.business?.logo : undefined,
+    logo: searchState.hideContact === true ? undefined : defaultProfileId != data.business?.id ? data.business?.logo : undefined,
     businessName: data.business?.name.split('::')[0],
     businessHandle: data.business?.name.split('::')[1] || data.business?.id,
     availability: data.availability || [],

@@ -57,6 +57,7 @@ export const Preview = (props) => {
 //const listingId = urlParams.get('listingId');
 Preview.args = {
   id: 'g5nm2l6X',
+  hideContact: false,
 };
 
 export const Loading = (props) => {

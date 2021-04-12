@@ -216,7 +216,7 @@ function Specifications({ data }) {
   ) : null;
 }
 
-function ListingBlock({ listingResource, Head = () => null, onReady, onEvent }) {
+function ListingBlock({ listingResource, Head = () => null, onReady, onEvent, hideContact }) {
   const setModal = useModal();
   const createAlert = useAlerts();
   //const [showVariants, setShowVariants] = useState();
@@ -364,7 +364,7 @@ function ListingBlock({ listingResource, Head = () => null, onReady, onEvent }) 
           </div>
         </div>
         <div className="bb-col-span-4 md:bb-col-span-1 bb-space-y-4">
-          <ContactSection profileId={listing.profileId} contactId={listing.contactId} Head={Head} sendMessage={sendMessage} />
+          {!hideContact && <ContactSection profileId={listing.profileId} contactId={listing.contactId} Head={Head} sendMessage={sendMessage} />}
           <Share pathname={`/listings/${listing.slug}`} title={listing.title} summary={listing.summary} />
 
           {listing.geo && (
@@ -382,10 +382,12 @@ function ListingBlock({ listingResource, Head = () => null, onReady, onEvent }) 
             </div>
           )}
 
-          <div className="bb-bg-gradient-to-b bb-from-blue-400 bb-to-blue-500 bb-p-2 bb-rounded-md bb-shadow bb-border bb-border-blue-500">
-            <h3 className="bb-uppercase bb-text-center bb-mb-1 bb-font-medium bb-text-gray-50 bb-text-sm">Follow This Boat</h3>
-            <WatchForm onSubmit={createSubscriber} />
-          </div>
+          {!hideContact && (
+            <div className="bb-bg-gradient-to-b bb-from-blue-400 bb-to-blue-500 bb-p-2 bb-rounded-md bb-shadow bb-border bb-border-blue-500">
+              <h3 className="bb-uppercase bb-text-center bb-mb-1 bb-font-medium bb-text-gray-50 bb-text-sm">Follow This Boat</h3>
+              <WatchForm onSubmit={createSubscriber} />
+            </div>
+          )}
 
           {/* <div className="bb-p-2">
             <QRCode pathname={`/listings/${listing.slug}`} />
@@ -405,7 +407,7 @@ function ListingBlock({ listingResource, Head = () => null, onReady, onEvent }) 
   );
 }
 
-export default function ListingLayout({ id, loading, Head, onReady, onEvent }) {
+export default function ListingLayout({ id, loading, Head, onReady, onEvent, hideContact }) {
   // If the server is rendering a loading page it can tell us to show a loading state and we exit early without triggering resource request
   if (loading) return <ListingLoading />;
 
@@ -431,7 +433,7 @@ export default function ListingLayout({ id, loading, Head, onReady, onEvent }) {
 
   return (
     <Suspend resources={listingResource} fallback={<ListingLoading />}>
-      <ListingBlock Head={Head} listingResource={listingResource} onReady={onReady} onEvent={onEvent} />
+      <ListingBlock Head={Head} listingResource={listingResource} onReady={onReady} onEvent={onEvent} hideContact={hideContact} />
     </Suspend>
   );
 }
