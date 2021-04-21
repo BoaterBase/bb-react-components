@@ -149,7 +149,7 @@ function Content({ items, className, snippet, defaultProfileId }) {
                   </div>
                 );
               }
-              if (item.link.startsWith('https://youtu.be/R2Fe5m56g7M')) {
+              if (item.link.startsWith('https://youtu.be/')) {
                 let yid = item.link.split('/')[3];
                 return (
                   <div className={aspectClass + ' bb-mx-auto bb-my-4'}>
