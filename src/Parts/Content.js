@@ -131,6 +131,40 @@ function Content({ items, className, snippet, defaultProfileId }) {
                 const profileHandle = item.link.split('/')[4];
                 return <ProfileUpdatesSection key={index} id={profileHandle} slug={profileHandle} limit={3} />;
               }
+
+              const aspectClass = item.size == 'small' ? 'bb-aspect-w-16 bb-aspect-h-9' : 'bb-aspect-w-4 bb-aspect-h-3';
+
+              if (item.link.startsWith('https://www.youtube.com/watch?v=')) {
+                let yid = item.link.split(/[=&]+/)[1];
+                return (
+                  <div className={aspectClass + ' bb-mx-auto bb-my-4'}>
+                    <iframe
+                      className="bb-rounded-sm bb-shadow-sm bb-overflow:hidden"
+                      src={'https://www.youtube.com/embed/' + yid}
+                      title="YouTube video player"
+                      frameborder="0"
+                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                      allowfullscreen
+                    ></iframe>
+                  </div>
+                );
+              }
+              if (item.link.startsWith('https://youtu.be/R2Fe5m56g7M')) {
+                let yid = item.link.split('/')[3];
+                return (
+                  <div className={aspectClass + ' bb-mx-auto bb-my-4'}>
+                    <iframe
+                      className="bb-rounded-sm bb-shadow-sm bb-overflow:hidden"
+                      src={'https://www.youtube.com/embed/' + yid}
+                      title="YouTube video player"
+                      frameborder="0"
+                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                      allowfullscreen
+                    ></iframe>
+                  </div>
+                );
+              }
+
               return (
                 <Microlink
                   key={index}
