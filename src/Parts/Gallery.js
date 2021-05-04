@@ -196,7 +196,9 @@ function Gallery({ media = [], layout, limit = 14, onReady }) {
             <div key={index}>
               <div className="md:bb-flex bb-items-center">
                 {item.description && (
-                  <div className={'bb-p-3 bb-w-1/2 bb-flex-none ' + ((layout == 'alternate' ? index % 2 : !(index % 2)) ? 'bb-order-first' : 'bb-order-last')}>
+                  <div
+                    className={'bb-p-3 md:bb-w-1/2 bb-flex-none ' + ((layout == 'alternate' ? index % 2 : !(index % 2)) ? 'bb-order-first' : 'bb-order-last')}
+                  >
                     <div className="bb-prose">
                       <RichText text={item.description} />
                     </div>
