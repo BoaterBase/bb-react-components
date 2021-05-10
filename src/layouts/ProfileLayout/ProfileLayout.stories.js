@@ -5,7 +5,12 @@ import ProfileLayout from './index';
 export default {
   title: 'Layouts/ProfileLayout',
   component: ProfileLayout,
-  argTypes: {},
+  argTypes: {
+    handle: {
+      type: 'select',
+      options: ['ant', 'captjoe', 'marinemotion'],
+    },
+  },
 };
 
 export const Preview = (props) => {
@@ -18,7 +23,7 @@ export const Preview = (props) => {
 //const urlParams = new URLSearchParams(document.location.search);
 //const listingId = urlParams.get('listingId');
 Preview.args = {
-  handle: 'marinemotion',
+  handle: 'ant',
 };
 
 export const Sub = (props) => {

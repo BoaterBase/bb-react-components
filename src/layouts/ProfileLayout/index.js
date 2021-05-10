@@ -4,6 +4,8 @@ import trackHit from '../../utils/trackHit';
 import trackEvent from '../../utils/trackEvent';
 
 import createProfileMessage from '../../data/createProfileMessage';
+import createProfileSubscriber from '../../data/createProfileSubscriber';
+
 import { useModal } from '../../Modal';
 import { useAlerts } from '../../Alerts';
 import Suspend from '../../data/Suspend';
@@ -15,6 +17,8 @@ import ProfileUpdatesSection from '../../sections/ProfileUpdatesSection';
 import Link from '../../Link';
 import Version from '../../Version';
 import MessageForm from '../../forms/MessageForm';
+import WatchForm from '../../forms/WatchForm';
+
 import Content from '../../parts/Content';
 import MapImage from '../../parts/MapImage';
 import MapBox from '../../parts/MapBox';
@@ -39,6 +43,19 @@ function Profile({ Head = () => null, profileResource, onEvent }) {
       createAlert('Error sending message!', 'error');
       console.error(err);
     }
+  }
+
+  async function createSubscriber(data, el) {
+    try {
+      await createProfileSubscriber(profile.id, data);
+      createAlert('Added to watch list!', 'success');
+      trackEvent([], 'Watch', 'Subscribed', `/profiles/${profile.slug}`);
+      onEvent && onEvent({ category: 'Watch', action: 'Subscribed', label: `/profiles/${profile.slug}` });
+    } catch (err) {
+      createAlert('Error creating subscription!', 'error');
+      console.error(err);
+    }
+    el.target.reset();
   }
 
   function sendMessage() {
@@ -129,6 +146,12 @@ function Profile({ Head = () => null, profileResource, onEvent }) {
           </div>
         )}
         <Share pathname={`/profiles/${profile.handle}`} title={profile.name} summary={profile.summary} />
+
+        <div className="bb-bg-gradient-to-b bb-from-blue-400 bb-to-blue-500 bb-p-2 bb-rounded-md bb-shadow bb-border bb-border-blue-500">
+          <h3 className="bb-uppercase bb-text-center bb-mb-1 bb-font-medium bb-text-gray-50 bb-text-sm">Follow</h3>
+          <WatchForm onSubmit={createSubscriber} />
+        </div>
+
         <div className="bb-text-center bb-mt-3">
           <Version />
         </div>
