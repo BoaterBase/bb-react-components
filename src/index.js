@@ -26,6 +26,7 @@ export { default as ListingsLayout } from './layouts/ListingsLayout';
 export { default as ListingUpdateLayout } from './layouts/ListingUpdateLayout';
 export { default as ProfileLayout } from './layouts/ProfileLayout';
 export { default as ProfileUpdateLayout } from './layouts/ProfileUpdateLayout';
+export { default as UpdatesLayout } from './layouts/UpdatesLayout';
 
 /** Sections */
 export { default as ListingsSection } from './sections/ListingsSection';
