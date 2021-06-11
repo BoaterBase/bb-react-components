@@ -4,7 +4,7 @@ const colors = require('tailwindcss/colors');
 
 module.exports = {
   prefix: 'bb-',
-  plugins: [require('@tailwindcss/forms'), require('@tailwindcss/typography'), require('@tailwindcss/aspect-ratio')],
+  plugins: [require('@tailwindcss/forms'), require('@tailwindcss/typography'), require('@tailwindcss/aspect-ratio'), require('@tailwindcss/line-clamp')],
   variants: {
     zIndex: ['responsive', 'hover', 'focus', 'focus-within'],
     animation: ['responsive', 'hover'],

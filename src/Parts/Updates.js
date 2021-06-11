@@ -40,7 +40,9 @@ export default function Updates({ updates, pathname, limit = 9 }) {
         updates.slice(0, limit).map((item, index) => (
           <div key={index} className="bb-grid bb-grid-cols-3 bb-border-t bb-border-gray-100 bb-pt-6">
             <p className="bb-col-span-3 md:bb-col-span-1 bb-mb-2 bb-text-xl md:bb-text-2xl bb-leading-5 bb-text-gray-500 bb-font-extralight">
-              <time dateTime="2020-03-16">{new Date(item.created).toLocaleDateString('en-US', { day: 'numeric', month: 'short', year: 'numeric' })}</time>
+              <time dateTime={new Date(item.created).toISOString()}>
+                {new Date(item.created).toLocaleDateString('en-US', { day: 'numeric', month: 'short', year: 'numeric' })}
+              </time>
             </p>
             <div className="bb-col-span-3 md:bb-col-span-2">
               <h3 className="bb-text-xl bb-leading-7 bb-font-semibold bb-text-gray-900">
