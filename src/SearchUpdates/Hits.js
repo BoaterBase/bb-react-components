@@ -8,7 +8,7 @@ const BaseHits = memo(
   ({ hits, defaultProfileId }) => {
     const [searchState] = useSearch();
     const [currentImage, setCurrentImage] = useState(0);
-    console.log(searchState, hits);
+    //console.log(searchState, hits);
     switch (searchState.layout) {
       case 'compact':
         return (

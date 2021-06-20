@@ -128,7 +128,7 @@ function Profile({ Head = () => null, profileResource, onEvent }) {
           <UpdatesSection
             title={
               <div className="bb-flex bb-justify-between bb-items-end bb-my-2">
-                <h2 className="bb-text-xl bb-font-bold bb-text-gray-700">Listings</h2>
+                <h2 className="bb-text-xl bb-font-bold bb-text-gray-700">Updates</h2>
                 <Link
                   to={{
                     pathname: `/profiles/${profile.handle}/updates`,
@@ -145,6 +145,7 @@ function Profile({ Head = () => null, profileResource, onEvent }) {
               hideContact: false,
               configure: {
                 filters: 'profiles.id:' + profile.id,
+                hitsPerPage: 3,
               },
             }}
           />
