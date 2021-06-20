@@ -13,7 +13,7 @@ import ContactSection from '../../sections/ContactSection';
 import Share from '../../parts/Share';
 import { Image, Transformation, Placeholder } from 'cloudinary-react';
 import ListingsSection from '../../sections/ListingsSection';
-import ProfileUpdatesSection from '../../sections/ProfileUpdatesSection';
+import UpdatesSection from '../../sections/UpdatesSection';
 import Link from '../../Link';
 import Version from '../../Version';
 import MessageForm from '../../forms/MessageForm';
@@ -125,7 +125,29 @@ function Profile({ Head = () => null, profileResource, onEvent }) {
         </div>
 
         <div>
-          <ProfileUpdatesSection id={profile.id} slug={profile.handle} limit={6} />
+          <UpdatesSection
+            title={
+              <div className="bb-flex bb-justify-between bb-items-end bb-my-2">
+                <h2 className="bb-text-xl bb-font-bold bb-text-gray-700">Listings</h2>
+                <Link
+                  to={{
+                    pathname: `/profiles/${profile.handle}/updates`,
+                  }}
+                  className="bb-font-medium bb-text-blue-500"
+                >
+                  Show All →
+                </Link>
+              </div>
+            }
+            defaultProfileId={profile.id}
+            searchState={{
+              layout: 'list',
+              hideContact: false,
+              configure: {
+                filters: 'profiles.id:' + profile.id,
+              },
+            }}
+          />
         </div>
       </div>
 

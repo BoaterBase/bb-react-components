@@ -21,7 +21,7 @@ Preview.args = {
     layout: 'compact',
     hideContact: false,
     configure: {
-      //filters: 'business.id:yTxBjbGz',
+      filters: 'profiles.id:yTxBjbGz',
     },
   },
 };

@@ -30,6 +30,7 @@ export { default as UpdatesLayout } from './layouts/UpdatesLayout';
 
 /** Sections */
 export { default as ListingsSection } from './sections/ListingsSection';
+export { default as UpdatesSection } from './sections/UpdatesSection';
 
 /** Parts */
 export { default as ContentPart } from './parts/Content';

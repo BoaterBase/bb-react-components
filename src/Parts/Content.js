@@ -4,11 +4,11 @@ import Gallery from './Gallery';
 import classNames from 'classnames';
 import Microlink from '@microlink/react';
 import ListingsSection from '../sections/ListingsSection';
-import ProfileUpdatesSection from '../sections/ProfileUpdatesSection';
-import ListingUpdatesSection from '../sections/ListingUpdatesSection';
+import UpdatesSection from '../sections/UpdatesSection';
 
 import qs from 'qs';
 import Link from '../Link';
+import getId from '../utils/getId';
 
 const H2 = (props) => <h2 {...props} />;
 const H3 = (props) => <h3 {...props} />;
@@ -123,13 +123,50 @@ function Content({ items, className, snippet, defaultProfileId }) {
                   />
                 );
               }
+
+              if (item.link.startsWith('https://www.boaterbase.com/updates?')) {
+                //const searchState = { layout: 'card', configure: { hitsPerPage: 12 }, refinementList: { 'specifications.condition': ['New'] } };
+                const searchState = qs.parse(item.link.split('?')[1], {
+                  decoder(str, decoder, charset) {
+                    const keywords = {
+                      true: true,
+                      false: false,
+                      null: null,
+                      undefined,
+                    };
+                    if (str in keywords) {
+                      return keywords[str];
+                    }
+                    return decoder(str, decoder, charset);
+                  },
+                });
+
+                return <UpdatesSection key={index} defaultProfileId={defaultProfileId} searchState={searchState} />;
+              }
+
               if (item.link.startsWith('https://www.boaterbase.com/listings/') && item.link.endsWith('/updates')) {
                 const listingSlug = item.link.split('/')[4];
-                return <ListingUpdatesSection key={index} id={listingSlug} slug={listingSlug} limit={3} />;
+                const listingId = getId(listingSlug);
+                const searchState = {
+                  layout: 'compact',
+                  hideContact: false,
+                  configure: {
+                    filters: 'listing.id:' + listingId,
+                  },
+                };
+
+                return <UpdatesSection key={index} defaultProfileId={defaultProfileId} searchState={searchState} />;
               }
               if (item.link.startsWith('https://www.boaterbase.com/profiles/') && item.link.endsWith('/updates')) {
                 const profileHandle = item.link.split('/')[4];
-                return <ProfileUpdatesSection key={index} id={profileHandle} slug={profileHandle} limit={3} />;
+                const searchState = {
+                  layout: 'compact',
+                  hideContact: false,
+                  configure: {
+                    filters: 'profiles.handle:' + profileHandle,
+                  },
+                };
+                return <UpdatesSection key={index} defaultProfileId={defaultProfileId} searchState={searchState} />;
               }
 
               const aspectClass = item.size == 'small' ? 'bb-aspect-w-16 bb-aspect-h-9' : 'bb-aspect-w-4 bb-aspect-h-3';
