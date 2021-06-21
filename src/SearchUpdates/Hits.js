@@ -18,7 +18,7 @@ const BaseHits = memo(
                 <li key={item.slug + item.random} className="bb-py-2 bb-flex bb-space-x-2">
                   <div className="bb-w-20 bb-flex-none">
                     <div className="bb-relative bb-rounded-md">
-                      {item.images?.length > 0 && (
+                      {item.images?.length > 0 ? (
                         <Link title={item.title} to={`/${item.slug}`}>
                           <svg
                             viewBox="0 0 4 3"
@@ -30,6 +30,8 @@ const BaseHits = memo(
                             className="bb-absolute bb-inset-0 bb-w-full bb-h-full hover:bb-animate-slide-object bb-shadow-md bb-rounded-md bb-object-cover"
                           />
                         </Link>
+                      ) : (
+                        <svg viewBox="0 0 4 3" className="bb-relative bb-block bb-w-full bb-rounded-md bb-bg-white"></svg>
                       )}
                     </div>
                   </div>
@@ -60,7 +62,7 @@ const BaseHits = memo(
                 <li key={item.slug + item.random} className="bb-py-3 bb-block sm:bb-flex sm:bb-space-x-3 bb-space-y-3 sm:bb-space-y-0">
                   <div className="sm:bb-w-1/4 bb-flex-none">
                     <div className="bb-relative bb-rounded-md">
-                      {item.images?.length > 0 && (
+                      {item.images?.length > 0 ? (
                         <Link title={item.title} to={`/${item.slug}`}>
                           <svg
                             viewBox="0 0 16 9"
@@ -72,6 +74,8 @@ const BaseHits = memo(
                             className="bb-absolute bb-inset-0 bb-w-full bb-h-full hover:bb-animate-slide-object bb-shadow-md bb-rounded-md bb-object-cover"
                           />
                         </Link>
+                      ) : (
+                        <svg viewBox="0 0 16 9" className="bb-relative bb-block bb-w-full bb-rounded-md bb-bg-white"></svg>
                       )}
                     </div>
                   </div>

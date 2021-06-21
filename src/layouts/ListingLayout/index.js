@@ -6,6 +6,7 @@ import trackEvent from '../../utils/trackEvent';
 import createListingMessage from '../../data/createListingMessage';
 import createListingSubscriber from '../../data/createListingSubscriber';
 import Version from '../../Version';
+import Link from '../../Link';
 
 import { cloudUrl } from '../../BoaterBase';
 
@@ -35,7 +36,7 @@ import Variants from '../../parts/Variants';
 //import QRCode from '../../parts/QRCode';
 
 import ContactSection from '../../sections/ContactSection';
-import ListingUpdatesSection from '../../sections/ListingUpdatesSection';
+import UpdatesSection from '../../sections/UpdatesSection';
 
 import MessageForm from '../../forms/MessageForm';
 import WatchForm from '../../forms/WatchForm';
@@ -364,7 +365,30 @@ function ListingBlock({ listingResource, Head = () => null, onReady, onEvent, hi
           </div>
 
           <div ref={updatesRef}>
-            <ListingUpdatesSection id={listing.id} slug={listing.slug} limit={6} />
+            <UpdatesSection
+              title={
+                <div className="bb-flex bb-justify-between bb-items-end bb-my-2">
+                  <h2 className="bb-text-xl bb-font-bold bb-text-gray-700">Updates</h2>
+                  <Link
+                    to={{
+                      pathname: `/listings/${listing.id}/updates`,
+                    }}
+                    className="bb-font-medium bb-text-blue-500"
+                  >
+                    Show All →
+                  </Link>
+                </div>
+              }
+              defaultProfileId={listing.profileId}
+              searchState={{
+                layout: 'list',
+                hideContact: false,
+                configure: {
+                  filters: 'listing.id:' + listing.id,
+                  hitsPerPage: 3,
+                },
+              }}
+            />
           </div>
         </div>
         <div className="bb-col-span-4 md:bb-col-span-1 bb-space-y-4">
