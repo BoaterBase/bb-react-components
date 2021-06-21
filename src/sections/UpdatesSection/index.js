@@ -1,6 +1,6 @@
 import React, { Fragment, useRef, useEffect, useState } from 'react';
 
-import Search from '../../SearchUpdates';
+import SearchUpdates from '../../SearchUpdates';
 import Hits from '../../SearchUpdates/Hits';
 import ChevronLeft from '../../icons/ChevronLeft';
 import ChevronRight from '../../icons/ChevronRight';
@@ -19,14 +19,14 @@ export default function UpdatesSection({ className, searchState, title, defaultP
   return (
     <section className={className}>
       {title && <header>{title}</header>}
-      <Search state={searchState}>
-        <div className="bb-grid bb-grid-cols-1 sm:bb-grid-cols-2 md:bb-grid-cols-3 bb-gap-2 sm:bb-gap-3 md:bb-gap-4">
+      <SearchUpdates state={searchState}>
+        <div className="bb-mb-4">
           <Hits defaultProfileId={defaultProfileId} />
         </div>
 
         <VirtualSearchBox />
         <VirtualTags />
-      </Search>
+      </SearchUpdates>
     </section>
   );
 }
