@@ -40,7 +40,7 @@ const BaseHits = memo(
                     <time className="bb-text-xs bb-font-light bb-text-gray-500 bb-leading-tight" dateTime={new Date(item.created).toISOString()}>
                       {new Date(item.created).toLocaleDateString('en-US', { day: 'numeric', month: 'short', year: 'numeric' })}
                     </time>
-                    <h2 className="bb-text-lg bb-font-semibold bb-text-gray-800 bb-truncate hover:bb-underline  bb-leading-snug">
+                    <h2 className="bb-text-lg bb-font-semibold bb-text-gray-800 bb-line-clamp-1 hover:bb-underline  bb-leading-snug">
                       <Link title={item.title} to={`/${item.slug}`}>
                         {item.title}
                       </Link>
@@ -84,7 +84,7 @@ const BaseHits = memo(
                     <time className="bb-text-sm bb-font-light bb-text-gray-500" dateTime={new Date(item.created).toISOString()}>
                       {new Date(item.created).toLocaleDateString('en-US', { day: 'numeric', month: 'short', year: 'numeric' })}
                     </time>
-                    <h2 className="bb-text-lg md:bb-text-xl bb-font-semibold bb-text-gray-800 bb-truncate hover:bb-underline">
+                    <h2 className="bb-text-lg md:bb-text-xl bb-font-semibold bb-text-gray-800 bb-line-clamp-1 hover:bb-underline">
                       <Link title={item.title} to={`/${item.slug}`}>
                         {item.title}
                       </Link>
