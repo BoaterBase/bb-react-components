@@ -13,7 +13,6 @@ import Location from '../../icons/Location';
 function Section({ profileResource, contactResource, Head = () => null, sendMessage }) {
   const profile = profileResource && profileResource.read();
   const contact = contactResource && contactResource.read();
-
   return (
     <section className="bb-text-center bb-bg-white bb-rounded-lg bb-shadow">
       {profile?.business && (
@@ -66,13 +65,12 @@ function Section({ profileResource, contactResource, Head = () => null, sendMess
           </div>
         </div>
       )}
-
       {(contact || (profile && !profile.business)) && (
         <div className="bb-p-8 bb-border-t bb-border-gray-200">
           {(contact?.avatar?.id || profile?.avatar?.id) && (
             <Link to={`/profiles/${contact ? contact.handle : profile.handle}`}>
               <Image className="bb-w-32 bb-h-32 bb-mx-auto bb-bg-black bb-rounded-full" publicId={contact?.avatar?.id || profile.avatar.id}>
-                <Transformation width="300" height="300" gravity="face" crop="thumb" />
+                <Transformation width="300" height="300" gravity="faces" crop="thumb" fetchFormat="auto" />
               </Image>
             </Link>
           )}

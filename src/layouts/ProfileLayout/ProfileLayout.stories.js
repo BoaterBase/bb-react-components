@@ -8,7 +8,7 @@ export default {
   argTypes: {
     handle: {
       type: 'select',
-      options: ['ant', 'captjoe', 'marinemotion'],
+      options: ['ant', 'captjoe', 'marinemotion', 'drmduncan'],
     },
   },
 };
