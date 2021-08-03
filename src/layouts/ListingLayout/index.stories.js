@@ -10,7 +10,7 @@ export default {
     id: {
       control: {
         type: 'select',
-        options: ['g5nm2l6X', 'Awwe1IQm'],
+        options: ['g5nm2l6X', 'hyiazle3', 'Awwe1IQm'],
       },
     },
   },

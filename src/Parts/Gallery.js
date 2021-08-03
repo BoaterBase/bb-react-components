@@ -7,6 +7,8 @@ import Expand from '../icons/Expand';
 import CloseIcon from '../icons/Close';
 import ChevronLeft from '../icons/ChevronLeft';
 import ChevronRight from '../icons/ChevronRight';
+import Play from '../icons/Play';
+
 import RichText from './RichText';
 
 function Slideshow({ media = [], close, selected }) {
@@ -127,17 +129,38 @@ function Gallery({ media = [], layout, limit = 14, onReady }) {
         <div className="bb-relative bb-rounded-md bb-shadow">
           <svg viewBox="0 0 16 9" className="bb-block bb-w-full bb-invisible"></svg>
           <a href={media[current].original} target="_preview" onClick={openModal(media[current].id)}>
-            <Image
-              className="bb-rounded-md bb-absolute bb-w-full bb-h-full bb-bg-gray-400 bb-inset-0 bb-object-cover"
-              publicId={media[current].id}
-              dpr="auto"
-              responsive
-              width="auto"
-              responsiveUseBreakpoints="true"
-            >
-              <Placeholder type="blur" />
-              <Transformation quality="auto" fetchFormat="auto" />
-            </Image>
+            {media[current].type == 'image' ? (
+              <Image
+                className="bb-rounded-md bb-absolute bb-w-full bb-h-full bb-bg-gray-400 bb-inset-0 bb-object-cover"
+                publicId={media[current].id}
+                dpr="auto"
+                responsive
+                width="auto"
+                responsiveUseBreakpoints="true"
+                resourceType={media[current].type}
+                quality="auto"
+                fetchFormat="auto"
+              >
+                <Placeholder type="blur" />
+              </Image>
+            ) : (
+              <Image
+                className="bb-rounded-md bb-absolute bb-w-full bb-h-full bb-bg-gray-400 bb-inset-0 bb-object-cover"
+                publicId={media[current].id}
+                transformation="large_image"
+                resourceType={media[current].type}
+                format="jpg"
+              >
+                <Placeholder type="blur" />
+              </Image>
+            )}
+            {media[current].type == 'video' ? (
+              <div className="bb-absolute bb-top-1/2 bb-left-1/2 bb-rounded-full bb-bg-gray-700 bb-opacity-70 hover:bb-opacity-95 bb-p-0.5 bb--mx-6 bb--my-6">
+                <Play className="bb-text-white bb-w-10 bb-h-10" />
+              </div>
+            ) : (
+              ''
+            )}
           </a>
         </div>
       );
