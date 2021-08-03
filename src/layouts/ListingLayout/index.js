@@ -368,7 +368,7 @@ function ListingBlock({ listingResource, Head = () => null, onReady, onEvent, hi
             <UpdatesSection
               title={
                 <div className="bb-flex bb-justify-between bb-items-end bb-my-2">
-                  <h2 className="bb-text-xl bb-font-bold bb-text-gray-700">Updates</h2>
+                  <h2 className="bb-text-xl bb-font-bold bb-text-gray-700">Logbook</h2>
                   <Link
                     to={{
                       pathname: `/listings/${listing.id}/updates`,
