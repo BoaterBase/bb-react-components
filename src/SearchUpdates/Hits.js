@@ -53,7 +53,48 @@ const BaseHits = memo(
             })}
           </ul>
         );
-
+      case 'gallery':
+        return (
+          <div className="bb-w-full bb-grid bb-grid-cols-1 sm:bb-grid-cols-2 md:bb-grid-cols-3 bb-gap-2 md:bb-gap-3">
+            {hits.map((item) => {
+              return (
+                <div className="bb-rounded-md bb-bg-gray-50 bb-shadow hover:bb-shadow-md bb-transition-transform bb-duration-300 bb-transform hover:bb--translate-y-px bb-cursor-pointer bb-h-full">
+                  <div className="bb-relative bb-rounded-md">
+                    <Link title={item.title} to={`/${item.slug}`}>
+                      <svg viewBox="0 0 4 3" className="bb-relative bb-block bb-w-full bb-rounded-md bb-bg-gradient-to-b bb-from-blue-200 bb-to-blue-100"></svg>
+                      {item.images?.length > 0 && (
+                        <img
+                          src={imagePath(item.images[mod(currentImage, item.images.length)])}
+                          className="bb-absolute hover:bb-animate-slide-object bb-w-full bb-rounded-md bb-h-full bb-inset-0 bb-object-cover"
+                        />
+                      )}
+                    </Link>
+                    {item.business && item.business.name && item.business.logo && (
+                      <Link title={item.business.name} to={`/profiles/${item.business.name.split('::')[1] || item.business.id}`}>
+                        <img
+                          alt={item.business.name}
+                          src={item.business.logo}
+                          style={{ maxWidth: '30%', maxHeight: '20%' }}
+                          className="bb-absolute bb-top-1.5 bb-right-1.5 bb-bg-white bb-shadow bb-rounded-sm bb-p-0.5 bb-opacity-75 hover:bb-opacity-100"
+                        />
+                      </Link>
+                    )}
+                  </div>
+                  <Link
+                    title={item.title}
+                    to={`/${item.slug}`}
+                    style={{ textShadow: '0 0 2px rgba(0,0,0,0.75)' }}
+                    className="bb-block bb-leading-tight bb-pt-8 bb-rounded-b-md bb-absolute bb-bottom-0 bb-left-0 bb-w-full bb-bg-gradient-to-b bb-from-transparent bb-to-gray-500"
+                  >
+                    <h3 title={item.title} className="bb-px-2 bb-pb-1 bb-text-xl bb-font-semibold bb-text-gray-100 bb-clamp-2 bb-leading-tight">
+                      {item.title}
+                    </h3>
+                  </Link>
+                </div>
+              );
+            })}
+          </div>
+        );
       default:
         return (
           <ul className="bb-divide-y bb-divide-gray-100">

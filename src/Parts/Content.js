@@ -141,32 +141,84 @@ function Content({ items, className, snippet, defaultProfileId }) {
                   },
                 });
 
-                return <UpdatesSection key={index} defaultProfileId={defaultProfileId} searchState={searchState} />;
+                return (
+                  <UpdatesSection
+                    key={index}
+                    defaultProfileId={defaultProfileId}
+                    searchState={{ layout: 'card', configure: { hitsPerPage: 6 }, ...searchState }}
+                  />
+                );
               }
 
               if (item.link.startsWith('https://www.boaterbase.com/listings/') && item.link.endsWith('/updates')) {
                 const listingSlug = item.link.split('/')[4];
                 const listingId = getId(listingSlug);
                 const searchState = {
-                  layout: 'compact',
+                  layout: 'card',
                   hideContact: false,
                   configure: {
                     filters: 'listing.id:' + listingId,
+                    hitsPerPage: 6,
                   },
                 };
 
-                return <UpdatesSection key={index} defaultProfileId={defaultProfileId} searchState={searchState} />;
+                return (
+                  <UpdatesSection
+                    key={index}
+                    defaultProfileId={defaultProfileId}
+                    searchState={{ layout: 'card', configure: { hitsPerPage: 6 }, ...searchState }}
+                  />
+                );
               }
               if (item.link.startsWith('https://www.boaterbase.com/profiles/') && item.link.endsWith('/updates')) {
                 const profileHandle = item.link.split('/')[4];
                 const searchState = {
-                  layout: 'compact',
+                  layout: 'card',
                   hideContact: false,
                   configure: {
                     filters: 'profiles.handle:' + profileHandle,
+                    hitsPerPage: 6,
                   },
                 };
-                return <UpdatesSection key={index} defaultProfileId={defaultProfileId} searchState={searchState} />;
+                return (
+                  <UpdatesSection
+                    key={index}
+                    defaultProfileId={defaultProfileId}
+                    searchState={{ layout: 'card', configure: { hitsPerPage: 6 }, ...searchState }}
+                  />
+                );
+              }
+
+              if (item.link.startsWith('https://www.boaterbase.com/profiles/') && item.link.includes('/updates?')) {
+                const profileHandle = item.link.split('/')[4];
+
+                const searchState = qs.parse(item.link.split('?')[1], {
+                  decoder(str, decoder, charset) {
+                    const keywords = {
+                      true: true,
+                      false: false,
+                      null: null,
+                      undefined,
+                    };
+                    if (str in keywords) {
+                      return keywords[str];
+                    }
+                    return decoder(str, decoder, charset);
+                  },
+                });
+
+                return (
+                  <UpdatesSection
+                    key={index}
+                    defaultProfileId={defaultProfileId}
+                    searchState={{
+                      layout: 'card',
+                      hideContact: false,
+                      configure: { hitsPerPage: 6, filters: 'profiles.handle:' + profileHandle, ...(searchState.configure || {}) },
+                      ...searchState,
+                    }}
+                  />
+                );
               }
 
               const aspectClass = item.size == 'small' ? 'bb-aspect-w-16 bb-aspect-h-9' : 'bb-aspect-w-4 bb-aspect-h-3';

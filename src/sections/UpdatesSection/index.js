@@ -20,7 +20,7 @@ export default function UpdatesSection({ className, searchState, title, defaultP
     <section className={className}>
       {title && <header>{title}</header>}
       <SearchUpdates state={searchState}>
-        <div className="bb-mb-4">
+        <div className="bb-mb-4 bb-w-full">
           <Hits defaultProfileId={defaultProfileId} />
         </div>
 

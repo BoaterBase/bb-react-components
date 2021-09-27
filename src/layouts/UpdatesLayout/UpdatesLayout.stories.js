@@ -18,10 +18,10 @@ export const Preview = (props) => {
 
 Preview.args = {
   searchState: {
-    layout: 'compact',
+    layout: 'gallery',
     hideContact: false,
     configure: {
-      filters: 'profiles.id:yTxBjbGz',
+      filters: 'profiles.handle:maritimesolutions', //'profiles.id:yTxBjbGz',
     },
   },
 };

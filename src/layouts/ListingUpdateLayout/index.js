@@ -7,7 +7,7 @@ import Share from '../../parts/Share';
 import Suspend from '../../data/Suspend';
 import Version from '../../Version';
 import Link from '../../Link';
-
+import cleanText from '../../utils/cleanText';
 function UpdateLoading() {
   return <div>Loading...</div>;
 }
@@ -19,7 +19,7 @@ function ListingUpdate({ Head = () => null, listingResource, updateResource }) {
   return (
     <div className="bb-grid bb-grid-cols-4 bb-gap-3">
       <Head>
-        <title>{update.title}</title>
+        <title>{cleanText(update.title)}</title>
       </Head>
       <div className="bb-col-span-4 md:bb-col-span-3">
         <h1 className="bb-text-3xl bb-font-semibold bb-text-gray-800 bb-leading-9">{update.title}</h1>
