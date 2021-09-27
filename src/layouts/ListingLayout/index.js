@@ -21,6 +21,7 @@ import ListingLoading from './ListingLoading';
 import formatNumber from '../../utils/formatNumber';
 import formatCurrency from '../../utils/formatCurrency';
 import { converter, converterAltUnit } from '../../utils/converter.ts';
+import cleanText from '../../utils/cleanText';
 
 import LocationIcon from '../../icons/Location';
 import Plus from '../../icons/Plus';
@@ -304,11 +305,11 @@ function ListingBlock({ listingResource, Head = () => null, onReady, onEvent, hi
   return (
     <div>
       <Head>
-        <title>{listing.title}</title>
-        <meta name="description" content={listing.summary} />
+        <title>{cleanText(listing.title)}</title>
+        <meta name="description" content={cleanText(listing.summary)} />
         <meta name="twitter:site" content="@boaterbase" />
-        <meta name="og:title" content={listing.title} />
-        <meta name="og:description" content={listing.summary} />
+        <meta name="og:title" content={cleanText(listing.title)} />
+        <meta name="og:description" content={cleanText(listing.summary)} />
 
         {listing.media && listing.media[0] && <meta name="twitter:card" content="summary_large_image" />}
         {listing.media && listing.media[0] && <meta property="og:image" content={cloudUrl(listing.media[0].id, { transformation: 'large_image' })} />}

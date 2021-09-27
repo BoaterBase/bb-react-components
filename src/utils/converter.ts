@@ -68,11 +68,13 @@ export function converterAltUnit(measurement, unit) {
   return converters[measurement][unit].alt;
 }
 
-// Handle user input
-export const convertMeasurement: any = (measurement: string, from: string, to: string, fixed = -1) => (value) => {
-  let v = parseFloat(value);
-  if (value === undefined || value === '' || value === null) return null;
-  else if (v === NaN) return null;
-  else if (fixed >= 0) return Math.round(converter(measurement, from, to, value) * Math.pow(10, fixed)) / Math.pow(10, fixed);
-  else return converter(measurement, from, to, value);
-};
+// Handle user input export function convertMeasurement(measurement: string, from: string, to: string, fixed = -1) {
+export function convertMeasurement(measurement, from, to, fixed = -1) {
+  return (value) => {
+    let v = parseFloat(value);
+    if (value === undefined || value === '' || value === null) return null;
+    else if (v === NaN) return null;
+    else if (fixed >= 0) return Math.round(converter(measurement, from, to, value) * Math.pow(10, fixed)) / Math.pow(10, fixed);
+    else return converter(measurement, from, to, value);
+  };
+}
