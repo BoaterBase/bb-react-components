@@ -15,6 +15,11 @@ function Share({ pathname, query, title, summary }) {
 
   const { linker } = useBoaterBase();
   const permalink = linker.createPermalink({ pathname, query });
+  const onload = `t=this;window.addEventListener('message',function (m){m.data.bbHeight && t.style.setProperty('height', m.data.bbHeight)}, false)`;
+  const embed = `<iframe onload="${onload}" src="${linker.createEmbed({
+    pathname,
+    query,
+  })}" loading="lazy" style="border:0;display:block;width:100%;height:300px;"><a href="${permalink}">${title}</a></iframe>`;
 
   const shares = [
     {
@@ -78,6 +83,15 @@ function Share({ pathname, query, title, summary }) {
     }
   }
 
+  function onCopyEmbedClick() {
+    try {
+      navigator.clipboard.writeText(embed);
+      createAlert('Copied to clipboard.', 'success');
+    } catch (err) {
+      createAlert('Could not copy to clipboard, try selecting the text.', 'error');
+    }
+  }
+
   return (
     <div>
       <h3 className="bb-uppercase bb-text-center bb-font-medium bb-text-gray-500 bb-text-sm">Share</h3>
@@ -108,6 +122,22 @@ function Share({ pathname, query, title, summary }) {
         <button
           onClick={onCopyLinkClick}
           className="bb-absolute bb-inset-y-0 bb-right-0 bb-px-2 bb-flex bb-items-center bb-rounded bb-border bb-border-transparent focus:bb-outline-none focus:bb-border-indigo-300 focus:bb-shadow-outline-indigo active:bb-bg-indigo-200 bb-transition bb-ease-in-out bb-duration-150"
+        >
+          <Copy className="bb-h-4 bb-w-4 bb-text-gray-400" />
+        </button>
+      </div>
+      <h3 className="bb-uppercase bb-text-center bb-font-medium bb-text-gray-500 bb-text-sm bb-mt-2">Embed</h3>
+      <div className="bb-mt-1 bb-relative bb-rounded-md bb-shadow-sm">
+        <textarea
+          type="text"
+          value={embed}
+          readOnly
+          className="bb-rounded-md bb-block bb-w-full bb-pr-10 bb-border-gray-300 bb-bg-gray-200 bb-text-gray-500 bb-font-mono bb-text-xs bb-leading-5"
+          placeholder="000-00-0000"
+        />
+        <button
+          onClick={onCopyEmbedClick}
+          className="bb-absolute bb-top-0 bb-right-0 bb-py-2 bb-px-2 bb-flex bb-items-center bb-rounded bb-border bb-border-transparent focus:bb-outline-none focus:bb-border-indigo-300 focus:bb-shadow-outline-indigo active:bb-bg-indigo-200 bb-transition bb-ease-in-out bb-duration-150"
         >
           <Copy className="bb-h-4 bb-w-4 bb-text-gray-400" />
         </button>

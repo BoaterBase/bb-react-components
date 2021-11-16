@@ -46,6 +46,10 @@ const defaultLinker = {
   createPermalink: ({ pathname, query }) => {
     return 'https://www.boaterbase.com' + pathname + (query ? '?' + qs.stringify(query, { encodeValuesOnly: true }) : '');
   },
+  /** Create a url for an external link */
+  createEmbed: ({ pathname, query }) => {
+    return 'https://embed.boaterbase.com' + pathname + (query ? '?' + qs.stringify(query, { encodeValuesOnly: true }) : '');
+  },
 };
 
 /**
