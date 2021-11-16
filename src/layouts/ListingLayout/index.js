@@ -345,14 +345,21 @@ function ListingBlock({ listingResource, Head = () => null, onReady, onEvent, hi
           )}
 
           <div ref={priceRef} className="bb-flex bb-mt-2">
-            <div className="bb-mr-4">
-              <span className="bb-text-2xl md:bb-text-4xl bb-font-medium bb-text-gray-800 bb-mr-1">
-                {listing.price && formatCurrency(listing.price, listing.currency)}
-              </span>
-              <span className="bb-font-medium bb-text-gray-400 bb-truncate bb-text-sm md:bb-text-base">{listing.label}</span>
-            </div>
+            {listing.availability.includes('Sold') ? (
+              <div className="bb-mr-4">
+                <span className="bb-text-2xl md:bb-text-4xl bb-font-medium bb-text-gray-800 bb-mr-1">Sold</span>
+              </div>
+            ) : (
+              <div className="bb-mr-4">
+                <span className="bb-text-2xl md:bb-text-4xl bb-font-medium bb-text-gray-800 bb-mr-1">
+                  {listing.price && formatCurrency(listing.price, listing.currency)}
+                </span>
+                <span className="bb-font-medium bb-text-gray-400 bb-truncate bb-text-sm md:bb-text-base">{listing.label}</span>
+              </div>
+            )}
           </div>
-          {listing.variants?.length ? <Variants items={listing.variants} sendMessage={sendMessage} /> : null}
+          {!listing.availability.includes('Sold') && listing.variants?.length ? <Variants items={listing.variants} sendMessage={sendMessage} /> : null}
+
           <div ref={specsRef} className="bb-w-full">
             <Specifications data={listing.specifications} />
           </div>

@@ -32,11 +32,10 @@ export default function HitCard({
         <Link title={title} to={`/listings/${slug}`}>
           <svg viewBox="0 0 4 3" className="bb-relative bb-block bb-w-full bb-rounded-t-md bb-bg-gradient-to-b bb-from-blue-500 bb-to-blue-400"></svg>
           {images?.length > 0 && (
-              <img
-                src={imagePath(images[mod(currentImage, images.length)])}
-                className="bb-absolute bb-inset-0 bb-w-full bb-h-full hover:bb-animate-slide-objec bb-rounded-t-md bb-object-cover"
-              />
-            
+            <img
+              src={imagePath(images[mod(currentImage, images.length)])}
+              className="bb-absolute bb-inset-0 bb-w-full bb-h-full hover:bb-animate-slide-objec bb-rounded-t-md bb-object-cover"
+            />
           )}
         </Link>
         {logo && (
@@ -109,14 +108,16 @@ export default function HitCard({
           <Location className="bb-flex-none bb-w-4 bb-h-4 bb-mr-0.5 bb-opacity-50" />
           <span className="bb-truncate">{location}</span>
         </div>
-        {availability.length > 0 ? (
+        {availability.length > 0 && !availability.includes('Sold') ? (
           <div className="bb-flex bb-items-center bb-px-2 bb-pb-1 bb-h-10">
             <span className="bb-text-2xl bb-text-orange-400 bb-font-medium bb-mr-3">{price}</span>
             {label && isNaN(label) && <span className="bb-ml-auto bb-text-normal bb-text-orange-400 bb-font-medium">{label}</span>}
           </div>
+        ) : availability.length > 0 && availability.includes('Sold') ? (
+          <div className="bb-flex bb-items-center bb-px-2 bb-pb-1 bb-h-10 bb-text-red-400 bb-text-xl bb-font-medium">Sold</div>
         ) : (
           <div className="bb-flex bb-items-center bb-justify-end bb-px-2 bb-pb-1 bb-h-10 bb-text-gray-200">Not Available</div>
-            )}
+        )}
       </Link>
     </div>
   );

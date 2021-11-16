@@ -32,12 +32,10 @@ export default function HitGallery({
         <Link title={title} to={`/listings/${slug}`}>
           <svg viewBox="0 0 8 7" className="bb-relative bb-block bb-w-full bb-rounded-md bb-bg-gradient-to-b bb-from-blue-500 bb-to-blue-400"></svg>
           {images?.length > 0 && (
-            
-              <img
-                src={imagePath(images[mod(currentImage, images.length)])}
-                className="bb-absolute hover:bb-animate-slide-object bb-w-full bb-rounded-md bb-h-full bb-inset-0 bb-object-cover"
-              />
-            
+            <img
+              src={imagePath(images[mod(currentImage, images.length)])}
+              className="bb-absolute hover:bb-animate-slide-object bb-w-full bb-rounded-md bb-h-full bb-inset-0 bb-object-cover"
+            />
           )}
         </Link>
         {logo && (
@@ -61,7 +59,9 @@ export default function HitGallery({
           </Link>
         )}
 
-        <Link title={title} to={`/listings/${slug}`}
+        <Link
+          title={title}
+          to={`/listings/${slug}`}
           style={{ textShadow: '0 0 2px rgba(0,0,0,0.75)' }}
           className="bb-block bb-leading-tight bb-pt-6 bb-rounded-b-md bb-absolute bb-bottom-0 bb-left-0 bb-w-full bb-bg-gradient-to-b bb-from-transparent bb-to-gray-900"
         >
@@ -79,11 +79,14 @@ export default function HitGallery({
             <Location className="bb-flex-none bb-w-4 bb-h-4 bb-mr-0.5 bb-opacity-75" />
             <span className="bb-truncate">{location}</span>
           </div>
-          {availability.length > 0 ? (
-            <div className="bb-flex bb-items-center bb-px-2 bb-pb-0.5 bb-h-10 bb-leading-tight">
+
+          {availability.length > 0 && !availability.includes('Sold') ? (
+            <div className="bb-flex bb-items-center bb-px-2 bb-pb-0.5 bb-h-10">
               <span className="bb-text-xl bb-text-orange-400 bb-font-medium bb-mr-3">{price}</span>
               {label && isNaN(label) && <span className="bb-ml-auto bb-text-normal bb-text-orange-400 bb-font-medium bb-leading-snug">{label}</span>}
             </div>
+          ) : availability.length > 0 && availability.includes('Sold') ? (
+            <div className="bb-flex bb-items-center bb-px-2 bb-pb-1 bb-h-10 bb-text-red-400 bb-text-xl bb-font-medium">Sold</div>
           ) : (
             <div className="bb-flex bb-items-center bb-justify-end bb-px-2 bb-pb-1 bb-h-10 bb-text-gray-500">Not Available</div>
           )}

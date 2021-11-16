@@ -30,7 +30,10 @@ export default function HitList({
     <div className="bb-rounded-md bb-flex bb-flex-col md:bb-flex-row bb-bg-gray-50 bb-shadow hover:bb-shadow-md bb-transition-transform bb-duration-300 bb-transform hover:bb--translate-y-px bb-cursor-pointer">
       <div className="bb-relative bb-rounded-t-md md:bb-rounded-t-none md:bb-rounded-l-md  bb-flex-none">
         <Link title={title} to={`/listings/${slug}`}>
-          <svg viewBox="0 0 8 5" className="bb-relative bb-block bb-w-full bb-rounded-t-md md:bb-rounded-t-none md:bb-rounded-l-md  bb-bg-gradient-to-b bb-from-blue-500 bb-to-blue-400"></svg>
+          <svg
+            viewBox="0 0 8 5"
+            className="bb-relative bb-block bb-w-full bb-rounded-t-md md:bb-rounded-t-none md:bb-rounded-l-md  bb-bg-gradient-to-b bb-from-blue-500 bb-to-blue-400"
+          ></svg>
           {images?.length > 0 && (
             <img
               src={imagePath(images[mod(currentImage, images.length)])}
@@ -105,11 +108,14 @@ export default function HitList({
           <Location className="bb-flex-none bb-w-4 bb-h-4 bb-mr-0.5 bb-opacity-50" />
           <span className="bb-truncate">{location}</span>
         </div>
-        {availability.length > 0 ? (
+
+        {availability.length > 0 && !availability.includes('Sold') ? (
           <div className="bb-mt-auto bb-flex bb-items-center bb-h-8">
             <span className="bb-text-2xl bb-text-orange-400 bb-font-medium bb-mr-3">{price}</span>
             {label && isNaN(label) && <span className="bb-ml-auto bb-text-normal bb-text-orange-400 bb-font-medium">{label}</span>}
           </div>
+        ) : availability.length > 0 && availability.includes('Sold') ? (
+          <div className="bb-flex bb-items-center bb-pb-1 bb-h-10 bb-text-red-400 bb-text-xl bb-font-medium">Sold</div>
         ) : (
           <div className="bb-mt-auto bb-flex bb-items-center bb-justify-end bb-h-8 bb-text-gray-200">Not Available</div>
         )}
