@@ -401,7 +401,13 @@ function ListingBlock({ listingResource, Head = () => null, onReady, onEvent, hi
         </div>
         <div className="bb-col-span-4 md:bb-col-span-1 bb-space-y-4">
           {!hideContact && <ContactSection profileId={listing.profileId} contactId={listing.contactId} Head={Head} sendMessage={sendMessage} />}
-          <Share pathname={`/listings/${listing.slug}`} title={listing.title} summary={listing.summary} />
+          <Share
+            pathname={`/listings/${listing.slug}`}
+            title={listing.title}
+            summary={listing.summary}
+            category={'boat'}
+            image={listing.media && listing.media[0] && cloudUrl(listing.media[0].id, { transformation: 'large_image' })}
+          />
 
           {listing.geo && (
             <div>

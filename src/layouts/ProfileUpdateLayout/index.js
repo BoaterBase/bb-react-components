@@ -36,7 +36,7 @@ function ProfileUpdate({ Head = () => null, profileResource, updateResource }) {
       </div>
 
       <div className="bb-col-span-4 md:bb-col-span-1">
-        <Share pathname={`/profiles/${profile.handle}/updates/${update.slug}`} title={update.title} summary={update.summary} />
+        <Share pathname={`/profiles/${profile.handle}/updates/${update.slug}`} title={update.title} summary={update.summary} category="article" />
         <div className="bb-text-center bb-mt-3">
           <Version />
         </div>

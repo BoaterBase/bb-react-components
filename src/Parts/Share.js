@@ -5,12 +5,15 @@ import Twitter from '../icons/Twitter';
 import Pinterest from '../icons/Pinterest';
 import Linkedin from '../icons/Linkedin';
 import Email from '../icons/Email';
+import Hypershare from '../icons/Hypershare';
+import BoaterBoard from '../icons/BoaterBoard';
+
 import Copy from '../icons/Copy';
 import { useAlerts } from '../Alerts';
 import qs from 'qs';
 import { useBoaterBase } from '../BoaterBase';
 
-function Share({ pathname, query, title, summary }) {
+function Share({ pathname, query, title, summary, image, category }) {
   const createAlert = useAlerts();
 
   const { linker } = useBoaterBase();
@@ -62,6 +65,30 @@ function Share({ pathname, query, title, summary }) {
       })}`,
       color: 'bb-bg-blue-600',
     },
+
+    category && {
+      id: 'boaterboard',
+      Icon: BoaterBoard,
+      title: 'BoaterBoard',
+      link: `https://www.boaterboard.com/create?${qs.stringify({
+        link: permalink,
+        title: title,
+        description: summary,
+        category: category,
+        imageUrl: image,
+      })}`,
+      color: 'bb-bg-teal-500',
+    },
+
+    {
+      id: 'share',
+      Icon: Hypershare,
+      title: 'Hypershare',
+      link: `https://hypershare.xyz/${encodeURIComponent(permalink)}?${qs.stringify({
+        t: title,
+      })}`,
+      color: 'bb-bg-pink-400',
+    },
     {
       id: 'email',
       Icon: Email,
@@ -72,7 +99,7 @@ function Share({ pathname, query, title, summary }) {
       })}`,
       color: 'bb-bg-gray-400',
     },
-  ];
+  ].filter(Boolean);
 
   function onCopyLinkClick() {
     try {
@@ -95,7 +122,7 @@ function Share({ pathname, query, title, summary }) {
   return (
     <div>
       <h3 className="bb-uppercase bb-text-center bb-font-medium bb-text-gray-500 bb-text-sm">Share</h3>
-      <div className="bb-flex bb-space-x-1 bb-justify-center bb-my-2">
+      <div className="bb-flex bb-flex-wrap bb-space-x-1 bb-justify-center bb-my-2">
         {shares.map(({ Icon, title, link, color, id }) => (
           <a
             key={id}
